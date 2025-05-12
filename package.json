@@ -1,0 +1,13 @@
+{
+  "name": "monorepo-pnpm",
+  "version": "1.0.0",
+  "private": true,
+  "author": "hansol",
+  "license": "MIT",
+  "packageManager": "pnpm@10.9.0",
+  "scripts": {
+    "build:shared": "pnpm --filter @monorepo-pnpm/shared run build",
+    "dev:next": "pnpm --filter next-app dev",
+    "dev:react": "pnpm --filter react-app dev"
+  }
+}
