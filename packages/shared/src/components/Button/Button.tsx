@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 import { buttonIcon, storiesButton, StoriesButtonProps } from "./Button.css";
 import Icon, { IconObj } from "../Icons/Icon";
 
-interface ButtonProps extends ComponentProps<"button"> {
+export interface ButtonProps extends ComponentProps<"button"> {
   size: StoriesButtonProps["size"];
   icon?: keyof typeof IconObj;
   ty?: StoriesButtonProps["ty"];
