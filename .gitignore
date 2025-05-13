@@ -1,4 +1,5 @@
 node_modules/
 .vscode/
 
-packages/shared/build/*
+packages/shared/build/
+packages/shared/tsconfig.tsbuildinfo
