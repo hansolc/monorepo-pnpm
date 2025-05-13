@@ -1,4 +1,4 @@
-import { Button } from "@monorepo-pnpm/shared";
+import { Button, Typography } from "@monorepo-pnpm/shared";
 
 function App() {
   return (
@@ -19,6 +19,9 @@ function App() {
         <Button size="lg" ty="text">
           Button
         </Button>
+        <Typography size="small" ty="display">
+          hello world
+        </Typography>
       </div>
     </>
   );
