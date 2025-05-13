@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "@monorepo-pnpm/shared/dist/shared.css";
 import { defaultThemeClasses } from "@monorepo-pnpm/shared";
+import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
