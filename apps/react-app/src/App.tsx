@@ -19,7 +19,7 @@ function App() {
         <Button size="lg" ty="text">
           Button
         </Button>
-        <Typography size="small" ty="display">
+        <Typography size="sm" ty="display">
           hello world
         </Typography>
       </div>

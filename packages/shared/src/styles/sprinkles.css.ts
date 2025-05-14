@@ -33,9 +33,28 @@ const layerSprinklesProperties = defineProperties({
   },
 });
 
+const flexSprinklesProperties = defineProperties({
+  properties: {
+    display: ["flex"],
+    flexDirection: ["row", "column"],
+    justifyContent: ["center", "space-between"],
+    alignItems: ["center"],
+    flexWrap: ["wrap"],
+    gap: [4, 8],
+  },
+});
+
+const areaSprinklesProperties = defineProperties({
+  properties: {
+    width: ["100%"],
+  },
+});
+
 export const sprinkles = createSprinkles(
   colorSprinklesProperties,
-  layerSprinklesProperties
+  layerSprinklesProperties,
+  flexSprinklesProperties,
+  areaSprinklesProperties
 );
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];
