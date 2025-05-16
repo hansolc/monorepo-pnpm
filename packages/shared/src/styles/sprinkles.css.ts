@@ -1,6 +1,8 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 import { shadow, vars } from "./theme/color.css";
 
+const spacingValues = [4, 8, 12, 16];
+
 const colorSprinklesProperties = defineProperties({
   conditions: {
     default: {},
@@ -35,12 +37,13 @@ const layerSprinklesProperties = defineProperties({
 
 const flexSprinklesProperties = defineProperties({
   properties: {
-    display: ["flex"],
+    display: ["flex", "block"],
     flexDirection: ["row", "column"],
     justifyContent: ["center", "space-between"],
     alignItems: ["center"],
     flexWrap: ["wrap"],
-    gap: [4, 8],
+    gap: spacingValues,
+    flexGrow: [0, 1],
   },
 });
 
@@ -50,11 +53,26 @@ const areaSprinklesProperties = defineProperties({
   },
 });
 
+const spacingSprinklesProperties = defineProperties({
+  properties: {
+    paddingTop: spacingValues,
+    paddingLeft: spacingValues,
+    paddingBottom: spacingValues,
+    paddingRight: spacingValues,
+  },
+  shorthands: {
+    padding: ["paddingBottom", "paddingLeft", "paddingRight", "paddingTop"],
+    px: ["paddingLeft", "paddingRight"],
+    py: ["paddingBottom", "paddingTop"],
+  },
+});
+
 export const sprinkles = createSprinkles(
   colorSprinklesProperties,
   layerSprinklesProperties,
   flexSprinklesProperties,
-  areaSprinklesProperties
+  areaSprinklesProperties,
+  spacingSprinklesProperties
 );
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];
