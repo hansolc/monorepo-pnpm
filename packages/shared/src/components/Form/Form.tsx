@@ -44,9 +44,7 @@ const FormTitle = ({
 };
 FormTitle.displayName = "Form.Title";
 
-interface FormTextInputProps extends Omit<TextFieldProps, "name"> {
-  name: string;
-}
+interface FormTextInputProps extends TextFieldProps {}
 
 const FormTextInput = ({ ...rest }: FormTextInputProps) => {
   return <TextField {...rest} />;
