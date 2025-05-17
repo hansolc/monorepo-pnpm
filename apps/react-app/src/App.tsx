@@ -1,4 +1,5 @@
-import { Button, Typography } from "@monorepo-pnpm/shared";
+import { Button, Form, TextField, Typography } from "@monorepo-pnpm/shared";
+import { FaBeer } from "react-icons/fa";
 
 function App() {
   return (
@@ -23,6 +24,15 @@ function App() {
           hello world
         </Typography>
       </div>
+      <TextField
+        label="label"
+        type="text"
+        leadingIcon={<FaBeer size="24" />}
+      ></TextField>
+      <Form>
+        <Form.FormTitle>Title</Form.FormTitle>
+        <Form.FormTextInput label="label" type="text" />
+      </Form>
     </>
   );
 }

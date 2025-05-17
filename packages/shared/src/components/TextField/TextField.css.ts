@@ -4,7 +4,7 @@ import { globalStyle, style, styleVariants } from "@vanilla-extract/css";
 import { vars } from "../../styles/theme/color.css";
 
 export const textField = recipe({
-  base: {},
+  base: { width: "100%" },
 });
 
 export const textFieldInputArea = recipe({
@@ -72,7 +72,7 @@ export const textFieldLabel = recipe({
 
 export const textFieldInput = recipe({
   base: [
-    sprinkles({ color: "onSurface" }),
+    sprinkles({ color: "onSurface", width: "100%" }),
     {
       outline: "none",
       border: "none",

@@ -94,8 +94,10 @@ const TrailingElements = ({ children }: { children: ReactNode }) => (
 );
 TrailingElements.displayName = "Appbar.TrailingElements";
 
-export const Appbar = Object.assign(AppbarRoot, {
+const Appbar = Object.assign(AppbarRoot, {
   Headline,
   Subtitle,
   TrailingElements,
 });
+
+export default Appbar;
