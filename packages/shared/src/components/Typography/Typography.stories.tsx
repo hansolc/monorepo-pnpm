@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const BaseTypography: Story = {
   args: {
-    size: "medium",
+    size: "md",
     ty: "body",
     children: "Typography",
   },

@@ -44,7 +44,10 @@ export const LoginForm = {
   render: () => {
     const [password, setPassword] = useState("");
 
-    const { errors, handleSubmit, register } = useFormValidation();
+    const { errors, handleSubmit, register } = useFormValidation<{
+      username: string;
+      password: string;
+    }>();
 
     const onValid = async (data: Record<string, string>) => {
       console.log("input values: ", data);
