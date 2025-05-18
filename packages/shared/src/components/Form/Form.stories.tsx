@@ -2,7 +2,7 @@ import { useState } from "react";
 import Form from "./Form";
 import { Meta } from "@storybook/react";
 import Button from "../Button/Button";
-import useTextFieldValidation from "../TextField/hooks/useTextFieldValidation";
+import useFormValidation from "../TextField/hooks/useFormValidation";
 
 const meta = {
   title: "Components/Form",
@@ -44,7 +44,7 @@ export const LoginForm = {
   render: () => {
     const [password, setPassword] = useState("");
 
-    const { errors, handleSubmit, register } = useTextFieldValidation();
+    const { errors, handleSubmit, register } = useFormValidation();
 
     const onValid = async (data: Record<string, string>) => {
       console.log("input values: ", data);

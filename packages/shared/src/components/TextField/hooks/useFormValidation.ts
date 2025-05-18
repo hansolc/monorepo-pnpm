@@ -11,11 +11,11 @@ type RuleSet = {
 
 type Validator = (value: string) => string | null;
 
-const useTextFieldValidation = () => {
-  const fields = useRef<Record<string, { validator: Validator }>>({});
-  const [errors, setErrors] = useState<Record<string, string>>({});
+const useFormValidation = <T extends Record<keyof T, string>>() => {
+  const fields = useRef<Partial<Record<keyof T, { validator: Validator }>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
 
-  const register = (name: string, rules: RuleSet) => {
+  const register = (name: keyof T, rules: RuleSet) => {
     const validator: Validator = (value) => {
       if (rules.required) {
         const requiredMsg =
@@ -50,7 +50,7 @@ const useTextFieldValidation = () => {
   };
 
   //   매개변수로 콜백함수를 등록하여 훅을 사용하는곳에서도 등록된 Form data 에 접근이 가능하도록 하기 위해 콜백함수를 등록합니다.
-  const handleSubmit = (onValid: (data: Record<string, string>) => void) => {
+  const handleSubmit = (onValid: (data: T) => void) => {
     return (e: React.FormEvent) => {
       e.preventDefault();
 
@@ -59,17 +59,14 @@ const useTextFieldValidation = () => {
 
       // FormData 객체에서 일반 JS 객체로 변환하기 위해
       // formdata.get("username")은 가능하지만 formData.username은 불가
-      const values = Object.fromEntries(formData.entries()) as Record<
-        string,
-        string
-      >;
+      const values = Object.fromEntries(formData.entries()) as T;
 
       // 등록한 fields ref의 validator 실행
       // 이전 register 등록시 validator에 대한 정보가 클로저로 담겨짐
-      const newErrors: Record<string, string> = {};
+      const newErrors: Partial<Record<keyof T, string>> = {};
       for (const key in fields.current) {
         const value = values[key] ?? "";
-        const err = fields.current[key].validator(value);
+        const err = fields.current[key]?.validator(value);
         if (err) newErrors[key] = err;
       }
 
@@ -84,4 +81,4 @@ const useTextFieldValidation = () => {
   return { register, handleSubmit, errors };
 };
 
-export default useTextFieldValidation;
+export default useFormValidation;
