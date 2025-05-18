@@ -13,15 +13,15 @@ export const storiesTypography = recipe({
       label: { fontWeight: 500 },
     },
     size: {
-      large: {},
-      medium: {},
-      small: {},
+      lg: {},
+      md: {},
+      sm: {},
     },
   },
   compoundVariants: [
     // Display
     {
-      variants: { ty: "display", size: "large" },
+      variants: { ty: "display", size: "lg" },
       style: {
         fontSize: "57px",
         lineHeight: "64px",
@@ -29,7 +29,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "display", size: "medium" },
+      variants: { ty: "display", size: "md" },
       style: {
         fontSize: "45px",
         lineHeight: "52px",
@@ -37,7 +37,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "display", size: "small" },
+      variants: { ty: "display", size: "sm" },
       style: {
         fontSize: "36px",
         lineHeight: "44px",
@@ -47,7 +47,7 @@ export const storiesTypography = recipe({
 
     // Headline
     {
-      variants: { ty: "headline", size: "large" },
+      variants: { ty: "headline", size: "lg" },
       style: {
         fontSize: "32px",
         lineHeight: "40px",
@@ -55,7 +55,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "headline", size: "medium" },
+      variants: { ty: "headline", size: "md" },
       style: {
         fontSize: "28px",
         lineHeight: "36px",
@@ -63,7 +63,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "headline", size: "small" },
+      variants: { ty: "headline", size: "sm" },
       style: {
         fontSize: "24px",
         lineHeight: "32px",
@@ -73,7 +73,7 @@ export const storiesTypography = recipe({
 
     // Title
     {
-      variants: { ty: "title", size: "large" },
+      variants: { ty: "title", size: "lg" },
       style: {
         fontSize: "22px",
         lineHeight: "28px",
@@ -81,7 +81,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "title", size: "medium" },
+      variants: { ty: "title", size: "md" },
       style: {
         fontSize: "16px",
         lineHeight: "24px",
@@ -89,7 +89,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "title", size: "small" },
+      variants: { ty: "title", size: "sm" },
       style: {
         fontSize: "14px",
         lineHeight: "20px",
@@ -99,7 +99,7 @@ export const storiesTypography = recipe({
 
     // Body
     {
-      variants: { ty: "body", size: "large" },
+      variants: { ty: "body", size: "lg" },
       style: {
         fontSize: "16px",
         lineHeight: "24px",
@@ -107,7 +107,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "body", size: "medium" },
+      variants: { ty: "body", size: "md" },
       style: {
         fontSize: "14px",
         lineHeight: "20px",
@@ -115,7 +115,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "body", size: "small" },
+      variants: { ty: "body", size: "sm" },
       style: {
         fontSize: "12px",
         lineHeight: "16px",
@@ -125,7 +125,7 @@ export const storiesTypography = recipe({
 
     // Label
     {
-      variants: { ty: "label", size: "large" },
+      variants: { ty: "label", size: "lg" },
       style: {
         fontSize: "14px",
         lineHeight: "20px",
@@ -133,7 +133,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "label", size: "medium" },
+      variants: { ty: "label", size: "md" },
       style: {
         fontSize: "12px",
         lineHeight: "16px",
@@ -141,7 +141,7 @@ export const storiesTypography = recipe({
       },
     },
     {
-      variants: { ty: "label", size: "small" },
+      variants: { ty: "label", size: "sm" },
       style: {
         fontSize: "11px",
         lineHeight: "16px",

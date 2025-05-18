@@ -15,9 +15,13 @@ const Typography = ({
   size,
   as: Component = "span",
   className = "",
+  ...rest
 }: TypographyProps) => {
   return (
-    <Component className={`${storiesTypography({ ty, size })} ${className}`}>
+    <Component
+      className={`${storiesTypography({ ty, size })} ${className}`}
+      {...rest}
+    >
       {children}
     </Component>
   );
