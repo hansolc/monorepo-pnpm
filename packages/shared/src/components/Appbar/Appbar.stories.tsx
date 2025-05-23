@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Appbar } from "./Appbar";
+import Appbar from "./Appbar";
 import { MdAccessTime } from "@react-icons/all-files/md/MdAccessTime";
 import Typography from "../Typography/Typography";
 
