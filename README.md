@@ -2,11 +2,11 @@
 
 프로젝트 수행기간: 2024-05-12 ~
 
-## 사용기술
+## 🛠️ 사용기술
 
 - pnpm
 
-## 아키텍쳐
+## 🏗️ 아키텍쳐
 
 ```
 root/
@@ -30,7 +30,7 @@ root/
 
 **tsconfig.base.json** - 각 프로젝트별 기본 ts 컴파일 설정
 
-## 주요기능
+## ✨ 주요기능
 
 ### 1. pnpm의 빠른 속도, 효율적인 방식의 패키지 관리
 
@@ -40,7 +40,7 @@ pnpm은 `package.json`에 명시된 패키지를 읽은 후 `node_moduels`에 sy
 
 pnpm-workspace는 간단하게 모노레포 설정을 할 수 있습니다. `pnpm-workspcae.yaml` 파일에 모노레포를 적용할 폴더를 명시하고 `package.json`에 간단한 설정을 해 주면 끝입니다. 만들어진 패키지들은 자동으로 링크되기에 별도로 설치나 연결해줄 필요가 없습니다.
 
-### 설치 및 사용방법
+## 📦 설치 및 사용방법
 
 ### 1. git clone
 
@@ -56,7 +56,7 @@ apps 폴더 내에 프로젝트를 추가합니다(CRA or Vite 사용 가능). �
 
 `packages/shared` 의 `component` 파일에 각 프로젝트마다 재사용할 컴포넌트를 추가합니다. 추가후, index.ts 파일에 export해주세요.
 
-## 패키지 수정 시 앱에서 즉시 반영되도록 Vite HMR 설정하기
+## ♻️ 패키지 수정 시 앱에서 즉시 반영되도록 Vite HMR 설정하기
 
 ### With React-Vite
 
