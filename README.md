@@ -56,6 +56,10 @@ apps 폴더 내에 프로젝트를 추가합니다(CRA or Vite 사용 가능). �
 
 `packages/shared` 의 `component` 파일에 각 프로젝트마다 재사용할 컴포넌트를 추가합니다. 추가후, index.ts 파일에 export해주세요.
 
+### 4. Storybook 실행
+
+`packages/shared`의 컴포넌트 이해를 위해 storybook은 `dev:shared-stories`로 실행해주세요.
+
 ## ♻️ 패키지 수정 시 앱에서 즉시 반영되도록 Vite HMR 설정하기
 
 ### With React-Vite
