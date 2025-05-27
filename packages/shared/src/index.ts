@@ -4,8 +4,8 @@ import Button from "./components/Button/Button";
 import Typography from "./components/Typography/Typography";
 import Appbar from "./components/Appbar/Appbar";
 import Form from "./components/Form/Form";
-import TextField from "./components/TextField/TextField";
-import useFormValidation from "./components/TextField/hooks/useFormValidation";
+import TextField from "./test/TextField/TextField";
+import useFormValidation from "./test/TextField/hooks/useFormValidation";
 
 export {
   Button,

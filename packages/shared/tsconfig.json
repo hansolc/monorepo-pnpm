@@ -1,11 +1,15 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "build",
     "rootDir": "src",
     "declaration": true,
     "emitDeclarationOnly": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@styles/*": ["./src/styles/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["**/*.stories.tsx"]

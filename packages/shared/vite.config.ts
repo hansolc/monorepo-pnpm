@@ -6,6 +6,11 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
+  resolve: {
+    alias: {
+      "@styles": path.resolve(__dirname, "./src/styles"),
+    },
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"), // 진입점

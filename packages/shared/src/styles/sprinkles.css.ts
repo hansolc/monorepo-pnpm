@@ -38,6 +38,7 @@ const layerSprinklesProperties = defineProperties({
 const flexSprinklesProperties = defineProperties({
   properties: {
     display: ["flex", "block"],
+    flex: [1, 0],
     flexDirection: ["row", "column"],
     justifyContent: ["center", "space-between"],
     alignItems: ["center"],
