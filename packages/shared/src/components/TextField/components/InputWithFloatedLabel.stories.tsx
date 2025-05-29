@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { MdKey } from "react-icons/md";
-import InputWithFloatedLabel from "./components/InputWithFloatedLabel";
+import InputWithFloatedLabel from "./InputWithFloatedLabel";
 
 const meta = {
-  title: "Components/TextField",
+  title: "Components/InputWithFloatedLabel",
   component: InputWithFloatedLabel,
   tags: ["autodocs"],
   argTypes: {},

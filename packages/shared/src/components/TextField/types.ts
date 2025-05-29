@@ -8,9 +8,15 @@ interface TextFieldSharedProps {
   isHovered?: boolean;
 }
 
+interface TextFieldFixProps {
+  position: "prefix" | "suffix";
+  text?: string;
+}
+
 export type {
   InputStateTypes,
   InputTypes,
   TextFieldSharedProps,
   InputTagTypes,
+  TextFieldFixProps,
 };
