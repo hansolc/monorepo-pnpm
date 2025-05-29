@@ -1,5 +1,6 @@
 type InputStateTypes = "focused" | "disabled" | "blur";
 type InputTypes = "filled" | "outlined";
+type InputTagTypes = "text" | "email" | "number" | "password";
 
 interface TextFieldSharedProps {
   outlined?: boolean;
@@ -7,4 +8,9 @@ interface TextFieldSharedProps {
   isHovered?: boolean;
 }
 
-export type { InputStateTypes, InputTypes, TextFieldSharedProps };
+export type {
+  InputStateTypes,
+  InputTypes,
+  TextFieldSharedProps,
+  InputTagTypes,
+};

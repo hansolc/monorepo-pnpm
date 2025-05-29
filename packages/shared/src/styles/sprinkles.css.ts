@@ -41,7 +41,7 @@ const flexSprinklesProperties = defineProperties({
     flex: [1, 0],
     flexDirection: ["row", "column"],
     justifyContent: ["center", "space-between"],
-    alignItems: ["center"],
+    alignItems: ["center", "baseline"],
     flexWrap: ["wrap"],
     gap: spacingValues,
     flexGrow: [0, 1],
@@ -60,11 +60,18 @@ const spacingSprinklesProperties = defineProperties({
     paddingLeft: spacingValues,
     paddingBottom: spacingValues,
     paddingRight: spacingValues,
+    marginTop: spacingValues,
+    marginLeft: spacingValues,
+    marginBottom: spacingValues,
+    marginRight: spacingValues,
   },
   shorthands: {
     padding: ["paddingBottom", "paddingLeft", "paddingRight", "paddingTop"],
     px: ["paddingLeft", "paddingRight"],
     py: ["paddingBottom", "paddingTop"],
+    margin: ["marginBottom", "marginLeft", "marginRight", "marginTop"],
+    my: ["marginBottom", "marginTop"],
+    mx: ["marginLeft", "marginRight"],
   },
 });
 

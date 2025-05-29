@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles } from "../../../../styles/sprinkles.css";
 import { vars } from "../../../../styles/theme/color.css";
@@ -11,8 +11,8 @@ const baseFieldset = style([
   }),
   {
     border: 0,
-    padding: "0 1rem",
-    height: 56,
+    padding: "1rem",
+    // height: 56,
   },
 ]);
 
@@ -63,13 +63,51 @@ export const fieldSet = recipe({
   ],
 });
 
+const inputAreaContainerBase = style([
+  sprinkles({ position: "relative", flex: 1 }),
+]);
+
+export const inputAreaContainer = recipe({
+  base: [inputAreaContainerBase],
+  variants: {
+    outlined: {
+      true: [],
+      false: [],
+    },
+    inputState: {
+      focused: [],
+      disabled: [],
+      blur: [],
+    },
+    hasValue: {
+      true: [],
+      false: [],
+    },
+  },
+  compoundVariants: [
+    {
+      variants: { outlined: false, inputState: "focused" },
+      style: { marginTop: "17px" },
+    },
+    {
+      variants: { outlined: false, hasValue: true },
+      style: { marginTop: 17 },
+    },
+  ],
+});
+
 const baseInput = style([
+  sprinkles({ color: "onSurface" }),
   {
     fontSize: "1rem",
     outline: "none",
     border: "none",
     backgroundColor: "transparent",
     width: "100%",
+    padding: 0,
+    resize: "none",
+    scrollbarWidth: "none",
+    height: "20px",
   },
 ]);
 
@@ -112,11 +150,16 @@ export const label = recipe({
   compoundVariants: [
     {
       variants: { outlined: false, floated: true },
-      style: { top: "-0.5rem" },
+      style: { top: "-0.7rem" },
     },
     {
       variants: { outlined: true, floated: true },
-      style: { top: "-1.1rem", left: "0", backgroundColor: "white" },
+      style: { top: "-1.3rem", left: "0", backgroundColor: "white" },
     },
   ],
+});
+
+export const textFieldFix = styleVariants({
+  prefix: [sprinkles({ color: "onSurfaceVariant", paddingRight: 4 })],
+  suffix: [sprinkles({ color: "onSurfaceVariant", paddingLeft: 4 })],
 });

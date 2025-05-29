@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MdKey } from "react-icons/md";
 
 const meta = {
-  title: "Components/TextField2",
+  title: "Components/TextField",
   component: TextFieldInput,
   tags: ["autodocs"],
   argTypes: {},
@@ -13,6 +13,17 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+export const BaseTextFieldInput: Story = {
+  args: {
+    value: "value",
+    setValue: () => {},
+    type: "text",
+    prefix: "",
+    suffix: "",
+    fixedHeight: undefined,
+  },
+};
 
 export const OutlinedInput = {
   render: () => {

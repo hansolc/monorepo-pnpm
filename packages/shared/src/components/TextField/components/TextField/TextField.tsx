@@ -1,6 +1,6 @@
 import React, { ComponentProps, PropsWithChildren } from "react";
-import { InputStateTypes, InputTypes, TextFieldSharedProps } from "../../types";
-import { fieldSet, input, label } from "./TextField.css";
+import { InputStateTypes, TextFieldSharedProps } from "../../types";
+import { fieldSet, input, label, textFieldFix } from "./TextField.css";
 import Typography from "../../../Typography/Typography";
 import { sprinkles } from "@styles/sprinkles.css";
 
@@ -34,8 +34,13 @@ const Input = ({ ...props }: ComponentProps<"input">) => {
   return <input className={input()} {...props} />;
 };
 
-const Textarea = () => {
-  return <textarea name="" id=""></textarea>;
+const Textarea = ({
+  fixedHeight = 3,
+  ...props
+}: { fixedHeight?: number } & ComponentProps<"textarea">) => {
+  return (
+    <textarea className={input()} rows={fixedHeight} {...props}></textarea>
+  );
 };
 
 const Label = ({
@@ -58,10 +63,16 @@ const Label = ({
 const Clear = ({
   as,
   clear,
+  value,
+  withClear,
 }: {
   as: React.ReactElement;
   clear: () => void;
+  value: string;
+  withClear?: boolean;
 }) => {
+  if (!value || !withClear) return null;
+
   return React.cloneElement(as, {
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -82,12 +93,33 @@ const SupportingText = ({ children }: PropsWithChildren) => {
   );
 };
 
+const Fix = ({
+  text,
+  position,
+  inputValue,
+  inputState,
+}: {
+  position: "prefix" | "suffix";
+  text?: string;
+  inputValue: string;
+  inputState: InputStateTypes;
+}) => {
+  const isDisplay = inputState === "focused" || inputValue.length > 0;
+  if (!text || !isDisplay) return null;
+  return (
+    <Typography size="lg" ty="label" className={textFieldFix[position]}>
+      {text}
+    </Typography>
+  );
+};
+
 const TextField = Object.assign(TextFieldRoot, {
   Input,
   Textarea,
   Label,
   Clear,
   SupportingText,
+  Fix,
 });
 
 export default TextField;
