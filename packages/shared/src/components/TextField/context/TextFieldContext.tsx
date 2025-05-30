@@ -1,9 +1,13 @@
 import { createContext, useContext } from "react";
+import { InputStateTypes } from "../types";
 
 export interface TextFieldContextValue {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  state?: "disabled" | "blur" | "focused";
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  state?: InputStateTypes;
+  error?: string;
 }
 
 const TextFieldContext = createContext<TextFieldContextValue | null>(null);

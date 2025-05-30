@@ -76,3 +76,16 @@ export const input = style({
   height: "24px",
   color: vars.colors.onSurface,
 });
+
+export const label = recipe({
+  base: { fontSize: "1rem" },
+  variants: {
+    floated: {
+      true: {
+        fontSize: "0.75rem",
+        color: vars.colors.primary,
+      },
+      false: {},
+    },
+  },
+});

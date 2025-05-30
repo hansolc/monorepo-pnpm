@@ -3,29 +3,33 @@ import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { vars } from "../../styles/theme/color.css";
 
-const baseInput = style([
-  sprinkles({ color: "onSurface" }),
-  {
-    fontSize: "1rem",
-    outline: "none",
-    border: "none",
-    backgroundColor: "transparent",
-    width: "100%",
-    padding: 0,
-    resize: "none",
-    scrollbarWidth: "none",
-    height: "24px",
+const errorFontColor = style({ color: `${vars.colors.error} !important` });
+
+export const fieldset = recipe({
+  base: [],
+  variants: {
+    error: {
+      true: {
+        borderColor: `${vars.colors.error} !important`,
+      },
+      false: {},
+    },
   },
-]);
+});
 
 export const input = recipe({
-  base: [baseInput],
+  base: [],
+  variants: {
+    error: {
+      true: errorFontColor,
+      false: {},
+    },
+  },
 });
 
 const baseLabel = style({
   position: "absolute",
   transition: "all 0.2s ease",
-  fontSize: "1rem",
 });
 
 export const label = recipe({
@@ -33,10 +37,12 @@ export const label = recipe({
   variants: {
     floated: {
       true: {
-        fontSize: "0.75rem",
-        color: vars.colors.primary,
         position: "relative",
       },
+      false: {},
+    },
+    error: {
+      true: errorFontColor,
       false: {},
     },
   },

@@ -29,6 +29,7 @@ export const BaseTextFieldInput: Story = {
     supportingText: "Supporting Text",
     fixedHeight: 0,
     clear: false,
+    error: "",
   },
 };
 

@@ -2,14 +2,18 @@ import React from "react";
 import useFocus from "../hooks/useFocus";
 import TextField from "../TextField";
 import { MdCancel } from "react-icons/md";
-import { fieldSet, input } from "./InputWithFloatedLabel.css";
+import {
+  fieldSet,
+  input,
+  label as labelStyle,
+} from "./InputWithFloatedLabel.css";
 import { sprinkles } from "@styles/sprinkles.css";
+import { TextFieldContextValue } from "../context/TextFieldContext";
+import useIsTyping from "../hooks/useIsTyping";
 
-interface Props {
+interface Props extends TextFieldContextValue {
   label: string;
   type: "number" | "text" | "email" | "password";
-  value: string;
-  onChange: any;
   outlined?: boolean;
   disabled?: boolean;
   prefix?: string;
@@ -31,10 +35,12 @@ const InputWithFloatedLabel = ({
   supportingText,
   outlined,
   trailingIcon,
+  error,
   ...props
 }: Props) => {
   const { disabled, onChange, value } = props;
   const { inputState, focusEvents } = useFocus({ disabled });
+  const { isTyping } = useIsTyping({ value, state: inputState });
   //   const { isHovered, hoverEvents } = useHover({ inputState });
   return (
     <>
@@ -43,16 +49,25 @@ const InputWithFloatedLabel = ({
         onChange={onChange}
         state={inputState}
         disabled={disabled}
+        error={error}
         className={fieldSet({
           type: outlined ? "outlined" : "filled",
         })}
         {...focusEvents}
       >
         {leadingIcon}
-        {outlined && <TextField.OutlinedLabel>{label}</TextField.OutlinedLabel>}
+        {outlined && (
+          <TextField.OutlinedLabel
+            className={labelStyle({ floated: isTyping })}
+          >
+            {label}
+          </TextField.OutlinedLabel>
+        )}
         <div className={sprinkles({ flex: 1 })}>
           {!outlined && (
-            <TextField.FloatingLabel className={label}>
+            <TextField.FloatingLabel
+              className={labelStyle({ floated: isTyping })}
+            >
               {label}
             </TextField.FloatingLabel>
           )}
@@ -79,7 +94,13 @@ const InputWithFloatedLabel = ({
           withClear={clear}
         />
       </TextField>
-      <TextField.SupportingText>{supportingText}</TextField.SupportingText>
+      {error ? (
+        <TextField.SupportingText className={sprinkles({ color: "error" })}>
+          {error}
+        </TextField.SupportingText>
+      ) : (
+        <TextField.SupportingText>{supportingText}</TextField.SupportingText>
+      )}
     </>
   );
 };

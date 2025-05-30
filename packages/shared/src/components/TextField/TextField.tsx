@@ -1,6 +1,6 @@
 import React, { ComponentProps } from "react";
 import { TextFieldFixProps } from "./types";
-import { input, label, textFieldFix } from "./TextField.css";
+import { fieldset, input, label, textFieldFix } from "./TextField.css";
 import Typography from "../Typography/Typography";
 import { sprinkles } from "@styles/sprinkles.css";
 import {
@@ -9,34 +9,40 @@ import {
   useTextFieldContext,
 } from "./context/TextFieldContext";
 import { PropsWithChildrenStyle } from "src/types";
+import useIsTyping from "./hooks/useIsTyping";
 
 const TextFieldRoot = ({
   children,
   value,
   onChange,
   state,
+  error,
+  className = "",
   ...props
 }: PropsWithChildrenStyle &
   TextFieldContextValue &
-  ComponentProps<"fieldset">) => {
+  Omit<ComponentProps<"fieldset">, "onChange">) => {
   return (
-    <TextFieldProvider value={{ value, onChange, state }}>
-      <fieldset {...props}>{children}</fieldset>
+    <TextFieldProvider value={{ value, onChange, state, error }}>
+      <fieldset
+        className={`${fieldset({ error: !!error })} ${className}`}
+        {...props}
+      >
+        {children}
+      </fieldset>
     </TextFieldProvider>
   );
 };
 
-const Input = ({ ...props }: ComponentProps<"input">) => {
-  return <input {...props} />;
+const Input = ({ className = "", ...props }: ComponentProps<"input">) => {
+  return <input className={` ${className}`} {...props} />;
 };
 
 const Textarea = ({
   fixedHeight = 3,
   ...props
 }: { fixedHeight?: number } & ComponentProps<"textarea">) => {
-  return (
-    <textarea className={input()} rows={fixedHeight} {...props}></textarea>
-  );
+  return <textarea rows={fixedHeight} {...props}></textarea>;
 };
 
 const InputWithFix = ({
@@ -78,10 +84,12 @@ const FloatingLabel = ({
   children,
   className = "",
 }: PropsWithChildrenStyle) => {
-  const { value, state } = useTextFieldContext();
-  const isFloat = (value && value.length > 0) || state === "focused";
+  const { value, state, error } = useTextFieldContext();
+  const { isTyping } = useIsTyping({ value, state });
   return (
-    <label className={`${label({ floated: isFloat })} ${className}`}>
+    <label
+      className={`${label({ floated: isTyping, error: !!error })} ${className}`}
+    >
       {children}
     </label>
   );
@@ -91,11 +99,13 @@ const OutlinedLabel = ({
   children,
   className = "",
 }: PropsWithChildrenStyle) => {
-  const { value, state } = useTextFieldContext();
-  const isOutlined = (value && value.length > 0) || state === "focused";
-  if (isOutlined) {
+  const { value, state, error } = useTextFieldContext();
+  const { isTyping } = useIsTyping({ value, state });
+  if (isTyping) {
     return (
-      <legend className={`${label({ floated: true })} ${className}`}>
+      <legend
+        className={`${label({ floated: true, error: !!error })} ${className}`}
+      >
         {children}
       </legend>
     );
