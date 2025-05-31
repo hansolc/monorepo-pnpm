@@ -1,80 +1,87 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { MdKey } from "react-icons/md";
-import InputWithFloatedLabel from "./components/InputWithFloatedLabel";
+import TextField from "./TextField";
+import useFocus from "./hooks/useFocus";
 
 const meta = {
-  title: "Components/TextField",
-  component: InputWithFloatedLabel,
-  tags: ["autodocs"],
+  title: "Reusable/TextField",
+  component: TextField,
+  // tags: ["autodocs"],
   argTypes: {},
-} satisfies Meta<typeof InputWithFloatedLabel>;
+};
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const BaseTextFieldInput: Story = {
-  args: {
-    label: "label",
-    type: "text",
-    value: "",
-    onChange: () => {},
-    outlined: false,
-    disabled: false,
-    prefix: "$",
-    suffix: "@gmail.com",
-    leadingIcon: <MdKey size="24" />,
-    trailingIcon: <MdKey size="24" />,
-    supportingText: "Supporting Text",
-    fixedHeight: 0,
-    clear: false,
+export const FloatingLabelTextField: Story = {
+  name: "Floating Label",
+  render: () => {
+    const [val, setVal] = useState("");
+    const [disabled, setDisabled] = useState(false);
+    const { focusEvents, inputState } = useFocus({ disabled });
+
+    return (
+      <>
+        <TextField
+          value={val}
+          onChange={(e) => setVal(e.target.value)}
+          state={inputState}
+          {...focusEvents}
+        >
+          <TextField.FloatingLabel>Label</TextField.FloatingLabel>
+          <TextField.Input
+            placeholder="Type here"
+            value={val}
+            onChange={(e) => setVal(e.target.value)}
+          />
+          <TextField.Clear as={<button>button</button>} withClear={true} />
+        </TextField>
+        <TextField.SupportingText>Support message</TextField.SupportingText>
+      </>
+    );
   },
 };
 
-// export const OutlinedInput = {
-//   render: () => {
-//     const [val, setVal] = useState("");
-//     return (
-//       <InputWithFloatedLabel
-//         value={val}
-//         setValue={setVal}
-//         type="text"
-//         supportingText="supporting text"
-//         outlined
-//       />
-//     );
-//   },
-// };
+export const OutlinedLabel: Story = {
+  name: "Outlined Label",
+  render: () => {
+    const [val, setVal] = useState("");
+    const [disabled, setDisabled] = useState(false);
+    const { focusEvents, inputState } = useFocus({ disabled });
 
-// export const FilledInput = {
-//   render: () => {
-//     const [val, setVal] = useState("");
-//     return <InputWithFloatedLabel type="text" value={val} setValue={setVal} />;
-//   },
-// };
+    return (
+      <>
+        <TextField
+          value={val}
+          onChange={(e) => setVal(e.target.value)}
+          state={inputState}
+          {...focusEvents}
+        >
+          <TextField.OutlinedLabel>Label</TextField.OutlinedLabel>
+          <TextField.Input
+            placeholder="Type here"
+            value={val}
+            onChange={(e) => setVal(e.target.value)}
+          />
+          <TextField.Clear as={<button>button</button>} withClear={true} />
+        </TextField>
+        <TextField.SupportingText>Support message</TextField.SupportingText>
+      </>
+    );
+  },
+};
 
-// // 도메인 분리하기
-// // FrameworkPasswordInput은 컨테이너가 아니지만 데이터에 접근합니다.
-// // 필요한 데이터를 직접 관리할 때 자율적인 컴포넌트가 되고 외부 의존성이 없어 재사용하기 좋기 때문입니다.
-// // 비즈니스 로직은 스스로 처리하되 UI 로직을 위임하는 방식으로 볼 수 있습니다.
-// export const FrameworkPasswordInput = {
-//   render: () => {
-//     const [pw, setPw] = useState("");
-
-//     const handleSubmit = () => {
-//       // password submit logic here
-//     };
-
-//     return (
-//       <TextFieldInput
-//         leadingIcon={<MdKey size="24" />}
-//         supportingText="비밀번호를 입력해주세요"
-//         type="password"
-//         value={pw}
-//         setValue={setPw}
-//         label="비밀번호"
-//       />
-//     );
-//   },
-// };
+export const WithPrefixSuffix = {
+  render: () => (
+    <TextField value="value" onChange={() => {}} state="focused">
+      <TextField.FloatingLabel>Label</TextField.FloatingLabel>
+      <TextField.InputWithFix
+        pfix={{ text: "₩", position: "prefix" }}
+        sfix={{ text: "원", position: "suffix" }}
+      />
+      <TextField.SupportingText>Currency input</TextField.SupportingText>
+    </TextField>
+  ),
+};

@@ -11,7 +11,7 @@ import { sprinkles } from "@styles/sprinkles.css";
 import { TextFieldContextValue } from "../context/TextFieldContext";
 import useIsTyping from "../hooks/useIsTyping";
 
-interface Props extends TextFieldContextValue {
+interface Props extends Omit<TextFieldContextValue, "state"> {
   label: string;
   type: "number" | "text" | "email" | "password";
   outlined?: boolean;
@@ -52,6 +52,7 @@ const InputWithFloatedLabel = ({
         error={error}
         className={fieldSet({
           type: outlined ? "outlined" : "filled",
+          fixedHeight: !!fixedHeight,
         })}
         {...focusEvents}
       >
@@ -95,11 +96,15 @@ const InputWithFloatedLabel = ({
         />
       </TextField>
       {error ? (
-        <TextField.SupportingText className={sprinkles({ color: "error" })}>
+        <TextField.SupportingText
+          className={sprinkles({ color: "error", px: 16 })}
+        >
           {error}
         </TextField.SupportingText>
       ) : (
-        <TextField.SupportingText>{supportingText}</TextField.SupportingText>
+        <TextField.SupportingText className={sprinkles({ px: 16 })}>
+          {supportingText}
+        </TextField.SupportingText>
       )}
     </>
   );

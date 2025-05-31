@@ -6,8 +6,47 @@ import InputWithFloatedLabel from "./InputWithFloatedLabel";
 const meta = {
   title: "Components/InputWithFloatedLabel",
   component: InputWithFloatedLabel,
-  tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    label: {
+      description: "입력 항목을 설명하는 라벨",
+    },
+    type: {
+      description: "input의 타입 속성",
+    },
+    value: {
+      description: "입력 필드의 값",
+    },
+    outlined: {
+      description: "outlined 스타일 적용 여부",
+    },
+    disabled: {
+      description: "입력 비활성화 여부",
+    },
+    prefix: {
+      description: "앞에 고정 텍스트",
+    },
+    suffix: {
+      description: "뒤에 고정 텍스트",
+    },
+    leadingIcon: {
+      description: "앞쪽 아이콘",
+    },
+    trailingIcon: {
+      description: "뒤쪽 아이콘",
+    },
+    supportingText: {
+      description: "부가 설명 텍스트",
+    },
+    fixedHeight: {
+      description: "고정 높이 설정",
+    },
+    clear: {
+      description: "입력값 초기화 버튼",
+    },
+    error: {
+      description: "에러 메시지 표시",
+    },
+  },
 } satisfies Meta<typeof InputWithFloatedLabel>;
 
 export default meta;
@@ -33,49 +72,56 @@ export const BaseTextFieldInput: Story = {
   },
 };
 
-// export const OutlinedInput = {
-//   render: () => {
-//     const [val, setVal] = useState("");
-//     return (
-//       <InputWithFloatedLabel
-//         value={val}
-//         setValue={setVal}
-//         type="text"
-//         supportingText="supporting text"
-//         outlined
-//       />
-//     );
-//   },
-// };
+export const OutlinedFieldInput = {
+  render: () => {
+    return (
+      <InputWithFloatedLabel
+        label="label"
+        onChange={() => {}}
+        type="text"
+        value=""
+        outlined
+      />
+    );
+  },
+};
 
-// export const FilledInput = {
-//   render: () => {
-//     const [val, setVal] = useState("");
-//     return <InputWithFloatedLabel type="text" value={val} setValue={setVal} />;
-//   },
-// };
+export const SimpleInput = {
+  render: () => (
+    <InputWithFloatedLabel
+      label="label"
+      onChange={() => {}}
+      type="text"
+      value=""
+    />
+  ),
+};
 
-// // 도메인 분리하기
-// // FrameworkPasswordInput은 컨테이너가 아니지만 데이터에 접근합니다.
-// // 필요한 데이터를 직접 관리할 때 자율적인 컴포넌트가 되고 외부 의존성이 없어 재사용하기 좋기 때문입니다.
-// // 비즈니스 로직은 스스로 처리하되 UI 로직을 위임하는 방식으로 볼 수 있습니다.
-// export const FrameworkPasswordInput = {
-//   render: () => {
-//     const [pw, setPw] = useState("");
+export const UserPasswordInput = {
+  render: () => (
+    <InputWithFloatedLabel
+      label="비밀번호"
+      onChange={() => {}}
+      type="password"
+      value=""
+      leadingIcon={<MdKey size="24" />}
+      supportingText="패스워드를 입력해주세요."
+      outlined
+    />
+  ),
+};
 
-//     const handleSubmit = () => {
-//       // password submit logic here
-//     };
-
-//     return (
-//       <TextFieldInput
-//         leadingIcon={<MdKey size="24" />}
-//         supportingText="비밀번호를 입력해주세요"
-//         type="password"
-//         value={pw}
-//         setValue={setPw}
-//         label="비밀번호"
-//       />
-//     );
-//   },
-// };
+export const InputWithError = {
+  render: () => (
+    <InputWithFloatedLabel
+      label="비밀번호"
+      onChange={() => {}}
+      type="password"
+      value="123456"
+      leadingIcon={<MdKey size="24" />}
+      supportingText="패스워드를 입력해주세요."
+      outlined
+      error="잘못된 비밀번호 입니다."
+    />
+  ),
+};

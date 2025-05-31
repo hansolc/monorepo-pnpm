@@ -1,0 +1,159 @@
+import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
+import * as TextFieldStories from './TextField.stories';
+import * as InputWithFloatedLabel from './components/InputWithFloatedLabel.stories';
+
+<Meta of={TextFieldStories} />
+
+# TextField 문서
+
+`TextField`는 Compound Pattern 기반의 컴포넌트로, `TextField.Input`, `TextField.FloatingLabel`, `TextField.SupportingText` 등 여러 하위 컴포넌트를 조합하여 다양한 입력 UI를 만들 수 있습니다.
+
+---
+
+## Usage
+```tsx
+    const [val, setVal] = useState("");
+    const [disabled, setDisabled] = useState(false);
+    const { focusEvents, inputState } = useFocus({ disabled });
+
+    <TextField
+      value={val}
+      onChange={(e) => setVal(e.target.value)}
+      state={inputState}
+      {...focusEvents}
+    >
+    ...
+    </TextField>
+```
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## TextField 구성 요소
+
+TextField 컴포넌트는 Compound Pattern으로 구성되어 있으며 다음과 같은 하위 요소들을 포함합니다:
+
+<table>
+  <thead>
+    <tr>
+      <th>컴포넌트</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>TextField</code></td>
+      <td>
+        <strong>컨텍스트 컨테이너</strong> 역할을 하며, 하위 컴포넌트에서 공유할 <code>value</code>, <code>onChange</code>, <code>state</code>, <code>error</code> 값을 제공합니다. 
+        <br />- <code>value</code>, <code>onChange</code>, <code>error</code>는 상위 컴포넌트에서 전달해야 하며, 
+        <br />- <code>state</code>는 <code>useFocus</code> 훅을 사용해 <code>input</code>의 포커스 상태를 관리하고 전달해야 합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.Input</code></td>
+      <td>기본 <code>input</code> 요소를 렌더링합니다.</td>
+    </tr>
+    <tr>
+      <td><code>TextField.Textarea</code></td>
+      <td><code>textarea</code> 요소를 렌더링하며, <code>fixedHeight</code> prop을 통해 <code>rows</code> 속성을 설정할 수 있습니다.</td>
+    </tr>
+    <tr>
+      <td><code>TextField.InputWithFix</code><br /><code>TextField.TextAreaWithFix</code></td>
+      <td>
+        <code>pfix</code>, <code>sfix</code> prop을 통해 prefix/suffix 텍스트를 렌더링합니다. 
+        <br />통화 단위(예: ₩), 이메일 도메인 등 부가 정보를 함께 표시할 때 사용합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.FloatingLabel</code></td>
+      <td>
+        기본 <code>position: absolute</code>로 <code>input</code> 내부에 위치합니다. 
+        <br />입력값이 존재하거나 focus 상태일 때 <code>position: relative</code>로 전환되어 label이 위로 떠오르는 효과를 줍니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.OutlinedLabel</code></td>
+      <td>
+        <code>FloatingLabel</code>과 유사하게 동작하지만, focus 또는 타이핑 시 <code>legend</code> 태그로 전환되어 
+        <strong>outline border에 텍스트가 삽입되는 효과</strong>를 제공합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.Clear</code></td>
+      <td>
+        <code>as</code> prop으로 지우기 버튼 등의 UI 요소를 <code>React.ReactElement</code> 형태로 전달하고, 
+        <code>withClear</code>가 <code>true</code>일 때만 렌더링됩니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.SupportingText</code></td>
+      <td>
+        입력 필드 하단에 보조 설명을 표시합니다. 
+        <br /><code>error</code>가 존재할 경우 대체되어 표시되며, 
+        <strong>에러 메시지와 동시에 표시하지 않는 것을 권장</strong>합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## 기본 사용 예시
+
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Floating Label</h2>
+  <p>
+    <strong>FloatingLabel</strong>을 사용하면, 입력 필드에 값이 있거나 focus 상태일 때
+    label이 위로 떠오르는 애니메이션 효과를 적용할 수 있습a니다.
+    <br />
+    또한 <code>Clear</code> 기능을 추가해 입력값을 초기화하는 UX도 함께 구현할 수 있습니다.
+  </p>
+
+  <Canvas of={TextFieldStories.FloatingLabelTextField} />
+</section>
+
+---
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Outlined Label</h2>
+  <p>
+    <strong>OutlinedLabel</strong>은 label이 input의 border에 삽입되는 효과를 제공합니다.
+    <br />
+    포커스되거나 텍스트가 입력되면 <code>legend</code> 태그로 변경되어 outline 스타일이 적용됩니다.
+  </p>
+
+  <Canvas of={TextFieldStories.OutlinedLabel} />
+    
+</section>
+
+---
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Prefix / Suffix</h2>
+  <p>
+    <strong>InputWithFix</strong> 또는 <strong>TextAreaWithFix</strong> 컴포넌트를 사용하여
+    input 앞뒤에 부가 정보를 표시할 수 있습니다.
+    <br />
+    <code>pfix</code>, <code>sfix</code> prop을 통해 접두사 / 접미사를 설정하며, 예: 금액 단위(₩), 이메일 도메인(@gmail.com) 등.
+  </p>
+
+  <Canvas of={TextFieldStories.WithPrefixSuffix} />
+    {/* <Story of={TextFieldStories.WithPrefixSuffix} /> */}
+  {/* </Canvas> */}
+</section>
+
+---
+
+<section style={{ marginTop: "48px" }}>
+  <h2>조합 예시: InputWithFloatedLabel</h2>
+  <p>
+    여러 기능을 조합하여 실제 사용에 가까운 <strong>완성형 TextField</strong> 컴포넌트 예시입니다. Material design 3 TextField의 Filled, Outlined 타입입니다.
+    <br />
+    FloatingLabel, SupportingText, Clear 버튼 등이 함께 사용되며, 디자인 스타일도 포함되어 있습니다.
+  </p>
+  <Story of={InputWithFloatedLabel.BaseTextFieldInput} />
+  <div style={{marginTop: "24px"}} />
+  <Story of={InputWithFloatedLabel.OutlinedFieldInput} />
+</section>

@@ -11,6 +11,6 @@
       "@styles/*": ["./src/styles/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["**/*.stories.tsx"]
+  "include": ["src", "src/**/*.stories.tsx"],
+  "exclude": ["**/*.stories.tsx", "**/*.mdx"]
 }

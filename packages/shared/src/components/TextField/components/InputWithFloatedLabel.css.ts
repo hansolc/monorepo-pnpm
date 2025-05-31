@@ -60,6 +60,10 @@ export const fieldSet = recipe({
         },
       ],
     },
+    fixedHeight: {
+      true: { height: "auto" },
+      false: {},
+    },
   },
   compoundVariants: [],
 });
@@ -73,7 +77,7 @@ export const input = style({
   padding: 0,
   resize: "none",
   scrollbarWidth: "none",
-  height: "24px",
+  // height: "24px",
   color: vars.colors.onSurface,
 });
 
