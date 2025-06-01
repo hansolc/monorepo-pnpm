@@ -1,0 +1,105 @@
+import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
+import * as DropdownStories from './Dropdown.stories';
+import * as MenuStories from '../../Menu/Menu.stories';
+
+<Meta of={DropdownStories} />
+
+# Dropdown 문서
+
+`Dropdown`는 Compound Pattern 기반의 컴포넌트로, `Dropdown.Trigger`, `Dropdown.Menu`, `Dropdown.Item` 등 여러 하위 컴포넌트를 조합하여 다양한 입력 UI를 만들 수 있습니다.
+
+---
+
+## Usage
+```tsx
+<Dropdown value={selected} onChange={onChange}>
+  <Dropdown.Trigger as={trigger} />
+  <Dropdown.Menu>
+    {options.map((option, idx) => {
+      return (
+        <Dropdown.Item
+          key={idx}
+          value={option}
+        >
+          {valueAs(option)}
+        </Dropdown.Item>
+      );
+    })}
+  </Dropdown.Menu>
+</Dropdown>
+```
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## Dropdown 구성 요소
+
+Dropdown 컴포넌트는 Compound Pattern으로 구성되어 있으며 다음과 같은 하위 요소들을 포함합니다:
+
+<table>
+  <thead>
+    <tr>
+      <th>컴포넌트</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dropdown</code></td>
+      <td>
+        컴포넌트 트리 내에서 상태를 공유하기 위한 <strong>컨텍스트 컨테이너</strong> 역할을 합니다.<br />
+        외부로부터 <code>value</code>와 <code>onChange</code>를 전달받고, 내부적으로 <code>isOpen</code>과 <code>toggle</code> 상태를 관리합니다.<br />
+        하위 컴포넌트인 <code>Trigger</code>, <code>Menu</code>, <code>Item</code>은 이 컨텍스트를 통해 상태에 접근합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Dropdown.Trigger</code></td>
+      <td>
+        <code>as</code> props를 통해 ReactElement를 전달받습니다.<br />
+        전달된 요소에 클릭 이벤트를 주입하며, 클릭 시 <code>toggle()</code>을 호출하여 메뉴의 열림/닫힘 상태를 제어합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Dropdown.Menu</code></td>
+      <td>
+        열려 있는 상태(<code>isOpen</code>)일 때만 렌더링되며, 외부 영역을 클릭할 경우 <code>useClickOutside</code> 훅을 통해 자동으로 닫히도록 처리됩니다.<br />
+        <code>className</code>을 통해 외부에서 스타일을 지정할 수 있습니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Dropdown.Item</code></td>
+      <td>
+        메뉴 내에서 렌더링되는 각 항목을 나타냅니다.<br />
+        클릭 시 <code>onChange</code>를 호출하여 선택된 값을 변경하고, 동시에 메뉴를 닫습니다.<br />
+        <code>value</code>와 <code>children</code>을 전달받아 표시할 텍스트와 실제 값이 분리될 수 있습니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## 기본 사용 예시
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Select</h2>
+  <p>
+    이 예시는 가장 단순한 형태의 Dropdown입니다.<br />
+    <code>Trigger</code>는 기본 <code>button</code> 요소로 구성되며, 선택 항목은 배열 형태의 <code>options</code>로 전달됩니다.<br />
+    외부에서 <code>as</code> props를 통해 트리거 요소에 커스텀 스타일을 적용할 수 있습니다.
+  </p>
+  <Canvas of={DropdownStories.SimpleDropdown} />
+</section>
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Select</h2>
+  <p>
+    이 예시는 디자인 커스터마이징이 적용된 Dropdown입니다.<br />
+    <code>Trigger</code>로 전달되는 요소는 스타일링된 <code>fieldset</code> 태그로 구성되어 있으며, 클릭 시 <code>props</code>로 전달된 <code>options</code> 목록이 표시됩니다.<br />
+    사용자가 항목을 선택하면 해당 항목의 텍스트가 트리거 영역에 표시됩니다.
+  </p>
+  <Canvas of={MenuStories.FrameworkStyledMenu} />
+</section>
+
+---
