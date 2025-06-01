@@ -57,8 +57,8 @@ export const BaseTextFieldInput: Story = {
   args: {
     label: "label",
     type: "text",
-    value: "",
-    onChange: () => {},
+    // value: "",
+    // onChange: () => {},
     outlined: false,
     disabled: false,
     prefix: "$",
@@ -98,17 +98,21 @@ export const SimpleInput = {
 };
 
 export const UserPasswordInput = {
-  render: () => (
-    <InputWithFloatedLabel
-      label="비밀번호"
-      onChange={() => {}}
-      type="password"
-      value=""
-      leadingIcon={<MdKey size="24" />}
-      supportingText="패스워드를 입력해주세요."
-      outlined
-    />
-  ),
+  render: () => {
+    const [pw, setPw] = useState("");
+
+    return (
+      <InputWithFloatedLabel
+        label="비밀번호"
+        type="password"
+        leadingIcon={<MdKey size="24" />}
+        supportingText="패스워드를 입력해주세요."
+        outlined
+        value={pw}
+        onChange={setPw}
+      />
+    );
+  },
 };
 
 export const InputWithError = {

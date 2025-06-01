@@ -1,5 +1,5 @@
 import React, { ComponentProps } from "react";
-import { TextFieldFixProps } from "./types";
+import { InputTagTypes, InputTypes, TextFieldFixProps } from "./types";
 import { fieldset, input, label, textFieldFix } from "./TextField.css";
 import Typography from "../Typography/Typography";
 import { sprinkles } from "@styles/sprinkles.css";
@@ -10,6 +10,13 @@ import {
 } from "./context/TextFieldContext";
 import { PropsWithChildrenStyle } from "src/types";
 import useIsTyping from "./hooks/useIsTyping";
+
+interface InputProps {
+  value?: string;
+  onChange?: (value: string) => void;
+  type: InputTagTypes;
+  className?: string;
+}
 
 const TextFieldRoot = ({
   children,
@@ -34,22 +41,35 @@ const TextFieldRoot = ({
   );
 };
 
-const Input = ({ className = "", ...props }: ComponentProps<"input">) => {
-  return <input className={` ${className}`} {...props} />;
+const Input = ({ className = "", onChange, ...props }: InputProps) => {
+  return (
+    <input
+      className={` ${className}`}
+      onChange={(e) => onChange?.(e.target.value)}
+      {...props}
+    />
+  );
 };
 
 const Textarea = ({
   fixedHeight = 3,
+  onChange,
   ...props
-}: { fixedHeight?: number } & ComponentProps<"textarea">) => {
-  return <textarea rows={fixedHeight} {...props}></textarea>;
+}: { fixedHeight?: number } & Omit<InputProps, "type">) => {
+  return (
+    <textarea
+      rows={fixedHeight}
+      onChange={(e) => onChange?.(e.target.value)}
+      {...props}
+    ></textarea>
+  );
 };
 
 const InputWithFix = ({
   pfix,
   sfix,
   ...props
-}: ComponentProps<"input"> & {
+}: InputProps & {
   pfix?: TextFieldFixProps;
   sfix?: TextFieldFixProps;
 }) => {
@@ -66,7 +86,7 @@ const TextAreaWithFix = ({
   pfix,
   sfix,
   ...props
-}: ComponentProps<"textarea"> & {
+}: Omit<InputProps, "type"> & {
   pfix?: TextFieldFixProps;
   sfix?: TextFieldFixProps;
   fixedHeight?: number;
@@ -134,19 +154,20 @@ const Clear = ({
   return React.cloneElement(as, {
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation();
-      if (onChange) {
-        const event = {
-          target: { value: "" },
-        } as React.ChangeEvent<HTMLInputElement>;
-        onChange(event);
-      }
+      onChange?.("");
+      // if (onChange) {
+      //   const event = {
+      //     target: { value: "" },
+      //   } as React.ChangeEvent<HTMLInputElement>;
+      //   onChange("");
+      // }
     },
   });
 };
 
 const SupportingText = ({ children, ...props }: PropsWithChildrenStyle) => {
   return (
-    <Typography size="sm" ty="label" {...props}>
+    <Typography size="sm" ty="label" {...props} as="div">
       {children}
     </Typography>
   );

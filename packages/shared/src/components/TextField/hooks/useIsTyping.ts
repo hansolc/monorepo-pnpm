@@ -5,10 +5,10 @@ const useIsTyping = ({
   value,
   state,
 }: {
-  value: string;
+  value?: string;
   state?: InputStateTypes;
 }) => {
-  const isTyping = value.length > 0 || state === "focused";
+  const isTyping = (value && value.length > 0) || state === "focused";
 
   return {
     isTyping,

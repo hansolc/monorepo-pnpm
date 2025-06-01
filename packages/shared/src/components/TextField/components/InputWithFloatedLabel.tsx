@@ -38,7 +38,7 @@ const InputWithFloatedLabel = ({
   error,
   ...props
 }: Props) => {
-  const { disabled, onChange, value } = props;
+  const { disabled, value, onChange } = props;
   const { inputState, focusEvents } = useFocus({ disabled });
   const { isTyping } = useIsTyping({ value, state: inputState });
   //   const { isHovered, hoverEvents } = useHover({ inputState });
