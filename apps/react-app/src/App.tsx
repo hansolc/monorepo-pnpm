@@ -1,10 +1,10 @@
 import Wrapper from "./components/Wrapper";
-import { default as UserLoginForm } from "./components/UserLoginForm";
+import Form from "./components/Form";
 
 function App() {
   return (
     <Wrapper>
-      <UserLoginForm />
+      <Form />
     </Wrapper>
   );
 }
