@@ -13,6 +13,7 @@ const Input = ({
   error,
   inputConfig,
   outlined,
+  className,
   ...props
 }: FrameworkInputProps) => {
   const { disabled, value, onChange } = props;
@@ -45,6 +46,7 @@ const Input = ({
       state={inputState}
       error={error}
       isTyping={isTyping}
+      className={className}
     >
       <TextField.Fieldset
         className={fieldSet({
@@ -87,6 +89,7 @@ const Input = ({
             className={input({ fixedHeight: !!fixedHeight })}
             fixedHeight={fixedHeight}
             type={props.type}
+            name={props.name}
             {...focusEvents}
           />
         </div>

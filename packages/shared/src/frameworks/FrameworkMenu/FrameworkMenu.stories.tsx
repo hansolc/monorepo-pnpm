@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Menu from "./components/Menu";
 import FrameworkMenu from "./FrameworkMenu";
+import { useState } from "react";
 
 const meta = {
   title: "Frameworks/FrameworkMenu",
@@ -30,7 +31,18 @@ type Story = StoryObj<typeof meta>;
 
 export const FrameworkStyledMenu = {
   render: () => {
-    return <FrameworkMenu />;
+    const label = "label";
+    const options = ["item1", "itme2", "item3"];
+    const [selected, change] = useState<string | undefined>(undefined);
+
+    return (
+      <FrameworkMenu
+        label={label}
+        options={options}
+        selected={selected}
+        change={change}
+      />
+    );
   },
 };
 

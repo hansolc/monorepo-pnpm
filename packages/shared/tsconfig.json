@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "outDir": "build",
     "rootDir": "src",
+    "composite": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "jsx": "react-jsx",

@@ -6,6 +6,7 @@ import {
 import useClickOutside from "../../hooks/useClickOutside";
 import { PropsWithChildrenStyle } from "src/types";
 import clsx from "clsx";
+import { sprinkles } from "@styles/sprinkles.css";
 
 interface Props {
   value?: string;
@@ -19,7 +20,9 @@ const DropdownRoot = ({
 }: PropsWithChildren<Props>) => {
   return (
     <DropdownProvider value={value} onChange={onChange}>
-      {children}
+      <div className={clsx(sprinkles({ position: "relative" }))}>
+        {children}
+      </div>
     </DropdownProvider>
   );
 };
@@ -44,7 +47,13 @@ const Menu = ({ children, className = "" }: PropsWithChildrenStyle) => {
   if (!isOpen) return null;
 
   return (
-    <div ref={ref} className={clsx(className)}>
+    <div
+      ref={ref}
+      className={clsx(
+        className,
+        sprinkles({ position: "absolute", width: "100%" })
+      )}
+    >
       {children}
     </div>
   );

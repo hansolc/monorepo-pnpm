@@ -13,9 +13,14 @@ import { FloatingLabelProps, InputProps, TextFieldFixProps } from "./types";
 
 const TextFieldRoot = ({
   children,
+  className,
   ...props
 }: PropsWithChildrenStyle & TextFieldContextValue) => {
-  return <TextFieldProvider value={{ ...props }}>{children}</TextFieldProvider>;
+  return (
+    <TextFieldProvider value={{ ...props }}>
+      <div className={clsx(className)}>{children}</div>
+    </TextFieldProvider>
+  );
 };
 
 const Fieldset = ({

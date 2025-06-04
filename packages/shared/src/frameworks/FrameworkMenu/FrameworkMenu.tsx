@@ -7,10 +7,22 @@ import {
 import Menu from "./components/Menu";
 import Flex from "@components/Flex/Flex";
 
-const FrameworkMenuExample = () => {
-  const label = "Label";
-  const options = ["Item1", "Item2", "Item3"];
-  const [selected, change] = useState<string | undefined>(undefined);
+interface Props {
+  label: string;
+  options: Array<string>;
+  selected?: string;
+  valueAs?: (val?: string) => string;
+  change?: (val?: string) => void;
+}
+
+const FrameworkMenu = ({
+  label,
+  options,
+  selected,
+  change,
+  valueAs,
+}: Props) => {
+  // const [selected, change] = useState<string | undefined>(undefined);
   return (
     <Menu
       trigger={
@@ -24,8 +36,9 @@ const FrameworkMenuExample = () => {
       }
       options={options}
       onChange={change}
+      valueAs={valueAs}
     />
   );
 };
 
-export default FrameworkMenuExample;
+export default FrameworkMenu;

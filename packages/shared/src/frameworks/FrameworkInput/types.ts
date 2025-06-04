@@ -7,6 +7,8 @@ interface FrameworkInputProps extends Omit<TextFieldContextValue, "state"> {
   disabled?: boolean;
   clear?: React.ReactElement;
   outlined?: boolean;
+  name?: string;
+  className?: string;
   inputConfig?: {
     prefix?: string;
     suffix?: string;

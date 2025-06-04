@@ -11,6 +11,7 @@ interface InputProps {
   sfix?: TextFieldFixProps;
   fixedHeight?: number;
   className?: string;
+  name?: string;
 }
 
 interface FloatingLabelProps {
