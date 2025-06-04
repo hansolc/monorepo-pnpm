@@ -15,5 +15,5 @@
     }
   },
   "include": ["src", "src/**/*.stories.tsx"],
-  "exclude": ["**/*.stories.tsx", "**/*.mdx"]
+  "exclude": ["**/*.stories.tsx", "**/*.mdx", "src/test/*"]
 }
