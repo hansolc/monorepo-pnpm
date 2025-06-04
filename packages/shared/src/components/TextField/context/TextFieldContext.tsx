@@ -6,6 +6,7 @@ export interface TextFieldContextValue {
   onChange?: (value: string) => void;
   state?: InputStateTypes;
   error?: string;
+  isTyping?: boolean;
 }
 
 const TextFieldContext = createContext<TextFieldContextValue | null>(null);

@@ -3,7 +3,7 @@ import {
   DropdownProvider,
   useDropdownContext,
 } from "./context/DropdownContext";
-import useClickOutside from "./hooks/useClickOutside";
+import useClickOutside from "../../hooks/useClickOutside";
 import { PropsWithChildrenStyle } from "src/types";
 import clsx from "clsx";
 

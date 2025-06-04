@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react";
 import Dropdown from "./Dropdown";
 
 const meta = {
-  title: "Reusable/Dropdown",
+  title: "Components/Dropdown",
   component: Dropdown,
 };
 

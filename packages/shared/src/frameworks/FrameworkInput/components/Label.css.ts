@@ -16,6 +16,7 @@ const baseFieldset = style([
     display: "flex",
     gap: 16,
     alignItems: "center",
+    position: "relative",
   }),
   {
     border: 0,
@@ -68,7 +69,7 @@ export const fieldSet = recipe({
   compoundVariants: [],
 });
 
-export const input = style({
+export const baseInput = style({
   fontSize: "1rem",
   outline: "none",
   border: "none",
@@ -81,6 +82,15 @@ export const input = style({
   color: vars.colors.onSurface,
 });
 
+export const input = recipe({
+  base: [baseInput],
+  variants: {
+    fixedHeight: {
+      false: [{ height: 24 }],
+    },
+  },
+});
+
 export const label = recipe({
   base: { fontSize: "1rem" },
   variants: {
@@ -91,5 +101,15 @@ export const label = recipe({
       },
       false: {},
     },
+    leadingIcon: {
+      true: [],
+      false: [],
+    },
   },
+  compoundVariants: [
+    {
+      variants: { leadingIcon: true, floated: false },
+      style: { paddingLeft: "35px" },
+    },
+  ],
 });

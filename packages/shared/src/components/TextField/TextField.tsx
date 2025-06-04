@@ -1,5 +1,5 @@
 import React, { forwardRef, PropsWithChildren } from "react";
-import { fieldset, label, textFieldFix } from "./TextField.css";
+import { errorFontColor, fieldset, label, textFieldFix } from "./TextField.css";
 import Typography from "../Typography/Typography";
 import { sprinkles } from "@styles/sprinkles.css";
 import {
@@ -22,12 +22,20 @@ const Fieldset = ({
   children,
   className,
   disabled,
-}: PropsWithChildren<{ className?: string; disabled?: boolean }>) => {
+  inputRef,
+}: PropsWithChildren<{
+  className?: string;
+  disabled?: boolean;
+  inputRef?: React.MutableRefObject<
+    HTMLInputElement | HTMLTextAreaElement | null
+  >;
+}>) => {
   const { error } = useTextFieldContext();
   return (
     <fieldset
       className={clsx(fieldset({ error: !!error }), className)}
       disabled={disabled}
+      onClick={() => inputRef?.current?.focus()}
     >
       {children}
     </fieldset>
@@ -37,7 +45,8 @@ const Fieldset = ({
 const InputWithFix = forwardRef<
   HTMLInputElement | HTMLTextAreaElement,
   InputProps
->(({ pfix, sfix, className, onChange, fixedHeight, ...props }, ref) => {
+>(({ pfix, sfix, className, fixedHeight, type, ...rest }, ref) => {
+  const { value, onChange } = useTextFieldContext();
   return (
     <div className={sprinkles({ display: "flex", alignItems: "center" })}>
       {pfix && <Fix {...pfix} />}
@@ -47,14 +56,17 @@ const InputWithFix = forwardRef<
           rows={fixedHeight}
           className={` ${className}`}
           onChange={(e) => onChange?.(e.target.value)}
-          {...props}
+          value={value}
+          {...rest}
         />
       ) : (
         <input
           ref={ref as React.Ref<HTMLInputElement>}
           className={` ${className}`}
           onChange={(e) => onChange?.(e.target.value)}
-          {...props}
+          value={value}
+          type={type}
+          {...rest}
         />
       )}
       {sfix && <Fix {...sfix} />}
@@ -67,9 +79,8 @@ const FloatingLabel = ({
   className,
   children,
 }: FloatingLabelProps) => {
-  const { value, state, error } = useTextFieldContext();
-  const isFloat = state === "focused" || !!value;
-
+  const { value, state, error, isTyping } = useTextFieldContext();
+  const isFloat = state === "focused" || !!value || !!isTyping;
   return (
     <Component
       className={clsx(label({ floated: isFloat, error: !!error }), className)}
@@ -81,19 +92,38 @@ const FloatingLabel = ({
 
 const Clear = ({
   as,
-  refValue,
+  elRef,
+  startTyping,
 }: {
   as: React.ReactElement;
-  refValue?: string;
+  elRef: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement | null>;
+  startTyping?: (isTyping: boolean) => void;
 }) => {
-  const { value, onChange } = useTextFieldContext();
-  if (!value) return null;
+  const { value, onChange, isTyping } = useTextFieldContext();
+
+  if (value !== undefined) {
+    if (!value) return null;
+  } else {
+    // Uncontrolled: isTyping 없으면 렌더링 안 함
+    if (!isTyping) return null;
+    if (!elRef || !startTyping) {
+      throw new Error("Uncontrolled input은 elRef와 startTyping이 필요합니다.");
+    }
+  }
 
   return React.cloneElement(as, {
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation();
-      onChange?.("");
-      refValue = "";
+      if (value !== undefined) {
+        // Controlled
+        onChange?.("");
+        elRef.current?.focus();
+      } else if (elRef && elRef.current) {
+        // Uncontrolled
+        elRef.current.value = "";
+        startTyping?.(false);
+        elRef.current.focus();
+      }
     },
   });
 };
@@ -108,7 +138,7 @@ const SupportingText = ({
       size="sm"
       ty="label"
       as="div"
-      className={clsx({ errorFontColor: !!error }, className)}
+      className={clsx(!!error && errorFontColor, className)}
     >
       {error ?? children}
     </Typography>
@@ -120,8 +150,8 @@ const IconWrapper = ({ children }: PropsWithChildren) => {
 };
 
 const Fix = ({ text, position }: TextFieldFixProps) => {
-  const { value, state } = useTextFieldContext();
-  const isDisplay = state === "focused" || !!value;
+  const { value, state, isTyping } = useTextFieldContext();
+  const isDisplay = state === "focused" || !!value || !!isTyping;
   if (!text || !isDisplay) return null;
   return (
     <Typography size="lg" ty="label" className={textFieldFix[position]}>

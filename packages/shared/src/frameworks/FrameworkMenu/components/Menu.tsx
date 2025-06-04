@@ -1,5 +1,5 @@
 import React, { ComponentProps, useState } from "react";
-import Dropdown from "../Reusable/Dropdown/Dropdown";
+import Dropdown from "../../../components/Dropdown/Dropdown";
 import clsx from "clsx";
 import { storiesMenu, storiesMenuItem } from "./Menu.css";
 

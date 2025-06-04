@@ -1,19 +1,16 @@
 type InputStateTypes = "focused" | "disabled" | "blur";
 type InputTagTypes = "text" | "email" | "number" | "password";
+interface TextFieldFixProps {
+  position: "prefix" | "suffix";
+  text?: string;
+}
 
 interface InputProps {
   type: InputTagTypes;
-  value?: string;
-  onChange?: (value: string) => void;
   pfix?: TextFieldFixProps;
   sfix?: TextFieldFixProps;
   fixedHeight?: number;
   className?: string;
-}
-
-interface TextFieldFixProps {
-  position: "prefix" | "suffix";
-  text?: string;
 }
 
 interface FloatingLabelProps {
@@ -25,7 +22,7 @@ interface FloatingLabelProps {
 export type {
   InputStateTypes,
   InputTagTypes,
-  TextFieldFixProps,
   FloatingLabelProps,
   InputProps,
+  TextFieldFixProps,
 };

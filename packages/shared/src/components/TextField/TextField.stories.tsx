@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { MdKey } from "react-icons/md";
+import type { StoryObj } from "@storybook/react";
+import { useRef, useState } from "react";
 import TextField from "./TextField";
-import useFocus from "./hooks/useFocus";
+import useFocus from "../../hooks/useFocus";
+import useTyping from "../../hooks/useTyping";
+import { InputStateTypes } from "./types";
 
 const meta = {
-  title: "Reusable/TextField",
+  title: "Components/TextField",
   component: TextField,
-  // tags: ["autodocs"],
   argTypes: {},
 };
 
@@ -15,73 +15,81 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const FloatingLabelTextField: Story = {
+export const ControlledTextField = {
   name: "Floating Label",
   render: () => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const [val, setVal] = useState("");
-    const [disabled, setDisabled] = useState(false);
-    const { focusEvents, inputState } = useFocus({ disabled });
+    const [inpuState, setInputState] = useState<InputStateTypes>("blur");
+    const focusEvents = useFocus({
+      onFocusCallback: () => setInputState("focused"),
+      onBlurCallback: () => setInputState("blur"),
+    });
 
     return (
-      <>
-        <TextField
-          value={val}
-          onChange={(e) => setVal(e.target.value)}
-          state={inputState}
-          {...focusEvents}
-        >
-          <TextField.FloatingLabel>Label</TextField.FloatingLabel>
-          <TextField.Input
-            placeholder="Type here"
-            value={val}
-            onChange={(e) => setVal(e.target.value)}
-          />
-          <TextField.Clear as={<button>button</button>} withClear={true} />
-        </TextField>
+      <TextField value={val} onChange={setVal} state={inpuState}>
+        <TextField.FloatingLabel>Label</TextField.FloatingLabel>
+        <TextField.InputWithFix type="text" ref={inputRef} {...focusEvents} />
+        <TextField.Clear as={<button>button</button>} elRef={inputRef} />
         <TextField.SupportingText>Support message</TextField.SupportingText>
-      </>
+      </TextField>
     );
   },
 };
 
-export const OutlinedLabel: Story = {
+export const OutlinedLabel = {
   name: "Outlined Label",
   render: () => {
-    const [val, setVal] = useState("");
-    const [disabled, setDisabled] = useState(false);
-    const { focusEvents, inputState } = useFocus({ disabled });
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [inpuState, setInputState] = useState<InputStateTypes>("blur");
+    const focusEvents = useFocus({
+      onFocusCallback: () => setInputState("focused"),
+      onBlurCallback: () => setInputState("blur"),
+    });
+    const { isTyping, startTyping } = useTyping({ inputRef });
 
     return (
-      <>
-        <TextField
-          value={val}
-          onChange={(e) => setVal(e.target.value)}
-          state={inputState}
-          {...focusEvents}
-        >
-          <TextField.OutlinedLabel>Label</TextField.OutlinedLabel>
-          <TextField.Input
-            placeholder="Type here"
-            value={val}
-            onChange={(e) => setVal(e.target.value)}
+      <TextField state={inpuState} isTyping={isTyping}>
+        <TextField.Fieldset>
+          <TextField.FloatingLabel tag="legend">Label</TextField.FloatingLabel>
+          <TextField.InputWithFix type="text" ref={inputRef} {...focusEvents} />
+          <TextField.Clear
+            as={<button>button</button>}
+            elRef={inputRef}
+            startTyping={startTyping}
           />
-          <TextField.Clear as={<button>button</button>} withClear={true} />
-        </TextField>
+        </TextField.Fieldset>
         <TextField.SupportingText>Support message</TextField.SupportingText>
-      </>
+      </TextField>
     );
   },
 };
 
-export const WithPrefixSuffix = {
-  render: () => (
-    <TextField value="value" onChange={() => {}} state="focused">
-      <TextField.FloatingLabel>Label</TextField.FloatingLabel>
-      <TextField.InputWithFix
-        pfix={{ text: "₩", position: "prefix" }}
-        sfix={{ text: "원", position: "suffix" }}
-      />
-      <TextField.SupportingText>Currency input</TextField.SupportingText>
-    </TextField>
-  ),
+export const ErrorInput = {
+  name: "Error Label",
+  render: () => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [inpuState, setInputState] = useState<InputStateTypes>("blur");
+    const focusEvents = useFocus({
+      onFocusCallback: () => setInputState("focused"),
+      onBlurCallback: () => setInputState("blur"),
+    });
+    const { isTyping, startTyping } = useTyping({ inputRef });
+    const error = "There is an error";
+
+    return (
+      <TextField state={inpuState} isTyping={isTyping} error={error}>
+        <TextField.Fieldset>
+          <TextField.FloatingLabel tag="legend">Label</TextField.FloatingLabel>
+          <TextField.InputWithFix type="text" ref={inputRef} {...focusEvents} />
+          <TextField.Clear
+            as={<button>button</button>}
+            elRef={inputRef}
+            startTyping={startTyping}
+          />
+        </TextField.Fieldset>
+        <TextField.SupportingText>Support message</TextField.SupportingText>
+      </TextField>
+    );
+  },
 };

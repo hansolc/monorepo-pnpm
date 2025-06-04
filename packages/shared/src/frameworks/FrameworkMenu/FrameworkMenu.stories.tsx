@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Menu from "./Menu";
-import FrameworkMenuExample from "./components/FrameworkMenuExample/FrameworkMenuExample";
+import Menu from "./components/Menu";
+import FrameworkMenu from "./FrameworkMenu";
 
 const meta = {
-  title: "Components/Menu",
+  title: "Frameworks/FrameworkMenu",
   component: Menu,
   argTypes: {
     options: {
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FrameworkStyledMenu = {
   render: () => {
-    return <FrameworkMenuExample />;
+    return <FrameworkMenu />;
   },
 };
 

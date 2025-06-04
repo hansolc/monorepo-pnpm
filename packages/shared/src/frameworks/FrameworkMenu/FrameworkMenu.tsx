@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Menu from "../../Menu";
+import { useState } from "react";
+import { MdArrowDropDown } from "react-icons/md";
 import {
   fieldSet,
   label as legendStyle,
-} from "../../../../components/TextField/components/InputWithFloatedLabel.css";
-import Flex from "../../../../components/Reusable/Flex/Flex";
-import { MdArrowDropDown } from "react-icons/md";
+} from "@frameworks/FrameworkInput/components/Label.css";
+import Menu from "./components/Menu";
+import Flex from "@components/Flex/Flex";
 
 const FrameworkMenuExample = () => {
   const label = "Label";

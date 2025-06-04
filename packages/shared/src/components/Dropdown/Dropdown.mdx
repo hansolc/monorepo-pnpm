@@ -1,6 +1,6 @@
 import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
 import * as DropdownStories from './Dropdown.stories';
-import * as MenuStories from '../../Menu/Menu.stories';
+import * as FrameworkMenu from '../../frameworks/FrameworkMenu/FrameworkMenu.stories';
 
 <Meta of={DropdownStories} />
 
@@ -99,7 +99,7 @@ Dropdown 컴포넌트는 Compound Pattern으로 구성되어 있으며 다음과
     <code>Trigger</code>로 전달되는 요소는 스타일링된 <code>fieldset</code> 태그로 구성되어 있으며, 클릭 시 <code>props</code>로 전달된 <code>options</code> 목록이 표시됩니다.<br />
     사용자가 항목을 선택하면 해당 항목의 텍스트가 트리거 영역에 표시됩니다.
   </p>
-  <Canvas of={MenuStories.FrameworkStyledMenu} />
+  <Canvas of={FrameworkMenu.FrameworkStyledMenu} />
 </section>
 
 ---
