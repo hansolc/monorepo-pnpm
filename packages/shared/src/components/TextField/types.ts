@@ -1,11 +1,14 @@
 type InputStateTypes = "focused" | "disabled" | "blur";
-type InputTypes = "filled" | "outlined";
 type InputTagTypes = "text" | "email" | "number" | "password";
 
-interface TextFieldSharedProps {
-  outlined?: boolean;
-  inputState: InputStateTypes;
-  isHovered?: boolean;
+interface InputProps {
+  type: InputTagTypes;
+  value?: string;
+  onChange?: (value: string) => void;
+  pfix?: TextFieldFixProps;
+  sfix?: TextFieldFixProps;
+  fixedHeight?: number;
+  className?: string;
 }
 
 interface TextFieldFixProps {
@@ -13,10 +16,16 @@ interface TextFieldFixProps {
   text?: string;
 }
 
+interface FloatingLabelProps {
+  children?: React.ReactNode;
+  tag?: "label" | "legend";
+  className?: string;
+  // hasValue?: boolean;
+}
 export type {
   InputStateTypes,
-  InputTypes,
-  TextFieldSharedProps,
   InputTagTypes,
   TextFieldFixProps,
+  FloatingLabelProps,
+  InputProps,
 };

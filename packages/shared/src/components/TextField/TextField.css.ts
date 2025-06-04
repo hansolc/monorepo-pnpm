@@ -3,7 +3,9 @@ import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { vars } from "../../styles/theme/color.css";
 
-const errorFontColor = style({ color: `${vars.colors.error} !important` });
+export const errorFontColor = style({
+  color: `${vars.colors.error} !important`,
+});
 
 export const fieldset = recipe({
   base: [],
@@ -12,16 +14,6 @@ export const fieldset = recipe({
       true: {
         borderColor: `${vars.colors.error} !important`,
       },
-      false: {},
-    },
-  },
-});
-
-export const input = recipe({
-  base: [],
-  variants: {
-    error: {
-      true: errorFontColor,
       false: {},
     },
   },

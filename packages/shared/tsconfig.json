@@ -9,7 +9,9 @@
     "jsx": "react-jsx",
     "paths": {
       "@styles/*": ["./src/styles/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@frameworks/*": ["./src/frameworks/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src", "src/**/*.stories.tsx"],

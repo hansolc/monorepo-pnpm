@@ -1,6 +1,5 @@
-import React, { ComponentProps } from "react";
-import { InputTagTypes, InputTypes, TextFieldFixProps } from "./types";
-import { fieldset, input, label, textFieldFix } from "./TextField.css";
+import React, { forwardRef, PropsWithChildren } from "react";
+import { fieldset, label, textFieldFix } from "./TextField.css";
 import Typography from "../Typography/Typography";
 import { sprinkles } from "@styles/sprinkles.css";
 import {
@@ -9,173 +8,120 @@ import {
   useTextFieldContext,
 } from "./context/TextFieldContext";
 import { PropsWithChildrenStyle } from "src/types";
-import useIsTyping from "./hooks/useIsTyping";
-
-interface InputProps {
-  value?: string;
-  onChange?: (value: string) => void;
-  type: InputTagTypes;
-  className?: string;
-}
+import clsx from "clsx";
+import { FloatingLabelProps, InputProps, TextFieldFixProps } from "./types";
 
 const TextFieldRoot = ({
   children,
-  value,
-  onChange,
-  state,
-  error,
-  className = "",
   ...props
-}: PropsWithChildrenStyle &
-  TextFieldContextValue &
-  Omit<ComponentProps<"fieldset">, "onChange">) => {
-  return (
-    <TextFieldProvider value={{ value, onChange, state, error }}>
-      <fieldset
-        className={`${fieldset({ error: !!error })} ${className}`}
-        {...props}
-      >
-        {children}
-      </fieldset>
-    </TextFieldProvider>
-  );
+}: PropsWithChildrenStyle & TextFieldContextValue) => {
+  return <TextFieldProvider value={{ ...props }}>{children}</TextFieldProvider>;
 };
 
-const Input = ({ className = "", onChange, ...props }: InputProps) => {
-  return (
-    <input
-      className={` ${className}`}
-      onChange={(e) => onChange?.(e.target.value)}
-      {...props}
-    />
-  );
-};
-
-const Textarea = ({
-  fixedHeight = 3,
-  onChange,
-  ...props
-}: { fixedHeight?: number } & Omit<InputProps, "type">) => {
-  return (
-    <textarea
-      rows={fixedHeight}
-      onChange={(e) => onChange?.(e.target.value)}
-      {...props}
-    ></textarea>
-  );
-};
-
-const InputWithFix = ({
-  pfix,
-  sfix,
-  ...props
-}: InputProps & {
-  pfix?: TextFieldFixProps;
-  sfix?: TextFieldFixProps;
-}) => {
-  return (
-    <div className={sprinkles({ display: "flex", alignItems: "center" })}>
-      {pfix && <Fix {...pfix} />}
-      <Input {...props} />
-      {sfix && <Fix {...sfix} />}
-    </div>
-  );
-};
-
-const TextAreaWithFix = ({
-  pfix,
-  sfix,
-  ...props
-}: Omit<InputProps, "type"> & {
-  pfix?: TextFieldFixProps;
-  sfix?: TextFieldFixProps;
-  fixedHeight?: number;
-}) => {
-  return (
-    <div className={sprinkles({ display: "flex", alignItems: "center" })}>
-      {pfix && <Fix {...pfix} />}
-      <Textarea {...props} />
-      {sfix && <Fix {...sfix} />}
-    </div>
-  );
-};
-
-const FloatingLabel = ({
+const Fieldset = ({
   children,
-  className = "",
-}: PropsWithChildrenStyle) => {
-  const { value, state, error } = useTextFieldContext();
-  const { isTyping } = useIsTyping({ value, state });
+  className,
+  disabled,
+}: PropsWithChildren<{ className?: string; disabled?: boolean }>) => {
+  const { error } = useTextFieldContext();
   return (
-    <label
-      className={`${label({ floated: isTyping, error: !!error })} ${className}`}
+    <fieldset
+      className={clsx(fieldset({ error: !!error }), className)}
+      disabled={disabled}
     >
       {children}
-    </label>
+    </fieldset>
   );
 };
 
-const OutlinedLabel = ({
+const InputWithFix = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  InputProps
+>(({ pfix, sfix, className, onChange, fixedHeight, ...props }, ref) => {
+  return (
+    <div className={sprinkles({ display: "flex", alignItems: "center" })}>
+      {pfix && <Fix {...pfix} />}
+      {fixedHeight ? (
+        <textarea
+          ref={ref as React.Ref<HTMLTextAreaElement>}
+          rows={fixedHeight}
+          className={` ${className}`}
+          onChange={(e) => onChange?.(e.target.value)}
+          {...props}
+        />
+      ) : (
+        <input
+          ref={ref as React.Ref<HTMLInputElement>}
+          className={` ${className}`}
+          onChange={(e) => onChange?.(e.target.value)}
+          {...props}
+        />
+      )}
+      {sfix && <Fix {...sfix} />}
+    </div>
+  );
+});
+
+const FloatingLabel = ({
+  tag: Component = "label",
+  className,
   children,
-  className = "",
-}: PropsWithChildrenStyle) => {
+}: FloatingLabelProps) => {
   const { value, state, error } = useTextFieldContext();
-  const { isTyping } = useIsTyping({ value, state });
-  if (isTyping) {
-    return (
-      <legend
-        className={`${label({ floated: true, error: !!error })} ${className}`}
-      >
-        {children}
-      </legend>
-    );
-  } else {
-    return (
-      <div
-        style={{ width: "1px", height: "100%" }}
-        className={sprinkles({ display: "flex", alignItems: "center" })}
-      >
-        <label className={`${label()} ${className}`}>{children}</label>
-      </div>
-    );
-  }
+  const isFloat = state === "focused" || !!value;
+
+  return (
+    <Component
+      className={clsx(label({ floated: isFloat, error: !!error }), className)}
+    >
+      {children}
+    </Component>
+  );
 };
 
 const Clear = ({
   as,
-  withClear,
+  refValue,
 }: {
   as: React.ReactElement;
-  withClear?: boolean;
+  refValue?: string;
 }) => {
   const { value, onChange } = useTextFieldContext();
-  if (!value || !withClear) return null;
+  if (!value) return null;
 
   return React.cloneElement(as, {
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation();
       onChange?.("");
-      // if (onChange) {
-      //   const event = {
-      //     target: { value: "" },
-      //   } as React.ChangeEvent<HTMLInputElement>;
-      //   onChange("");
-      // }
+      refValue = "";
     },
   });
 };
 
-const SupportingText = ({ children, ...props }: PropsWithChildrenStyle) => {
+const SupportingText = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  const { error } = useTextFieldContext();
   return (
-    <Typography size="sm" ty="label" {...props} as="div">
-      {children}
+    <Typography
+      size="sm"
+      ty="label"
+      as="div"
+      className={clsx({ errorFontColor: !!error }, className)}
+    >
+      {error ?? children}
     </Typography>
   );
 };
 
+const IconWrapper = ({ children }: PropsWithChildren) => {
+  return <>{children}</>;
+};
+
 const Fix = ({ text, position }: TextFieldFixProps) => {
   const { value, state } = useTextFieldContext();
-  const isDisplay = state === "focused" || (value && value.length > 0);
+  const isDisplay = state === "focused" || !!value;
   if (!text || !isDisplay) return null;
   return (
     <Typography size="lg" ty="label" className={textFieldFix[position]}>
@@ -185,15 +131,12 @@ const Fix = ({ text, position }: TextFieldFixProps) => {
 };
 
 const TextField = Object.assign(TextFieldRoot, {
-  Input,
-  Textarea,
   FloatingLabel,
-  OutlinedLabel,
   Clear,
   SupportingText,
-  Fix,
   InputWithFix,
-  TextAreaWithFix,
+  Fieldset,
+  IconWrapper,
 });
 
 export default TextField;

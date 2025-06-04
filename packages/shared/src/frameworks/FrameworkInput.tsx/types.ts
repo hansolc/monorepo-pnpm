@@ -1,0 +1,19 @@
+import { TextFieldContextValue } from "@components/TextField/context/TextFieldContext";
+import { InputTagTypes } from "@components/TextField/types";
+
+interface FrameworkInputProps extends Omit<TextFieldContextValue, "state"> {
+  label: string;
+  type: InputTagTypes;
+  disabled?: boolean;
+  clear?: React.ReactElement;
+  inputConfig?: {
+    prefix?: string;
+    suffix?: string;
+    leadingIcon?: React.ReactElement;
+    trailingIcon?: React.ReactElement;
+    supportingText?: string;
+    fixedHeight?: number;
+  };
+}
+
+export type { FrameworkInputProps };
