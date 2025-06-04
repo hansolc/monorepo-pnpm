@@ -1,6 +1,7 @@
 import { ComponentProps } from "react";
 import { buttonIcon, storiesButton, StoriesButtonProps } from "./Button.css";
 import Icon, { IconObj } from "../Icons/Icon";
+import clsx from "clsx";
 
 export interface ButtonProps extends ComponentProps<"button"> {
   size: StoriesButtonProps["size"];
@@ -13,10 +14,11 @@ const Button = ({
   children,
   icon,
   ty = "elevated",
+  className,
   ...props
 }: ButtonProps) => {
   return (
-    <button className={storiesButton({ size, ty })} {...props}>
+    <button className={clsx(storiesButton({ size, ty }), className)} {...props}>
       {icon && <Icon iconName={icon} className={buttonIcon[size]} />}
       {children}
     </button>

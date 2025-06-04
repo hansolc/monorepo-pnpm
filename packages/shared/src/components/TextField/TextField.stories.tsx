@@ -1,83 +1,95 @@
-import { Meta } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
+import { useRef, useState } from "react";
 import TextField from "./TextField";
-import { MdAccessTime } from "@react-icons/all-files/md/MdAccessTime";
-import { useState } from "react";
+import useFocus from "../../hooks/useFocus";
+import useTyping from "../../hooks/useTyping";
+import { InputStateTypes } from "./types";
 
 const meta = {
   title: "Components/TextField",
   component: TextField,
-  tags: ["autodocs"],
-} satisfies Meta<typeof TextField>;
+  argTypes: {},
+};
 
 export default meta;
 
-export const BaseTextField = {
+type Story = StoryObj<typeof meta>;
+
+export const ControlledTextField = {
+  name: "Floating Label",
   render: () => {
-    const [value, setValue] = useState("");
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [val, setVal] = useState("");
+    const [inpuState, setInputState] = useState<InputStateTypes>("blur");
+    const focusEvents = useFocus({
+      onFocusCallback: () => setInputState("focused"),
+      onBlurCallback: () => setInputState("blur"),
+    });
 
     return (
-      <TextField
-        label="label"
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        leadingIcon={<MdAccessTime size="24" />}
-        trailingIcon={<MdAccessTime size="24" />}
-        supportingText="Supporting Text"
-      />
+      <TextField value={val} onChange={setVal} state={inpuState}>
+        <TextField.FloatingLabel>Label</TextField.FloatingLabel>
+        <TextField.InputWithFix type="text" ref={inputRef} {...focusEvents} />
+        <TextField.Clear as={<button>button</button>} elRef={inputRef} />
+        <TextField.SupportingText>Support message</TextField.SupportingText>
+      </TextField>
     );
   },
 };
 
-export const TextFieldWithoutIcon = {
+export const OutlinedLabel = {
+  name: "Outlined Label",
   render: () => {
-    const [value, setValue] = useState("");
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [inpuState, setInputState] = useState<InputStateTypes>("blur");
+    const focusEvents = useFocus({
+      onFocusCallback: () => setInputState("focused"),
+      onBlurCallback: () => setInputState("blur"),
+    });
+    const { isTyping, startTyping } = useTyping({ inputRef });
+
     return (
-      <TextField
-        label="label"
-        type="text"
-        supportingText="Supporting Text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
+      <TextField state={inpuState} isTyping={isTyping}>
+        <TextField.Fieldset>
+          <TextField.FloatingLabel tag="legend">Label</TextField.FloatingLabel>
+          <TextField.InputWithFix type="text" ref={inputRef} {...focusEvents} />
+          <TextField.Clear
+            as={<button>button</button>}
+            elRef={inputRef}
+            startTyping={startTyping}
+          />
+        </TextField.Fieldset>
+        <TextField.SupportingText>Support message</TextField.SupportingText>
+      </TextField>
     );
   },
 };
 
-export const ErrorTextField = {
+export const ErrorInput = {
+  name: "Error Label",
   render: () => {
-    const [value, setValue] = useState("");
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [inpuState, setInputState] = useState<InputStateTypes>("blur");
+    const focusEvents = useFocus({
+      onFocusCallback: () => setInputState("focused"),
+      onBlurCallback: () => setInputState("blur"),
+    });
+    const { isTyping, startTyping } = useTyping({ inputRef });
+    const error = "There is an error";
 
     return (
-      <TextField
-        label="label"
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        leadingIcon={<MdAccessTime size="24" />}
-        trailingIcon={<MdAccessTime size="24" />}
-        supportingText="Supporting Text"
-        hasError={true}
-      />
-    );
-  },
-};
-
-export const TextFieldDisabled = {
-  render: () => {
-    const [value, setValue] = useState("");
-
-    return (
-      <TextField
-        label="label"
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        leadingIcon={<MdAccessTime size="24" />}
-        trailingIcon={<MdAccessTime size="24" />}
-        supportingText="Supporting Text"
-        disabled={true}
-      />
+      <TextField state={inpuState} isTyping={isTyping} error={error}>
+        <TextField.Fieldset>
+          <TextField.FloatingLabel tag="legend">Label</TextField.FloatingLabel>
+          <TextField.InputWithFix type="text" ref={inputRef} {...focusEvents} />
+          <TextField.Clear
+            as={<button>button</button>}
+            elRef={inputRef}
+            startTyping={startTyping}
+          />
+        </TextField.Fieldset>
+        <TextField.SupportingText>Support message</TextField.SupportingText>
+      </TextField>
     );
   },
 };

@@ -1,10 +1,12 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const config: StorybookConfig = {
   stories: [
     "../src/**/*.mdx",
     "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../src/frameworks/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
     "@storybook/addon-essentials",
@@ -18,6 +20,7 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config) => {
     config.plugins = config.plugins || [];
+    config.plugins.push(tsconfigPaths());
     config.plugins.push(vanillaExtractPlugin());
     return config;
   },

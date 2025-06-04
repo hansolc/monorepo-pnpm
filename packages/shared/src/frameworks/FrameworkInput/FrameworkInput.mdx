@@ -1,0 +1,190 @@
+import { Meta, Title, Story, Canvas, Controls, Primary } from '@storybook/blocks'; 
+import * as FrameworkInput from './FrameworkInput.stories';
+
+<Meta of={FrameworkInput} />
+
+# FrameworkInput
+
+<br/>
+<br/>
+
+## Overview
+- 사용자가 텍스트를 입력해야 할 때 사용합니다. 예: 연락처, 결제 정보 입력.
+- Material Design 3의 TextField 컴포넌트입니다.
+- `filled`, `outlined` 두 가지 스타일을 지원하며, `outlined` prop이 없으면 기본적으로 `filled`가 적용됩니다.
+
+<br/>
+<br/>
+
+<Primary />
+
+## Props
+
+<Controls />
+
+
+## Usuage
+
+```tsx
+<FrameworkInput
+    label="label"
+    type={"number" | "text" | "email" | "password"}
+    disabled={false}
+    inputConfig= {{
+      prefix="$"
+      suffix="@gmail.com"
+      leadingIcon={<MdReactIcon />}
+      trailingIcon={<MdReactIcon />}
+      supportingText="supporting text"
+      fixedHeight={3 | "undefined"}
+    }}
+    clear={<MdClear size="@4"/>}
+    error={""}
+/>
+```
+
+<br/>
+<br/>
+
+
+## Properties
+
+### Type: Filled, Outlined
+
+**Outlined** 타입은 `filled`보다 시각적 강조가 낮습니다.  
+폼처럼 여러 입력 필드가 함께 사용되는 경우, 복잡도를 줄이기 위해 적합합니다.
+
+**다음 기준에 따라 선택하세요:**
+- 앱의 전체 비주얼 스타일에 적합한가?
+- UI의 목적에 부합하는가?
+- 주변 컴포넌트(버튼 등)와 충분히 구분되는가?
+
+> 단, **하나의 UI에 여러 타입을 혼합해서 사용하지 마세요.** 예: 한 폼에 `filled`, `outlined`을 섞어 사용 ❌
+---
+
+### Label
+- 입력 내용이 무엇인지 명확하게 안내합니다.
+- 항상 보여야 하며, 잘리거나 여러 줄로 표시되지 않아야 합니다.
+- 필수 항목은 `*`로 표시하세요.
+---
+
+### type
+- text, number, email, password을 허용합니다.
+---
+
+### outlined
+- Material Design 3의 Outlined type 여부입니다.
+- default로는 Filled Type입니다.
+
+### clear
+- 입력값이 있을 때, 값 삭제 버튼을 표시합니다.
+---
+
+### disabled
+- 입력을 비활성화합니다.
+---
+
+### fixedHeight
+- 입력 필드를 한 줄 또는 여러 줄로 설정할 수 있습니다.
+- 한 줄: `fixedHeight` 생략
+- 여러 줄: 숫자를 넘겨 고정된 줄 수 지정 (예: `fixedHeight={3}`)
+---
+
+### prefix, suffix
+- 텍스트 앞뒤에 부가 정보를 표시합니다.
+- 예시:
+  - prefix: 통화 기호 (`₩`, `$`)
+  - suffix: 이메일 도메인 (`@gmail.com`), 단위 (`kg`, `cm`)
+  ---
+
+### supporting text
+- 입력값에 대한 간단한 설명 또는 가이드 메시지입니다.
+- `error`가 설정되면 `supportingText` 대신 에러 메시지가 표시됩니다.
+---
+
+### leadingIcon, trailingIcon
+- 입력값의 의미를 보조하는 아이콘입니다.
+- 입력 필드 왼쪽 또는 오른쪽에 표시됩니다.
+---
+
+
+
+<br/>
+<br/>
+
+## Examples
+
+<section>
+  <article style={{ marginTop: "1rem" }}>
+    <h2>Controlled Input</h2>
+    <Canvas of={FrameworkInput.ControlledInput} />
+    <div>
+      이 컴포넌트는 controlled와 uncontrolled 방식 모두 지원합니다.
+      입력값 변경 시 리렌더링 최적화가 필요한 경우, uncontrolled 방식으로 사용하는 것이 유리할 수 있습니다.
+    </div>
+    <ul>
+      <li>
+        <strong>Controlled:</strong> <code>value</code>와 <code>onChange</code>를 반드시 전달해야 합니다.
+      </li>
+      <li>
+        <strong>Uncontrolled + Validation:</strong> <code>react-hook-form</code>의 <code>register</code>와 함께 사용할 수 있습니다.
+      </li>
+    </ul>
+  </article>
+</section>
+
+<section>
+  <article style={{ marginTop: "1rem" }}>
+    <h2>Input with Configuration</h2>
+    <Canvas of={FrameworkInput.UserPasswordInput} />
+    <div>
+      입력 필드에 다양한 UI 요소를 조합할 수 있습니다. 
+      <code>leadingIcon</code>, <code>prefix</code> 등은 모두 선택적으로, 사용자 경험을 개선하기 위한 목적입니다.
+    </div>
+    <ul>
+      <li>
+        <strong>Icon:</strong> 아이콘을 통해 사용자에게 어떤 정보를 입력해야 하는지 명확하게 전달할 수 있습니다.
+      </li>
+      <li>
+        <strong>Prefix / Suffix:</strong> "$", "@gmail.com" 등 단위나 이메일 도메인을 표시하는 데 사용됩니다.
+      </li>
+      <li>
+        <strong>Supporting Text:</strong> 추가 설명을 제공하며, <code>error</code>가 있을 경우 자동으로 대체됩니다.
+      </li>
+      <li>
+        <strong>Clear:</strong> <code>clear</code> 옵션을 활성화하면 입력값을 한 번에 초기화할 수 있는 버튼이 표시됩니다.
+      </li>
+    </ul>
+  </article>
+</section>
+
+
+<section>
+  <article style={{ marginTop: "1rem" }}>
+    <h2>Error Input</h2>
+    <Canvas of={FrameworkInput.ErrorInput} />
+    <div>
+      <code>error</code>를 문자열로 전달하면 기존 <code>supportingText</code>를 덮어쓰며,
+      에러 상태에 대한 시각적 피드백이 자동으로 적용됩니다.
+    </div>
+    <ul>
+      <li>
+        <strong>자동 스타일링:</strong> <code>error</code> 값만 전달해도 스타일이 자동으로 적용되므로 별도의 스타일 설정은 필요 없습니다.
+      </li>
+      <li>
+        기본적으로 라벨과 테두리 색상이 빨간색으로 변경됩니다.
+      </li>
+    </ul>
+  </article>
+</section>
+
+<section>
+  <article style={{ marginTop: "1rem" }}>
+    <h2>Multiline Input</h2>
+    <Canvas of={FrameworkInput.MultilineInput} />
+    <div>
+      기본적으로는 한 줄짜리 <code>input</code> 필드로 렌더링되며,
+      <code>fixedHeight</code>를 설정하면 고정 높이를 가진 <code>textarea</code>로 동작합니다.
+    </div>
+  </article>
+</section>

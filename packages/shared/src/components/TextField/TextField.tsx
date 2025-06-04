@@ -1,107 +1,177 @@
-import React, { ComponentProps, useState } from "react";
+import React, { forwardRef, PropsWithChildren } from "react";
+import { errorFontColor, fieldset, label, textFieldFix } from "./TextField.css";
 import Typography from "../Typography/Typography";
+import { sprinkles } from "@styles/sprinkles.css";
 import {
-  textField,
-  textFieldInput,
-  textFieldInputArea,
-  textFieldLabel,
-  textFieldLabelInputArea,
-  TextFieldSupportingText,
-} from "./TextField.css";
+  TextFieldContextValue,
+  TextFieldProvider,
+  useTextFieldContext,
+} from "./context/TextFieldContext";
+import { PropsWithChildrenStyle } from "src/types";
+import clsx from "clsx";
+import { FloatingLabelProps, InputProps, TextFieldFixProps } from "./types";
 
-type TextFieldType = "email" | "password" | "text";
-
-export interface TextFieldProps extends Omit<ComponentProps<"input">, "type"> {
-  label: string;
-  type: TextFieldType;
-  error?: string;
-  supportingText?: string;
-  leadingIcon?: React.ReactNode;
-  trailingIcon?: React.ReactNode;
-  className?: string;
-}
-
-const TextField = ({
-  label,
-  type,
-  name,
-  value,
-  onChange,
-  error,
-  supportingText,
-  leadingIcon,
-  trailingIcon,
-  disabled,
+const TextFieldRoot = ({
+  children,
   className,
-  ...rest
-}: TextFieldProps) => {
-  // isFloat 버그 개선을 위해 추가
-  // useTextField 추가로 매번 input 입력마다 re-rendering하지 않고 onFoucsed 에서 onBlur 시에만 value 값이 있는지 판단하기 위해
-  const [inputValue, setInputValue] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
-
-  const isFloat = Boolean(inputValue?.toString().length) || isFocused;
-  const activeState = disabled ? "disabled" : isFocused ? "focus" : "enable";
-  const hasError = Boolean(error) && !disabled;
-
-  const helperText = error ?? supportingText ?? "";
-
+  ...props
+}: PropsWithChildrenStyle & TextFieldContextValue) => {
   return (
-    <div className={textField()}>
-      <div className={textFieldInputArea({ activeState, hasError })}>
-        {leadingIcon && <span>{leadingIcon}</span>}
-
-        <div className={textFieldLabelInputArea({ isFloat })}>
-          <label
-            htmlFor={name}
-            className={textFieldLabel({
-              activeState,
-              hasError,
-              isFloat,
-            })}
-          >
-            {label}
-          </label>
-
-          <input
-            id={name}
-            name={name}
-            type={type}
-            value={value}
-            onChange={onChange}
-            disabled={disabled}
-            className={`${textFieldInput({
-              activeState,
-              hasError,
-            })} ${className}`}
-            onFocus={() => !disabled && setIsFocused(true)}
-            onBlur={(e) => {
-              if (!disabled) {
-                setIsFocused(false);
-                setInputValue(e.target.value);
-              }
-            }}
-            {...rest}
-          />
-        </div>
-
-        {trailingIcon && <span>{trailingIcon}</span>}
-      </div>
-
-      {helperText && (
-        <Typography
-          className={TextFieldSupportingText({
-            activeState,
-            hasError,
-          })}
-          ty="label"
-          size="sm"
-        >
-          {helperText}
-        </Typography>
-      )}
-    </div>
+    <TextFieldProvider value={{ ...props }}>
+      <div className={clsx(className)}>{children}</div>
+    </TextFieldProvider>
   );
 };
+
+const Fieldset = ({
+  children,
+  className,
+  disabled,
+  inputRef,
+}: PropsWithChildren<{
+  className?: string;
+  disabled?: boolean;
+  inputRef?: React.MutableRefObject<
+    HTMLInputElement | HTMLTextAreaElement | null
+  >;
+}>) => {
+  const { error } = useTextFieldContext();
+  return (
+    <fieldset
+      className={clsx(fieldset({ error: !!error }), className)}
+      disabled={disabled}
+      onClick={() => inputRef?.current?.focus()}
+    >
+      {children}
+    </fieldset>
+  );
+};
+
+const InputWithFix = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  InputProps
+>(({ pfix, sfix, className, fixedHeight, type, ...rest }, ref) => {
+  const { value, onChange } = useTextFieldContext();
+  return (
+    <div className={sprinkles({ display: "flex", alignItems: "center" })}>
+      {pfix && <Fix {...pfix} />}
+      {fixedHeight ? (
+        <textarea
+          ref={ref as React.Ref<HTMLTextAreaElement>}
+          rows={fixedHeight}
+          className={` ${className}`}
+          onChange={(e) => onChange?.(e.target.value)}
+          value={value}
+          {...rest}
+        />
+      ) : (
+        <input
+          ref={ref as React.Ref<HTMLInputElement>}
+          className={` ${className}`}
+          onChange={(e) => onChange?.(e.target.value)}
+          value={value}
+          type={type}
+          {...rest}
+        />
+      )}
+      {sfix && <Fix {...sfix} />}
+    </div>
+  );
+});
+
+const FloatingLabel = ({
+  tag: Component = "label",
+  className,
+  children,
+}: FloatingLabelProps) => {
+  const { value, state, error, isTyping } = useTextFieldContext();
+  const isFloat = state === "focused" || !!value || !!isTyping;
+  return (
+    <Component
+      className={clsx(label({ floated: isFloat, error: !!error }), className)}
+    >
+      {children}
+    </Component>
+  );
+};
+
+const Clear = ({
+  as,
+  elRef,
+  startTyping,
+}: {
+  as: React.ReactElement;
+  elRef: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement | null>;
+  startTyping?: (isTyping: boolean) => void;
+}) => {
+  const { value, onChange, isTyping } = useTextFieldContext();
+
+  if (value !== undefined) {
+    if (!value) return null;
+  } else {
+    // Uncontrolled: isTyping 없으면 렌더링 안 함
+    if (!isTyping) return null;
+    if (!elRef || !startTyping) {
+      throw new Error("Uncontrolled input은 elRef와 startTyping이 필요합니다.");
+    }
+  }
+
+  return React.cloneElement(as, {
+    onClick: (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (value !== undefined) {
+        // Controlled
+        onChange?.("");
+        elRef.current?.focus();
+      } else if (elRef && elRef.current) {
+        // Uncontrolled
+        elRef.current.value = "";
+        startTyping?.(false);
+        elRef.current.focus();
+      }
+    },
+  });
+};
+
+const SupportingText = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  const { error } = useTextFieldContext();
+  return (
+    <Typography
+      size="sm"
+      ty="label"
+      as="div"
+      className={clsx(!!error && errorFontColor, className)}
+    >
+      {error ?? children}
+    </Typography>
+  );
+};
+
+const IconWrapper = ({ children }: PropsWithChildren) => {
+  return <>{children}</>;
+};
+
+const Fix = ({ text, position }: TextFieldFixProps) => {
+  const { value, state, isTyping } = useTextFieldContext();
+  const isDisplay = state === "focused" || !!value || !!isTyping;
+  if (!text || !isDisplay) return null;
+  return (
+    <Typography size="lg" ty="label" className={textFieldFix[position]}>
+      {text}
+    </Typography>
+  );
+};
+
+const TextField = Object.assign(TextFieldRoot, {
+  FloatingLabel,
+  Clear,
+  SupportingText,
+  InputWithFix,
+  Fieldset,
+  IconWrapper,
+});
 
 export default TextField;

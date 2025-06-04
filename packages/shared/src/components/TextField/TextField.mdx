@@ -1,0 +1,165 @@
+import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
+import * as TextFieldStories from './TextField.stories';
+
+<Meta of={TextFieldStories} />
+
+# TextField 문서
+
+`TextField`는 Compound Pattern 기반의 컴포넌트로 Input에 입력되는 값, 상태를 공유합니다.
+- TextField.FloatingLabel
+- TextField.Fieldset
+- TextField.Clear
+- TextField.SupportingText
+- TextField.InputWithFix
+- TextField.IconWrapper
+---
+
+## Usage
+```tsx
+    const [val, change] = useState("");
+    const [disabled, setDisabled] = useState(false);
+    const focusEvents = useFocus();
+    const [error, setError] = useState("");
+    const {isTyping, startTyping} = useTyping();
+    
+
+    <TextField
+      value={val}
+      onChange={change}
+      state={inputState}
+      isTyping={isTyping}
+      error={error}
+    >
+    ...
+    </TextField>
+```
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## TextField 구성 요소
+
+TextField 컴포넌트는 Compound Pattern으로 구성되어 있으며 다음과 같은 하위 요소들을 포함합니다:
+
+<table>
+  <thead>
+    <tr>
+      <th>컴포넌트</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>TextField</code></td>
+      <td>
+        <strong>컨텍스트 컨테이너</strong> 역할을 하며, 하위 컴포넌트들이 공유할 수 있도록 다음과 같은 상태 값을 제공합니다: 
+        <code>value</code>, <code>onChange</code>, <code>state</code>, <code>error</code>, <code>isTyping</code>.
+        <br />
+        - <code>value</code>, <code>onChange</code>: controlled input에서 사용됩니다. <br />
+        - <code>state</code>: input의 포커스 상태 등을 나타내며, <code>useFocus</code> 훅을 통해 설정해야 합니다. <br />
+        - <code>isTyping</code>: uncontrolled input에서 사용되며, <code>useTyping</code> 훅을 통해 입력 상태를 추적합니다. <br />
+        - <code>error</code>: 문자열로 전달되며, 값이 있을 경우 fieldset, supporting text, label에 에러 스타일을 적용합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.Fieldset</code></td>
+      <td>
+        시멘틱한 <code>fieldset</code> 태그를 반환하며, form 요소의 그룹을 명확히 구분하는 데 사용됩니다. 
+        <br />
+        - 라벨이 border에 걸치는 UI를 구현할 경우, <code>legend</code> 태그를 활용해 <code>TextField.FloatingLabel</code>과 함께 사용합니다. <br />
+        - input 요소의 <code>ref</code>를 전달하면 fieldset 클릭 시 해당 input으로 포커스를 이동시킬 수 있습니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.InputWithFix</code></td>
+      <td>
+        기본 <code>input</code> 또는 <code>textarea</code>를 반환하는 컴포넌트입니다. 
+        <br />
+        - 포커스 상태 추적이 필요한 경우 <code>useFocus</code> 훅을 사용해 콜백을 설정합니다. <br />
+        - controlled input의 경우 <code>value</code>와 <code>onChange</code>를 필수로 전달합니다. <br />
+        - <code>type</code>은 <code>text</code>, <code>email</code>, <code>password</code>, <code>number</code> 중 하나를 지원합니다. <br />
+        - <code>fixedHeight</code>를 설정하면 <code>textarea</code>로 렌더링되며, <code>rows</code> 속성으로 높이를 고정합니다. <br />
+        - <code>pfix</code>, <code>sfix</code> props를 통해 prefix/suffix 텍스트를 입력할 수 있으며, focus 상태일 때 렌더링됩니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.FloatingLabel</code></td>
+      <td>
+        <code>label</code> 또는 <code>legend</code> 요소를 렌더링하며, 기본적으로 상위 요소에 <code>absolute</code> 형태로 배치됩니다. 
+        <br />
+        - input에 값이 있거나 포커스된 경우 <code>relative</code> 위치로 이동합니다. <br />
+        - Material Design 3의 <code>outlined</code> 스타일이 필요한 경우 <code>TextField.Fieldset</code>과 함께 조합하여 사용해야 합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.Clear</code></td>
+      <td>
+        지우기 버튼 역할을 하며, <code>as</code> prop으로 <code>ReactElement</code>를 전달받아 커스터마이징할 수 있습니다.
+        <br />
+        - controlled input의 경우 <code>onChange("")</code>를 호출해 값을 초기화합니다. <br />
+        - uncontrolled input에서는 <code>inputRef</code>와 <code>isTyping</code> props가 필요하며, <code>useTyping</code> 훅을 통해 입력 상태를 추적하고 값 초기화를 처리합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.SupportingText</code></td>
+      <td>
+        보조 텍스트를 표시하는 영역이며, <code>children</code>으로 <code>ReactNode</code>를 받습니다. 
+        <br />
+        - <code>error</code>가 있을 경우, 해당 메시지로 대체되며 기본적으로 빨간색 스타일이 적용됩니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>TextField.IconWrapper</code></td>
+      <td>
+        <code>LeadingIcon</code>, <code>TrailingIcon</code> 등 <code>ReactElement</code>를 감싸 렌더링하는 wrapper입니다.
+        <br />
+        - 괄호 형태나 정렬 처리를 통해 아이콘 렌더링의 가독성과 일관성을 높입니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## 기본 사용 예시
+
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Controled Floating Label</h2>
+  <div>
+    <strong>FloatingLabel</strong>을 사용하면, 입력 필드에 값이 있거나 focus 상태일 때
+    label이 위로 떠오르는 애니메이션 효과를 적용할 수 있습니다.
+    <br />
+    또한 <code>Clear</code> 기능을 추가해 입력값을 초기화하는 UX도 함께 구현할 수 있습니다.
+  </div>
+
+  <Canvas of={TextFieldStories.ControlledTextField} />
+</section>
+
+---
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Outlined Label</h2>
+  <div>
+    <strong>OutlinedLabel</strong>은 label이 input의 border에 삽입되는 효과를 제공합니다.
+    <br />
+    포커스되거나 텍스트가 입력되면 <code>legend</code> 태그로 outline 스타일이 적용됩니다. TextField.Fieldset과 조합하여 사용해야합니다.
+  </div>
+
+  <Canvas of={TextFieldStories.OutlinedLabel} />
+    
+</section>
+
+---
+
+<section style={{ marginTop: "48px" }}>
+  <h2>Error</h2>
+  <div>
+    <strong>Error</strong>가 발생할 경우 label, fieldset, supportingText에 기본적으로 빨간색 스타일이 적용됩니다.
+    <br />
+  </div>
+
+  <Canvas of={TextFieldStories.ErrorInput} />
+</section>
+

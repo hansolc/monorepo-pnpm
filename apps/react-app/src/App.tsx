@@ -1,10 +1,15 @@
 import Wrapper from "./components/Wrapper";
-import { default as UserLoginForm } from "./components/UserLoginForm";
+import Form from "./components/Form";
+import FormTypeSelector from "./components/FormTypeSelector";
+import { useState } from "react";
 
 function App() {
+  const [types, setTypes] = useState<string>("outlined");
+
   return (
     <Wrapper>
-      <UserLoginForm />
+      <FormTypeSelector types={types} setTypes={setTypes} />
+      <Form types={types} />
     </Wrapper>
   );
 }
