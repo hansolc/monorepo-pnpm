@@ -11,7 +11,7 @@ export interface UserProps {
   introduce: string;
 }
 
-const Form = ({ types }: { types: string }) => {
+const Form = ({ types }: { types: string | undefined }) => {
   const { register, handleSubmit, errors } = useFormValidation<UserProps>();
 
   const submit = async (data: UserProps) => {

@@ -79,3 +79,77 @@ apps 폴더 내에 프로젝트를 추가합니다(CRA or Vite 사용 가능). �
 ### 4. Storybook 실행
 
 `packages/shared`의 컴포넌트 이해를 위해 storybook은 `dev:shared-stories`로 실행해주세요.
+
+---
+
+# ♻️ 주요기능
+
+## 공유 패키지 수정 시 Vite에서 실시간 반영(HMR) 설정
+
+### 배포(apps/) 프로젝트내 vite.config.ts 설정
+
+모노레포 환경에서는 `packages/` 디렉토리의 컴포넌트나 유틸 함수를 수정할 때,  
+`apps/` 프로젝트에서 매번 별도 빌드 없이 즉시 반영되어야 개발 효율이 높아집니다.
+
+이를 위해 Vite 개발 서버에서는 다음 두 가지 설정이 필요합니다:
+
+1. `vanilla-extract`를 사용하는 공유 컴포넌트에 대한 스타일 처리
+2. 직접 소스 파일을 참조하도록 하는 `resolve.alias` 설정
+
+### Vite 설정 (apps/react-app/vite.config.ts)
+
+```
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss(), vanillaExtractPlugin()],
+  resolve: {
+    alias: {
+      "@monorepo-pnpm/shared": path.resolve(
+        __dirname,
+        "../../packages/shared/src/index.ts"
+      ),
+    },
+  },
+});
+
+```
+
+- `vanillaExtractPlaugin` 추가
+- `resolve.alias`에 실제 컴포는 export 파일 등록
+
+### 루트 tsconfig.json 설정
+
+- 모노레포 내 각 프로젝트를 TypeScript가 인식하고 올바른 빌드 순서를 보장하도록 설정합니다.
+- packages에 프로젝트가 추가될 경우 이곳에 명시하세요
+
+```
+{
+  "files": [],
+  "references": [{ "path": "apps/react-app" }, { "path": "packages/shared" }]
+}
+```
+
+### 2. 앱 프로젝트(tsconfig.json)
+
+앱은 shared를 참조하므로 아래와 같이 references를 명시해 타입 의존성과 빌드 순서를 정의합니다.
+
+```
+// tsconfig.json
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "../../packages/shared" }]
+}
+```
+
+- `noEmit: true`는 앱에서는 JS나 타입 파일을 출력하지 않고 타입 검사만 수행하기 위한 설정입니다.
+
+### 3. packages내의 프로젝트 필수설정(composite:true)
+
+공유 패키지인 shared는 다른 프로젝트에서 참조되기 때문에 `composite: true`가 필요하며,
+이는 이미 공통 설정(tsconfig.base.json)에서 설정되어 있어 별도의 설정은 필요하지 않습니다.

@@ -4,8 +4,7 @@ import FormTypeSelector from "./components/FormTypeSelector";
 import { useState } from "react";
 
 function App() {
-  const [types, setTypes] = useState<string>("outlined");
-
+  const [types, setTypes] = useState<string | undefined>("outlined");
   return (
     <Wrapper>
       <FormTypeSelector types={types} setTypes={setTypes} />

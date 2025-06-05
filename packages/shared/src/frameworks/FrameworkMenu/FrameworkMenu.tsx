@@ -7,7 +7,7 @@ import {
 import Menu from "./components/Menu";
 import Flex from "@components/Flex/Flex";
 
-interface Props {
+export interface Props {
   label: string;
   options: Array<string>;
   selected?: string;
