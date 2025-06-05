@@ -1,8 +1,8 @@
 import { FrameworkMenu } from "@monorepo-pnpm/shared";
 
 interface Props {
-  types: string;
-  setTypes: (val: string) => void;
+  types: string | undefined;
+  setTypes: (val: string | undefined) => void;
 }
 
 const FormTypeSelector = ({ types, setTypes }: Props) => {

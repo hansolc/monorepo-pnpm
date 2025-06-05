@@ -1,20 +1,17 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "build",
     "rootDir": "src",
-    "composite": true,
-    "declaration": true,
     "emitDeclarationOnly": true,
-    "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
+      "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
       "@components/*": ["./src/components/*"],
-      "@frameworks/*": ["./src/frameworks/*"],
-      "@hooks/*": ["./src/hooks/*"]
+      "@frameworks/*": ["./src/frameworks/*"]
     }
   },
-  "include": ["src", "src/**/*.stories.tsx"],
+  "include": ["src"],
   "exclude": ["**/*.stories.tsx", "**/*.mdx", "src/test/*"]
 }
