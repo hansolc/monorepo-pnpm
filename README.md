@@ -119,7 +119,7 @@ export default defineConfig({
 - `vanillaExtractPlaugin` 추가
 - `resolve.alias`에 실제 컴포는 export 파일 등록
 
-### 루트 tsconfig.json 설정
+### 1. 루트 tsconfig.json 설정
 
 - 모노레포 내 각 프로젝트를 TypeScript가 인식하고 올바른 빌드 순서를 보장하도록 설정합니다.
 - packages에 프로젝트가 추가될 경우 이곳에 명시하세요
