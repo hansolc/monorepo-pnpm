@@ -1,0 +1,40 @@
+import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
+import * as TabsStories from './index.stories'
+
+<Meta of={TabsStories} name="TabsDoc" />
+
+# Tabs 문서
+
+`Tabs`는 Compound Pattern 기반의 컴포넌트로, `TabList`, `Label`, `TabPanel`, `Tab` 하위 컴포넌트를 조합하여 다양한 입력 UI를 만들 수 있습니다.
+
+---
+
+## Usage
+```tsx
+const Tabs = ({ options, selected, onSelect }: Props) => {
+  return (
+    <TabProvider selected={selected} onSelect={onSelect} ariaLabel="example">
+      <TabLabel label="category" />
+      <TabList>
+        {options.map((option) => (
+          <Tab value={option} as={"button"} />
+        ))}
+      </TabList>
+    </TabProvider>
+  );
+};
+
+```
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## Tabs 구성 요소
+
+
+---
+<div style={{ marginBottom: '24px' }} />
+
+## 기본 사용 예시
+
+---
