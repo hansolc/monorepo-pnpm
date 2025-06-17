@@ -7,13 +7,13 @@ interface Props {
   className?: string;
 }
 
-const TabLabel = ({ label, as: Component = "div", ...props }: Props) => {
+function TabLabel({ label, as: Component = "div", ...props }: Props) {
   const { ariaLabel } = useTabsContext();
   return (
     <Component id={`tablist-${ariaLabel}`} {...props}>
       {label}
     </Component>
   );
-};
+}
 
 export default TabLabel;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TabProvider, TabLabel, TabList, TabPanel, Tab } from "./index";
 import { default as TabFramework } from "./Example";
+import { storieTab } from "./index.css";
 
 const meta = {
   title: "Components/Tabs",
@@ -11,7 +12,7 @@ export default meta;
 
 export const Tabs = {
   render: () => {
-    const [selected, onSelect] = useState("");
+    const [selected, onSelect] = useState("tab1");
     const options = ["tab1", "tab2", "tab3"];
 
     return (
@@ -19,7 +20,18 @@ export const Tabs = {
         <TabLabel label="category" />
         <TabList>
           {options.map((option) => (
-            <Tab key={`tab-${option}`} value={option} as={"button"} />
+            <Tab key={`tab-${option}`} value={option}>
+              {({ selected, props }) => (
+                <button
+                  {...props}
+                  style={{
+                    outline: selected ? "2px solid black" : undefined,
+                  }}
+                >
+                  tab
+                </button>
+              )}
+            </Tab>
           ))}
         </TabList>
 
@@ -43,7 +55,12 @@ export const uncontorlled = {
         <TabLabel label="category" />
         <TabList>
           {options.map((option) => (
-            <Tab key={`tab-${option}`} value={option} as={"button"} />
+            <Tab
+              key={`tab-${option}`}
+              value={option}
+              as={"button"}
+              className={storieTab}
+            />
           ))}
         </TabList>
 

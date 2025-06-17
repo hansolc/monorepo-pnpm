@@ -10,14 +10,12 @@ interface Props {
 
 // mountonEnter, mountOnExit
 // TabPanel내의내용들이 무거울 경우 최적화 옵션
-const TabPanel = ({ value, children, mountOnEnter, unmountOnExit }: Props) => {
+function TabPanel({ value, children, mountOnEnter, unmountOnExit }: Props) {
   const { selected } = useTabsContext();
   const isSelected = selected === value;
 
-  // case: unmount on exit
   if (unmountOnExit && !isSelected) return null;
 
-  // case: mount only on enter
   if (mountOnEnter && !isSelected) return null;
 
   return (
@@ -32,6 +30,6 @@ const TabPanel = ({ value, children, mountOnEnter, unmountOnExit }: Props) => {
       {children}
     </div>
   );
-};
+}
 
 export default TabPanel;
