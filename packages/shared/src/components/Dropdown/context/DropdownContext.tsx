@@ -28,7 +28,7 @@ export const DropdownProvider = ({
 export const useDropdownContext = () => {
   const ctx = useContext(DropdownContext);
   if (!ctx) {
-    throw new Error("useDropdownContext must be used within TextFieldProvider");
+    throw new Error("useDropdownContext must be used within Dropdown Provider");
   }
   return ctx;
 };
