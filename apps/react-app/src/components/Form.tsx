@@ -1,5 +1,4 @@
 import { Md3Button, Md3Input } from "@monorepo-pnpm/shared/md3";
-import { Typography } from "@monorepo-pnpm/shared/base";
 import useFormValidation from "../hooks/useFormValidation";
 import { FaUser } from "react-icons/fa";
 import { MdKey, MdAccessibility, MdEmail, MdMoney } from "react-icons/md";
@@ -27,9 +26,7 @@ const Form = () => {
       onSubmit={handleSubmit(submit)}
       className="flex flex-col gap-[25px]"
     >
-      <Typography size="lg" ty="display">
-        Form Title
-      </Typography>
+      Form Title
       <Md3Input
         label="ID*"
         type="text"

@@ -1,6 +1,6 @@
 import type { StoryObj } from "@storybook/react";
 import { useRef, useState } from "react";
-import TextField from "./TextField";
+import TextField from "./index";
 import useFocus from "../../hooks/useFocus";
 import useTyping from "../../hooks/useTyping";
 import { InputStateTypes } from "./types";

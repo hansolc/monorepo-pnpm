@@ -1,6 +1,5 @@
 import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
-import * as DropdownStories from './Dropdown.stories';
-import * as FrameworkMenu from '../../frameworks/FrameworkMenu/FrameworkMenu.stories';
+import * as DropdownStories from './index.stories';
 
 <Meta of={DropdownStories} />
 
@@ -90,16 +89,6 @@ Dropdown 컴포넌트는 Compound Pattern으로 구성되어 있으며 다음과
     외부에서 <code>as</code> props를 통해 트리거 요소에 커스텀 스타일을 적용할 수 있습니다.
   </p>
   <Canvas of={DropdownStories.SimpleDropdown} />
-</section>
-
-<section style={{ marginTop: "48px" }}>
-  <h2>Select</h2>
-  <p>
-    이 예시는 디자인 커스터마이징이 적용된 Dropdown입니다.<br />
-    <code>Trigger</code>로 전달되는 요소는 스타일링된 <code>fieldset</code> 태그로 구성되어 있으며, 클릭 시 <code>props</code>로 전달된 <code>options</code> 목록이 표시됩니다.<br />
-    사용자가 항목을 선택하면 해당 항목의 텍스트가 트리거 영역에 표시됩니다.
-  </p>
-  <Canvas of={FrameworkMenu.FrameworkStyledMenu} />
 </section>
 
 ---

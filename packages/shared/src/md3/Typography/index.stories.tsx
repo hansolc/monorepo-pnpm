@@ -1,7 +1,7 @@
 import Typography from "./index";
 
 const meta = {
-  title: "base/Typhography",
+  title: "MaterialDesign3/Typhography",
   component: Typography,
 };
 

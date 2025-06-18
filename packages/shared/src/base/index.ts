@@ -1,6 +1,6 @@
-import Typography from "./Typography";
 import TextField from "./TextField";
 import Dropdown from "./Dropdown";
 import * as Tabs from "./Tabs";
+import Typography from "./Typography";
 
-export { Typography, TextField, Dropdown, Tabs };
+export { TextField, Dropdown, Tabs, Typography };

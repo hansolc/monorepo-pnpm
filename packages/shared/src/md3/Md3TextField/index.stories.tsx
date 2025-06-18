@@ -4,7 +4,7 @@ import { MdKey, MdCancel } from "react-icons/md";
 import FrameworkInput from ".";
 
 const meta = {
-  title: "Frameworks/FrameworkInput",
+  title: "MaterialDesign3/Md3TextField",
   component: FrameworkInput,
   argTypes: {
     label: {

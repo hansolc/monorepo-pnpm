@@ -1,6 +1,5 @@
 import React, { forwardRef, PropsWithChildren } from "react";
 import { errorFontColor, fieldset, label, textFieldFix } from "./index.css";
-import Typography from "../Typography";
 import { sprinkles } from "@styles/sprinkles.css";
 import {
   TextFieldContextValue,
@@ -9,6 +8,7 @@ import {
 } from "./context/TextFieldContext";
 import clsx from "clsx";
 import { FloatingLabelProps, InputProps, TextFieldFixProps } from "./types";
+import Typography from "@base/Typography";
 
 const TextFieldRoot = ({
   children,
@@ -139,8 +139,8 @@ const SupportingText = ({
   const { error } = useTextFieldContext();
   return (
     <Typography
+      role="label"
       size="sm"
-      ty="label"
       as="div"
       className={clsx(!!error && errorFontColor, className)}
     >
@@ -158,7 +158,7 @@ const Fix = ({ text, position }: TextFieldFixProps) => {
   const isDisplay = state === "focused" || !!value || !!isTyping;
   if (!text || !isDisplay) return null;
   return (
-    <Typography size="lg" ty="label" className={textFieldFix[position]}>
+    <Typography size="lg" role="label" className={textFieldFix[position]}>
       {text}
     </Typography>
   );

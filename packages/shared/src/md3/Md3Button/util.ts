@@ -1,5 +1,5 @@
+import { vars } from "@styles/theme/theme.css";
 import { CSSProperties } from "@vanilla-extract/css";
-import { vars } from "../../styles/theme/color.css";
 
 interface BackgroundOpacityStyleProps {
   bg?: keyof typeof vars.colors;
