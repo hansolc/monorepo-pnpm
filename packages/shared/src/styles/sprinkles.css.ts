@@ -1,5 +1,4 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
-import { shadow } from "./theme/color.css";
 import { vars } from "./theme/theme.css";
 import { staticVars } from "./theme/staticVars";
 
@@ -10,16 +9,18 @@ const colorSprinklesProperties = defineProperties({
     default: {},
     hover: { selector: "&:not(:disabled):hover" },
     focus: { selector: "&:not(:disabled):focus" },
+    focusVisible: { selector: "&:not(:disabled):focus-visible" },
     after: { selector: "&:after" },
     active: { selector: "&:not(:disabled):active" },
+    disabled: { selector: "&:disabled" },
   },
   defaultCondition: "default",
   properties: {
     color: vars.colors,
     backgroundColor: vars.colors,
     borderColor: vars.colors,
-    opacity: [0.08],
-    boxShadow: shadow,
+    opacity: staticVars.state,
+    boxShadow: staticVars.elevation,
     outlineColor: vars.colors,
   },
   shorthands: {

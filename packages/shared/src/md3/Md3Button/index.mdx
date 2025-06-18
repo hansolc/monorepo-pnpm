@@ -1,0 +1,161 @@
+import { Meta, Title, Story, Canvas, Controls, Primary } from '@storybook/blocks'; 
+import * as Md3Button from './index.stories';
+
+<Meta of={Md3Button} />
+
+# Button
+
+<br/>
+<br/>
+
+## Overview
+
+
+<div style={{ display: "flex", gap: "32px", justifyContent: "space-between" }}>
+  <div style={{ flex: 1 }}>
+    <h3>고려한 것</h3>
+    <ul>
+      <li>Default type</li>
+      <li>Leading Icon 포함</li>
+      <li><code>elevated</code>, <code>filled</code>, <code>outlined</code>, <code>tonal</code>, <code>text</code> 스타일 지원 </li>
+      <li><code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> 크기 지원 </li>
+      <li><code>round</code>, <code>square</code> 지원</li>
+      <li>각 hover, focus, disabled, active 마다 스타일 대응</li>
+    </ul>
+  </div>
+  <div style={{ flex: 1 }}>
+    <h3>고려하지 않은 것</h3>
+    <ul>
+      <li>Toggle type: 버튼 누른상태와 누르지 않은 상태 구분하는 버튼(ex) 재생버튼. 재생 누르기전 상태: play, 누른 후: pause)</li>
+      <li>Shape morph: 각 shape 마다 enable, hover, pressed 상태에서 스타일 애니매이션 변화</li>
+    </ul>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+## Usuage
+
+```tsx
+// icon: react-icons
+<Button variants={"elevated"} shape="square" icon={MdAccessTime}>
+    Button Text
+</Button>
+```
+
+## Props
+<Primary />
+<Controls />
+
+## Color Styles
+
+<div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
+      <section>
+        <article style={{ marginTop: "1rem" }}>
+          <h2>Elevated 버튼</h2>
+            <Canvas of={Md3Button.ElevatedButton} />
+          <p>
+            <strong>Elevated</strong> 버튼은 그림자(shadow)를 사용하여 표면에서
+            떠 있는 듯한 느낌을 줍니다.
+          </p>
+          <ul>
+            <li>
+              <strong>Filled</strong> 버튼과 유사하지만, 그림자를 통해 더 높은
+              고도감을 표현합니다.
+            </li>
+            <li>
+              일반 버튼보다 더 시각적으로 강조되며, 주의를 끌어야 하는 버튼에
+              적합합니다.
+            </li>
+            <li>
+              강조가 더 필요하다면 <code>variants="filled"</code> 스타일을 고려하세요.
+            </li>
+            <li>
+              그림자의 과도한 사용을 피하기 위해서는, 배경과 시각적으로 구분이
+              필요한 경우에만 사용하세요.
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section>
+        <article style={{ marginTop: "1rem" }}>
+          <h2>Filled 버튼</h2>
+            <Canvas of={Md3Button.FilledButton} />
+          <p>
+            <strong>Filled</strong> 버튼은 FAB(Floating Action Button) 다음으로
+            큰 임팩트를 가집니다.
+          </p>
+          <ul>
+            <li>
+              <strong>중요한 주요 액션</strong>에 사용합니다.(예: 저장,
+              가입하기, 확인)
+            </li>
+            <li>
+              한 페이지 내에 <strong>하나의 주된 목적</strong>에만 사용하는 것이
+              이상적입니다.
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section>
+        <article style={{ marginTop: "1rem" }}>
+          <h2>Tonal 버튼 </h2>
+        <Canvas of={Md3Button.TonalButton} />
+          <p>
+            <strong>Tonal</strong>버튼은 Filled 버튼보다는 약하고, Outlined
+            버튼보다는 강한 <strong>중간 수준의 시각적 강조</strong>를
+            제공합니다.
+          </p>
+          <ul>
+            <li>
+              예: ‘다음(next)’ 버튼에는 Tonal을, ‘이전(back)’ 버튼에는
+              Outlined 버튼을 사용하는 것이 적절합니다
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section>
+        <article style={{ marginTop: "1rem" }}>
+          <h2>Outlined 버튼</h2>
+        <Canvas of={Md3Button.OutlinedButton} />
+          <p>
+            <strong>Outline</strong>버튼은 마찬가지로 이목을 끌어야 하는
+            버튼이지만 주로 filled button과의 조화로 많이 사용할 수 있습니다.
+          </p>
+          <ul>
+            <li>
+              Primary 목적으로 filled button을, secondary 목적으로 outline
+              버튼을 조합해 사용합니다.
+            </li>
+            <li>
+              <strong>이미지나 비디오 배경</strong>이 있는 화면 위에서는
+              가시성이 낮아 사용을 피해야 하며, 그 경우 Filled 버튼이
+              권장됩니다.
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section>
+        <article style={{ marginTop: "1rem" }}>
+          <h2>Text 버튼</h2>
+        <Canvas of={Md3Button.TextButton} />
+          <p>
+            <strong>Text</strong>버튼은 <strong>가장 낮은 우선순위</strong>를
+            가지고 있으며 보통 <strong>다수의 선택지</strong>가있는 UI에서
+            사용합니다.
+          </p>
+          <ul>
+            <li>
+              Card, Dialog, Snackbar 등의 <strong>컴포넌트 내 액션 버튼</strong>
+              으로 적절합니다.
+            </li>
+            <li>
+              예를 들어, Dialog 내에서는 테두리가 없어 주변 텍스트와 자연스럽게
+              어우러지며 액션으로 인식됨니다.
+            </li>
+            <li>배경 이미지 위에서는 시인성이 낮아 사용을 지양해주세요</li>
+          </ul>
+        </article>
+      </section>
+    </div>
