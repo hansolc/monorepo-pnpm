@@ -1,6 +1,11 @@
 import React, { ComponentProps, PropsWithChildren } from "react";
 import clsx from "clsx";
-import { flex, flexItem, FlexItemStyleProps, FlexStyleProps } from "./Flex.css";
+import {
+  flex,
+  flexItem,
+  FlexItemStyleProps,
+  FlexStyleProps,
+} from "./index.css";
 import { PolymorphicProps } from "src/types";
 
 const FlexRoot = <T extends React.ElementType = "div">({

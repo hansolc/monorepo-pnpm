@@ -4,7 +4,6 @@ import {
   useDropdownContext,
 } from "./context/DropdownContext";
 import useClickOutside from "../../hooks/useClickOutside";
-import { PropsWithChildrenStyle } from "src/types";
 import clsx from "clsx";
 import { sprinkles } from "@styles/sprinkles.css";
 
@@ -39,7 +38,10 @@ const Trigger = ({ as }: { as: React.ReactElement }) => {
   });
 };
 
-const Menu = ({ children, className = "" }: PropsWithChildrenStyle) => {
+const Menu = ({
+  children,
+  className = "",
+}: PropsWithChildren<{ className?: string }>) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const { isOpen, toggle } = useDropdownContext();
   useClickOutside({ ref, onClickOutside: toggle });

@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
-import { buttonIcon, storiesButton, StoriesButtonProps } from "./Button.css";
-import Icon, { IconObj } from "../Icons/Icon";
+import { buttonIcon, storiesButton, StoriesButtonProps } from "./index.css";
+import Icon, { IconObj } from "../../base/Icons";
 import clsx from "clsx";
 
 export interface ButtonProps extends ComponentProps<"button"> {

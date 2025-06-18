@@ -1,4 +1,5 @@
-import { Button, FrameworkInput, Typography } from "@monorepo-pnpm/shared";
+import { Md3Button, Md3Input } from "@monorepo-pnpm/shared/md3";
+import { Typography } from "@monorepo-pnpm/shared/base";
 import useFormValidation from "../hooks/useFormValidation";
 import { FaUser } from "react-icons/fa";
 import { MdKey, MdAccessibility, MdEmail, MdMoney } from "react-icons/md";
@@ -11,7 +12,7 @@ export interface UserProps {
   introduce: string;
 }
 
-const Form = ({ types }: { types: string | undefined }) => {
+const Form = () => {
   const { register, handleSubmit, errors } = useFormValidation<UserProps>();
 
   const submit = async (data: UserProps) => {
@@ -29,7 +30,7 @@ const Form = ({ types }: { types: string | undefined }) => {
       <Typography size="lg" ty="display">
         Form Title
       </Typography>
-      <FrameworkInput
+      <Md3Input
         label="ID*"
         type="text"
         {...register("id", {
@@ -45,9 +46,8 @@ const Form = ({ types }: { types: string | undefined }) => {
           leadingIcon: <FaUser size="24" />,
         }}
         error={errors.id}
-        outlined={types === "outlined"}
       />
-      <FrameworkInput
+      <Md3Input
         label="Password*"
         type="password"
         inputConfig={{
@@ -64,10 +64,9 @@ const Form = ({ types }: { types: string | undefined }) => {
           },
         })}
         error={errors.password}
-        outlined={types === "outlined"}
       />
       <div className="flex">
-        <FrameworkInput
+        <Md3Input
           label="email"
           type="text"
           inputConfig={{
@@ -76,9 +75,8 @@ const Form = ({ types }: { types: string | undefined }) => {
           }}
           {...register("email", {})}
           className="flex-auto"
-          outlined={types === "outlined"}
         />
-        <FrameworkInput
+        <Md3Input
           label="money"
           type="number"
           inputConfig={{
@@ -87,10 +85,10 @@ const Form = ({ types }: { types: string | undefined }) => {
           }}
           {...register("money", {})}
           className="flex-auto"
-          outlined={types === "outlined"}
+          outlined={true}
         />
       </div>
-      <FrameworkInput
+      <Md3Input
         label="Introduce"
         type="text"
         inputConfig={{
@@ -99,11 +97,11 @@ const Form = ({ types }: { types: string | undefined }) => {
           fixedHeight: 3,
         }}
         {...register("introduce", {})}
-        outlined={types === "outlined"}
+        outlined={true}
       />
-      <Button size="md" ty="filled">
+      <Md3Button size="md" ty="filled">
         Submit
-      </Button>
+      </Md3Button>
     </form>
   );
 };

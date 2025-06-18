@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { MdKey, MdCancel } from "react-icons/md";
-import FrameworkInput from "./FrameworkInput";
+import FrameworkInput from ".";
 
 const meta = {
   title: "Frameworks/FrameworkInput",

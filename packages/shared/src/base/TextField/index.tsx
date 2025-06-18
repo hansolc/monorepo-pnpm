@@ -1,13 +1,12 @@
 import React, { forwardRef, PropsWithChildren } from "react";
-import { errorFontColor, fieldset, label, textFieldFix } from "./TextField.css";
-import Typography from "../Typography/Typography";
+import { errorFontColor, fieldset, label, textFieldFix } from "./index.css";
+import Typography from "../Typography";
 import { sprinkles } from "@styles/sprinkles.css";
 import {
   TextFieldContextValue,
   TextFieldProvider,
   useTextFieldContext,
 } from "./context/TextFieldContext";
-import { PropsWithChildrenStyle } from "src/types";
 import clsx from "clsx";
 import { FloatingLabelProps, InputProps, TextFieldFixProps } from "./types";
 
@@ -15,7 +14,7 @@ const TextFieldRoot = ({
   children,
   className,
   ...props
-}: PropsWithChildrenStyle & TextFieldContextValue) => {
+}: PropsWithChildren<{ className?: string }> & TextFieldContextValue) => {
   return (
     <TextFieldProvider value={{ ...props }}>
       <div className={clsx(className)}>{children}</div>

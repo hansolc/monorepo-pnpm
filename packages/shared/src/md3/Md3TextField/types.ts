@@ -1,5 +1,5 @@
-import { TextFieldContextValue } from "@components/TextField/context/TextFieldContext";
-import { InputTagTypes } from "@components/TextField/types";
+import { TextFieldContextValue } from "src/base/TextField/context/TextFieldContext";
+import { InputTagTypes } from "src/base/TextField/types";
 
 interface FrameworkInputProps extends Omit<TextFieldContextValue, "state"> {
   label: string;

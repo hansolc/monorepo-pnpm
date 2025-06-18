@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { StoriesTypogrphyProps, storiesTypography } from "./Typography.css";
+import { StoriesTypogrphyProps, storiesTypography } from "./index.css";
 
 export interface TypographyProps {
   children: React.ReactNode;

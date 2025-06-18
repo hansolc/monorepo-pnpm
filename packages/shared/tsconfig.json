@@ -8,10 +8,10 @@
     "paths": {
       "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
-      "@components/*": ["./src/components/*"],
-      "@frameworks/*": ["./src/frameworks/*"]
+      "@base/*": ["./src/base/*"],
+      "@md3/*": ["./src/md3/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.css.ts"],
   "exclude": ["**/*.stories.tsx", "**/*.mdx", "src/test/*"]
 }
