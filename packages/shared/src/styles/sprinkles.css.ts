@@ -1,5 +1,7 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
-import { shadow, vars } from "./theme/color.css";
+import { shadow } from "./theme/color.css";
+import { vars } from "./theme/theme.css";
+import { staticVars } from "./theme/staticVars";
 
 const spacingValues = [4, 8, 12, 16];
 
@@ -75,12 +77,19 @@ const spacingSprinklesProperties = defineProperties({
   },
 });
 
+const shapeSprinklesProperties = defineProperties({
+  properties: {
+    borderRadius: staticVars.shape.corner,
+  },
+});
+
 export const sprinkles = createSprinkles(
   colorSprinklesProperties,
   layerSprinklesProperties,
   flexSprinklesProperties,
   areaSprinklesProperties,
-  spacingSprinklesProperties
+  spacingSprinklesProperties,
+  shapeSprinklesProperties
 );
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];

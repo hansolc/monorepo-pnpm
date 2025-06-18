@@ -113,12 +113,10 @@ export const shadow = {
   level5: "0px 12px 17px rgba(0, 0, 0, 0.16), 0px 5px 22px rgba(0, 0, 0, 0.23)",
 };
 
-export const vars = createThemeContract({
-  colors: colors,
-  shadow: shadow,
+export const themeContract = createThemeContract({
+  colors,
 });
 
-export const defaultThemeClasses = createTheme(vars, {
+export const defaultThemeClasses = createTheme(themeContract, {
   colors: lightColors,
-  shadow: shadow,
 });

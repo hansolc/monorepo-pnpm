@@ -17,9 +17,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@monorepo-pnpm/shared": path.resolve(
+      "@monorepo-pnpm/shared/md3": path.resolve(
         __dirname,
-        "../../packages/shared/src/index.ts"
+        "../../packages/shared/src/md3"
       ),
     },
   },

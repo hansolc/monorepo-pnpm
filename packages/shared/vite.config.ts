@@ -3,17 +3,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react(), vanillaExtractPlugin()],
-  resolve: {
-    alias: {
-      "@styles": path.resolve(__dirname, "./src/styles"),
-      "@hooks": path.resolve(__dirname, "./src/hooks"),
-      "@components": path.resolve(__dirname, "./src/components/"),
-      "@frameworks": path.resolve(__dirname, "./src/frameworks/"),
-    },
-  },
+  plugins: [
+    react(),
+    vanillaExtractPlugin(),
+    tsconfigPaths({ projects: ["./tsconfig.json"] }),
+  ],
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"), // 진입점
