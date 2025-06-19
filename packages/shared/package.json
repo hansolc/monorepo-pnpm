@@ -6,6 +6,8 @@
   "module": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./server": "./dist/index.js",
+    "./client": "./dist/client.js",
     "./*": "./dist/*"
   },
   "types": "build/index.d.ts",

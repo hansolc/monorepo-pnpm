@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef, ReactNode } from "react";
 import { textStyle } from "./index.css";
 import { TypographyProps } from "./types";
 
-function Typography<T extends React.ElementType>({
+function Typography<T extends React.ElementType = "span">({
   variants,
   size,
   emphasize = false,

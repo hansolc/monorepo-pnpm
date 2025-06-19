@@ -12,7 +12,7 @@ interface TypographyProps<T extends React.ElementType> {
   className?: string;
 }
 
-function Typography<T extends React.ElementType>({
+function Typography<T extends React.ElementType = "span">({
   variants,
   size,
   emphasize = false,
