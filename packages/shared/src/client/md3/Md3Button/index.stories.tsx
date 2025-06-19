@@ -3,7 +3,7 @@ import Button from "./index";
 import { MdAccessTime } from "@react-icons/all-files/md/MdAccessTime";
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 
-const meta = {
+const meta: Meta<typeof Button> = {
   title: "MaterialDesign3/Md3Button",
   component: Button,
   argTypes: {
@@ -36,7 +36,7 @@ const meta = {
       control: "boolean",
     },
   },
-} satisfies Meta<typeof Button>;
+};
 
 export default meta;
 

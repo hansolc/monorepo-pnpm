@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  transpilePackages: ["@monorepo-pnpm/shared"],
-};
+const nextConfig = {};
 
 export default nextConfig;

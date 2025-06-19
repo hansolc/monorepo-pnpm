@@ -1,17 +1,19 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "build",
     "outDir": "build",
     "rootDir": "src",
     "emitDeclarationOnly": true,
     "baseUrl": ".",
     "paths": {
-      "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
       "@base/*": ["./src/base/*"],
-      "@md3/*": ["./src/md3/*"]
+      "@md3/*": ["./src/md3/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.css.ts"],
-  "exclude": ["**/*.stories.tsx", "**/*.mdx", "src/test/*"]
+  "exclude": ["src/test/*"]
 }

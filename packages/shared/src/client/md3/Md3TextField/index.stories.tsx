@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MdKey, MdCancel } from "react-icons/md";
 import FrameworkInput from ".";
 
-const meta = {
+const meta: Meta<typeof FrameworkInput> = {
   title: "MaterialDesign3/Md3TextField",
   component: FrameworkInput,
   argTypes: {
@@ -33,7 +33,7 @@ const meta = {
       description: "에러 메시지 표시",
     },
   },
-} satisfies Meta<typeof FrameworkInput>;
+};
 
 export default meta;
 

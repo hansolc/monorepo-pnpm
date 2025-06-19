@@ -2,15 +2,19 @@
   "name": "@monorepo-pnpm/shared",
   "private": true,
   "version": "1.0.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
   "exports": {
-    ".": "./dist/index.js",
-    "./server": "./dist/index.js",
-    "./client": "./dist/client.js",
-    "./*": "./dist/*"
+    "./server": {
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.cjs",
+      "types": "./build/server/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.mjs",
+      "require": "./dist/client.cjs",
+      "types": "./build/client/index.d.ts"
+    }
   },
-  "types": "build/index.d.ts",
+  "type": "module",
   "sideEffects": [
     "*.css.ts"
   ],

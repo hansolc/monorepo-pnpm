@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import { fieldSet, input, label as labelStyle } from "./Label.css";
 import { sprinkles } from "@styles/sprinkles.css";
 import useFocus from "@hooks/useFocus";
-import TextField from "@base/TextField";
-import { InputStateTypes } from "src/base/TextField/types";
 import { FrameworkInputProps } from "../types";
 import useTyping from "@hooks/useTyping";
+import { InputStateTypes } from "src/client/base/TextField/types";
+import TextField from "src/client/base/TextField";
 
 const Input = ({
   label,

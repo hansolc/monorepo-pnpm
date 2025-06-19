@@ -5,8 +5,8 @@ interface Props extends ComponentProps<typeof Input> {
   outlined?: boolean;
 }
 
-const FrameworkInput = ({ outlined, ...props }: Props) => {
+const M3dTextField = ({ outlined, ...props }: Props) => {
   return <Input outlined={outlined} {...props} />;
 };
 
-export default FrameworkInput;
+export default M3dTextField;

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "@monorepo-pnpm/shared/dist/shared.css";
 import "../../globals.css";
 
 export const metadata: Metadata = {

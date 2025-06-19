@@ -8,7 +8,7 @@ import {
 } from "./context/TextFieldContext";
 import clsx from "clsx";
 import { FloatingLabelProps, InputProps, TextFieldFixProps } from "./types";
-import Typography from "@base/Typography";
+import Typography from "src/server/Typography";
 
 const TextFieldRoot = ({
   children,

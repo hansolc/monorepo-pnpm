@@ -1,4 +1,4 @@
-import { Typography } from "@monorepo-pnpm/shared";
+import { Typography } from "@monorepo-pnpm/shared/server";
 
 export default function Home() {
   return (

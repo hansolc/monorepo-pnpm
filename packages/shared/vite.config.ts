@@ -3,37 +3,36 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react(), vanillaExtractPlugin()],
-  resolve: {
-    alias: {
-      "@styles": path.resolve(__dirname, "./src/styles"),
-      "@hooks": path.resolve(__dirname, "./src/hooks"),
-      "@base": path.resolve(__dirname, "./src/base"),
-      "@md3": path.resolve(__dirname, "./src/md3"),
-    },
-  },
+  plugins: [react(), vanillaExtractPlugin(), tsconfigPaths()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"), // 진입점
-      name: "SharedComponents",
-      formats: ["es"], // 모듈 형식
-      fileName: () => `[name].js`,
+      entry: {
+        client: "src/client/index.ts",
+        server: "src/server/index.ts",
+      },
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
-      // 외부 의존성 처리 (예: react는 번들에 포함하지 않음)
-      // 이미 사용하는 프로젝트가 react 기반이라면 react을 포함하지 않음
-      external: ["react", "react-dom", path.resolve(__dirname, "src/test/**")],
-      output: {
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        entryFileNames: `[name].js`,
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
+      output: [
+        {
+          format: "es",
+          entryFileNames: "[name].mjs",
         },
-      },
+        {
+          format: "cjs",
+          entryFileNames: "[name].cjs",
+        },
+      ],
+      external: [
+        "react",
+        "react-dom",
+        path.resolve(__dirname, "src/test/**"),
+        /\.stories\.(ts|tsx)$/,
+        /\.mdx$/,
+      ],
     },
   },
   // 소비자앱에서 storybook 관련 코드를 컴파일 하지 않으려 설정했지만
