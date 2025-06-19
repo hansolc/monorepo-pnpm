@@ -10,8 +10,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@monorepo-pnpm/shared": ["packages/shared/src"],
-      "@monorepo-pnpm/utils": ["packages/utils/src"]
+      "@monorepo-pnpm/shared/*": ["packages/shared/src/*"],
+      "@monorepo-pnpm/utils/*": ["packages/utils/src/*"]
     },
     "declaration": true,
     "declarationMap": true,

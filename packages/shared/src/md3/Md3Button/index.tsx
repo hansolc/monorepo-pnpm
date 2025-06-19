@@ -12,6 +12,7 @@ interface Md3ButtonProps extends ComponentPropsWithoutRef<"button"> {
   size?: keyof typeof buttonTypoSize;
   shape?: Md3ButtonStyleProps["shape"];
   icon?: IconType;
+  className?: string;
 }
 
 const Md3Button = ({
@@ -20,10 +21,14 @@ const Md3Button = ({
   size = "sm",
   shape,
   icon: Icon,
+  className,
   ...props
 }: Md3ButtonProps) => {
   return (
-    <Button className={clsx(md3Button({ variants, size, shape }))} {...props}>
+    <Button
+      className={clsx(md3Button({ variants, size, shape }), className)}
+      {...props}
+    >
       {Icon && <Icon className={md3ButtonIconSize[size]} />}
       <Typography {...buttonTypoSize[size]}>{children}</Typography>
     </Button>

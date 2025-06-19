@@ -7,7 +7,7 @@
   "packageManager": "pnpm@10.9.0",
   "scripts": {
     "build:shared": "pnpm --filter @monorepo-pnpm/shared run build",
-    "dev:next": "pnpm --filter next-app dev",
+    "dev:meat-wave-next": "pnpm --filter meat-wave-next dev",
     "dev:react": "pnpm --filter react-app dev",
     "dev:shared-stories": "pnpm --filter @monorepo-pnpm/shared storybook"
   }
