@@ -1,13 +1,39 @@
-import { Typography } from "@monorepo-pnpm/shared/server";
-import Button from "../components/Button";
+import { vars } from "@/styles/theme/theme.css";
+import Herobanner from "./components/Herobanner";
+import Section from "@components/Section";
 
 export default function Home() {
   return (
     <>
-      <Typography variants="body" size="lg">
-        body
-      </Typography>
-      <Button></Button>
+      <Herobanner />
+      <Section>
+        <Section.Title
+          subtitle={{ text: "BUSINESS", color: vars.colors.primary }}
+        >
+          SOLUTION
+        </Section.Title>
+      </Section>
+      <Section>
+        <Section.Title
+          subtitle={{ text: "BUSINESS", color: vars.colors.primary }}
+        >
+          SOLUTION
+        </Section.Title>
+      </Section>
+      <Section>
+        <Section.Title
+          subtitle={{ text: "BUSINESS", color: vars.colors.primary }}
+        >
+          SOLUTION
+        </Section.Title>
+      </Section>
+      <Section>
+        <Section.Title
+          subtitle={{ text: "BUSINESS", color: vars.colors.primary }}
+        >
+          SOLUTION
+        </Section.Title>
+      </Section>
     </>
   );
 }

@@ -1,0 +1,62 @@
+import { createTheme } from "@vanilla-extract/css";
+import { themeContract } from "@monorepo-pnpm/shared/server";
+
+export const lightColors = {
+  primary: "#00687b",
+  surfaceTint: "#00687b",
+  onPrimary: "#ffffff",
+  primaryContainer: "#adecff",
+  onPrimaryContainer: "#004e5d",
+  secondary: "#4b6269",
+  onSecondary: "#ffffff",
+  secondaryContainer: "#cee7ef",
+  onSecondaryContainer: "#344a51",
+  tertiary: "#575c7e",
+  onTertiary: "#ffffff",
+  tertiaryContainer: "#dee1ff",
+  onTertiaryContainer: "#3f4565",
+  error: "#ba1a1a",
+  onError: "#ffffff",
+  errorContainer: "#ffdad6",
+  onErrorContainer: "#93000a",
+  background: "#f5fafc",
+  onBackground: "#171c1e",
+  surface: "#f5fafc",
+  onSurface: "#171c1e",
+  surfaceVariant: "#dbe4e7",
+  onSurfaceVariant: "#3f484b",
+  outline: "#70797c",
+  outlineVariant: "#bfc8cb",
+  shadow: "#000000",
+  scrim: "#000000",
+  inverseSurface: "#2c3133",
+  inverseOnSurface: "#ecf2f4",
+  inversePrimary: "#85d2e7",
+  primaryFixed: "#adecff",
+  onPrimaryFixed: "#001f26",
+  primaryFixedDim: "#85d2e7",
+  onPrimaryFixedVariant: "#004e5d",
+  secondaryFixed: "#cee7ef",
+  onSecondaryFixed: "#061f25",
+  secondaryFixedDim: "#b2cbd3",
+  onSecondaryFixedVariant: "#344a51",
+  tertiaryFixed: "#dee1ff",
+  onTertiaryFixed: "#131937",
+  tertiaryFixedDim: "#bfc4eb",
+  onTertiaryFixedVariant: "#3f4565",
+  surfaceDim: "#d5dbdd",
+  surfaceBright: "#f5fafc",
+  surfaceContainerLowest: "#ffffff",
+  surfaceContainerLow: "#eff4f7",
+  surfaceContainer: "#e9eff1",
+  surfaceContainerHigh: "#e4e9eb",
+  surfaceContainerHighest: "#dee3e5",
+};
+
+export const lightThemeClasses = createTheme(themeContract, {
+  colors: lightColors,
+});
+
+export const vars = {
+  colors: themeContract.colors,
+};

@@ -27,7 +27,7 @@ function Section<T extends React.ElementType>({
   const backgroundImageStyle = bg?.image
     ? { backgroundImage: `url(${bg.image})` }
     : undefined;
-  const Component = as || "div";
+  const Component = as || "section";
 
   return (
     <Component
