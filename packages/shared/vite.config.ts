@@ -13,7 +13,7 @@ export default defineConfig({
         client: "src/client/index.ts",
         server: "src/server/index.ts",
       },
-      formats: ["es", "cjs"],
+      formats: ["es"],
     },
     rollupOptions: {
       output: [
@@ -21,10 +21,10 @@ export default defineConfig({
           format: "es",
           entryFileNames: "[name].mjs",
         },
-        {
-          format: "cjs",
-          entryFileNames: "[name].cjs",
-        },
+        // {
+        //   format: "cjs",
+        //   entryFileNames: "[name].cjs",
+        // },
       ],
       external: [
         "react",

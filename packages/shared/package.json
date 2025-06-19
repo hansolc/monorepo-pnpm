@@ -5,13 +5,14 @@
   "exports": {
     "./server": {
       "import": "./dist/server.mjs",
-      "require": "./dist/server.cjs",
       "types": "./build/server/index.d.ts"
     },
     "./client": {
       "import": "./dist/client.mjs",
-      "require": "./dist/client.cjs",
       "types": "./build/client/index.d.ts"
+    },
+    "./shared.css": {
+      "import": "./dist/shared.css"
     }
   },
   "type": "module",
