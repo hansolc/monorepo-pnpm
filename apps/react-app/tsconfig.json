@@ -5,9 +5,10 @@
     // 해당 프로젝트는 vite가 빌드 하기 때문에 ts가 .js을 직접 출력할 필요 없음.
     "noEmit": true
   },
-  "include": ["src"],
-  // ts가 프로젝트간 타입 종속성을 추적
-  // tsc -b 사용시, shared => react-app 순으로 자동 빌드
-  // shared의 타입 정의가 최신 상태가 아닐 경우 이를 감지하여 빌드
-  "references": [{ "path": "../../packages/shared" }]
+  "include": ["src"]
+  // // ts가 프로젝트간 타입 종속성을 추적
+  // // tsc -b 사용시, shared => react-app 순으로 자동 빌드
+  // // shared의 타입 정의가 최신 상태가 아닐 경우 이를 감지하여 빌드
+  // "references": [{ "path": "../../packages/shared" }]
+  // => tsup 으로 빌드하며 삭제
 }

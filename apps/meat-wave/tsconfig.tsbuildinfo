@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/footer/index.tsx","./src/components/header/index.tsx","./src/pages/about/index.tsx","./src/pages/home/index.tsx","./src/pages/home/components/herobanner.tsx","./src/pages/home/components/sectioncontainer.tsx"],"version":"5.8.3"}
