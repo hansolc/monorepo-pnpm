@@ -139,7 +139,7 @@ const SupportingText = ({
   const { error } = useTextFieldContext();
   return (
     <Typography
-      role="label"
+      variants="label"
       size="sm"
       as="div"
       className={clsx(!!error && errorFontColor, className)}
@@ -158,7 +158,7 @@ const Fix = ({ text, position }: TextFieldFixProps) => {
   const isDisplay = state === "focused" || !!value || !!isTyping;
   if (!text || !isDisplay) return null;
   return (
-    <Typography size="lg" role="label" className={textFieldFix[position]}>
+    <Typography size="lg" variants="label" className={textFieldFix[position]}>
       {text}
     </Typography>
   );

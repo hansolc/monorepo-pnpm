@@ -19,6 +19,16 @@
       "require": "./dist/md3.cjs"
     }
   },
+  "typesVersions": {
+    "*": {
+      "base": [
+        "./dist/base.d.ts"
+      ],
+      "md3": [
+        "./dist/md3.d.ts"
+      ]
+    }
+  },
   "sideEffects": [
     "*.css.ts"
   ],

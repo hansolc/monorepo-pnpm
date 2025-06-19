@@ -8,6 +8,70 @@ importers:
 
   .: {}
 
+  apps/meat-wave:
+    dependencies:
+      '@monorepo-pnpm/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@tailwindcss/vite':
+        specifier: ^4.1.6
+        version: 4.1.6(vite@6.3.5(@types/node@20.17.31)(jiti@2.4.2)(lightningcss@1.29.2))
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
+      react-router-dom:
+        specifier: ^6.30.1
+        version: 6.30.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      tailwindcss:
+        specifier: ^4.1.6
+        version: 4.1.6
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.25.0
+        version: 9.26.0
+      '@types/react':
+        specifier: ^18
+        version: 18.3.20
+      '@types/react-dom':
+        specifier: ^18
+        version: 18.3.6(@types/react@18.3.20)
+      '@vanilla-extract/vite-plugin':
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@20.17.31)(jiti@2.4.2)(lightningcss@1.29.2)(vite@6.3.5(@types/node@20.17.31)(jiti@2.4.2)(lightningcss@1.29.2))
+      '@vitejs/plugin-react-swc':
+        specifier: ^3.9.0
+        version: 3.9.0(vite@6.3.5(@types/node@20.17.31)(jiti@2.4.2)(lightningcss@1.29.2))
+      eslint:
+        specifier: ^9.25.0
+        version: 9.26.0(jiti@2.4.2)
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.26.0(jiti@2.4.2))
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.19
+        version: 0.4.20(eslint@9.26.0(jiti@2.4.2))
+      globals:
+        specifier: ^16.0.0
+        version: 16.1.0
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      typescript-eslint:
+        specifier: ^8.30.1
+        version: 8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
+      vite:
+        specifier: ^6.3.5
+        version: 6.3.5(@types/node@20.17.31)(jiti@2.4.2)(lightningcss@1.29.2)
+      vite-tsconfig-paths:
+        specifier: ^5.1.4
+        version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@20.17.31)(jiti@2.4.2)(lightningcss@1.29.2))
+
   apps/next-app:
     dependencies:
       '@monorepo-pnpm/shared':
@@ -817,6 +881,10 @@ packages:
     resolution: {integrity: sha512-COIazDAx1ncDg046cTJ8SFYsX8aS3lB/08LDnbkH/SkdYrFPWDlXMrO/sUam8j1WWM+PJ+4d1mj7tODIKNiFog==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  '@remix-run/router@1.23.0':
+    resolution: {integrity: sha512-O3rHJzAQKamUz1fvE0Qaw0xSFqsA/yafi2iqeE0pvdFtCO1viYx8QL6f3Ln/aCCTLxs68SLf0KPM9eSeM8yBnA==}
+    engines: {node: '>=14.0.0'}
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -3292,6 +3360,19 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
+  react-router-dom@6.30.1:
+    resolution: {integrity: sha512-llKsgOkZdbPU1Eg3zK8lCn+sjD9wMRZZPuzmdWWX5SUs8OFkN5HnFVC0u5KMeMaC9aoancFI/KoLuKPqN+hxHw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
+  react-router@6.30.1:
+    resolution: {integrity: sha512-X1m21aEmxGXqENEPG3T6u0Th7g0aS4ZmoNynhbs+Cn+q+QGTLt+d5IQ2bHAXKzKcxGJjxACpVbnYQSCRcfxHlQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
@@ -4198,9 +4279,9 @@ snapshots:
       eslint: 8.57.1
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/eslint-utils@4.6.1(eslint@9.26.0(jiti@2.4.2))':
+  '@eslint-community/eslint-utils@4.7.0(eslint@8.57.1)':
     dependencies:
-      eslint: 9.26.0(jiti@2.4.2)
+      eslint: 8.57.1
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/eslint-utils@4.7.0(eslint@9.26.0(jiti@2.4.2))':
@@ -4494,6 +4575,8 @@ snapshots:
   '@react-types/shared@3.30.0(react@18.3.1)':
     dependencies:
       react: 18.3.1
+
+  '@remix-run/router@1.23.0': {}
 
   '@rollup/pluginutils@5.1.4(rollup@4.40.2)':
     dependencies:
@@ -5149,7 +5232,7 @@ snapshots:
 
   '@typescript-eslint/utils@8.31.0(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.6.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@8.57.1)
       '@typescript-eslint/scope-manager': 8.31.0
       '@typescript-eslint/types': 8.31.0
       '@typescript-eslint/typescript-estree': 8.31.0(typescript@5.8.3)
@@ -6217,7 +6300,7 @@ snapshots:
 
   eslint@9.26.0(jiti@2.4.2):
     dependencies:
-      '@eslint-community/eslint-utils': 4.6.1(eslint@9.26.0(jiti@2.4.2))
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.26.0(jiti@2.4.2))
       '@eslint-community/regexpp': 4.12.1
       '@eslint/config-array': 0.20.0
       '@eslint/config-helpers': 0.2.2
@@ -7265,6 +7348,18 @@ snapshots:
   react-is@17.0.2: {}
 
   react-refresh@0.17.0: {}
+
+  react-router-dom@6.30.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@remix-run/router': 1.23.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 6.30.1(react@18.3.1)
+
+  react-router@6.30.1(react@18.3.1):
+    dependencies:
+      '@remix-run/router': 1.23.0
+      react: 18.3.1
 
   react@18.3.1:
     dependencies:
