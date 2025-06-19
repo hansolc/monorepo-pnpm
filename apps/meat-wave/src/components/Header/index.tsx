@@ -14,7 +14,6 @@ function Header({ children }: PropsWithChildren) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log(isScrolled);
   return (
     <nav
       className={clsx(

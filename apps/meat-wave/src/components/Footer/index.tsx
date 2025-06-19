@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Section } from "@monorepo-pnpm/shared/base";
+import { Section } from "@monorepo-pnpm/shared";
 
 function Footer({ className }: { className?: string }) {
   return (
