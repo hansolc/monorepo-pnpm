@@ -2,8 +2,12 @@
   "name": "@monorepo-pnpm/shared",
   "private": true,
   "version": "1.0.0",
-  "main": "dist/shared.cjs.js",
-  "module": "dist/shared.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*"
+  },
   "types": "build/index.d.ts",
   "sideEffects": [
     "*.css.ts"

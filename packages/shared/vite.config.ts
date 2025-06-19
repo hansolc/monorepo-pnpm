@@ -18,14 +18,17 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"), // 진입점
       name: "SharedComponents",
-      formats: ["es", "cjs"], // 원하는 모듈 형식
-      fileName: (format) => `shared.${format}.js`,
+      formats: ["es"], // 모듈 형식
+      fileName: () => `[name].js`,
     },
     rollupOptions: {
       // 외부 의존성 처리 (예: react는 번들에 포함하지 않음)
       // 이미 사용하는 프로젝트가 react 기반이라면 react을 포함하지 않음
       external: ["react", "react-dom", path.resolve(__dirname, "src/test/**")],
       output: {
+        preserveModules: true,
+        preserveModulesRoot: "src",
+        entryFileNames: `[name].js`,
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
