@@ -1,12 +1,10 @@
 import { style } from "@vanilla-extract/css";
-import { recipe } from "@vanilla-extract/recipes";
+import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 
 export const baseHeroBanner = recipe({
   base: [
     {
       width: "100%",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
       position: "relative",
       display: "flex",
       flexDirection: "column",
@@ -29,3 +27,7 @@ export const baseHeroBannerOverlay = style({
   inset: 0,
   background: "rgba(0,0,0,0.4)",
 });
+
+export type HeroBannerStyleVariants = Required<
+  NonNullable<RecipeVariants<typeof baseHeroBanner>>
+>;

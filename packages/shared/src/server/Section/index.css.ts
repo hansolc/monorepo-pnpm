@@ -7,44 +7,7 @@ export const baseSection = recipe({
     width: "100%",
     minHeight: 200,
   },
-  variants: {
-    size: {
-      contain: {
-        backgroundSize: "contain",
-      },
-      cover: {
-        backgroundSize: "cover",
-      },
-      auto: {
-        backgroundSize: "auto",
-      },
-    },
-    repeat: {
-      "no-repeat": {
-        backgroundRepeat: "no-repeat",
-      },
-      repeat: {
-        backgroundRepeat: "repeat",
-      },
-    },
-    position: {
-      top: { backgroundPosition: "top" },
-      left: { backgroundPosition: "left" },
-      right: { backgroundPosition: "right" },
-      bottom: { backgroundPosition: "bottom" },
-      center: { backgroundPosition: "center" },
-    },
-  },
-  defaultVariants: {
-    size: "cover",
-    repeat: "no-repeat",
-    position: "center",
-  },
 });
-
-export type SectionStyleVariants = Required<
-  NonNullable<RecipeVariants<typeof baseSection>>
->;
 
 export const baseSectionInner = style({
   width: "100%",

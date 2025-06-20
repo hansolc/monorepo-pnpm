@@ -1,50 +1,29 @@
-// packages/shared/src/base/Section/Section.tsx
-import { ComponentPropsWithoutRef } from "react";
-import clsx from "clsx";
+// Section.tsx
+import React, { ReactNode } from "react";
 import {
-  baseSection,
-  baseSectionInner,
-  SectionStyleVariants,
-} from "./index.css";
+  withBackgroundImage,
+  WithBackgroundImageProps,
+} from "../hoc/withBackgroundImage";
+import clsx from "clsx";
+import { baseSectionInner } from "./index.css";
 
-interface SectionProps<T extends React.ElementType> {
-  bg?: {
-    image: string;
-    size?: SectionStyleVariants["size"];
-    repeat?: SectionStyleVariants["repeat"];
-    position?: SectionStyleVariants["position"];
-  };
-  as?: T;
+interface SectionBaseProps {
+  className?: string;
+  children: ReactNode;
 }
 
-function Section<T extends React.ElementType>({
-  bg,
-  className,
-  children,
-  as,
-  ...props
-}: SectionProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof SectionProps<T>>) {
-  const backgroundImageStyle = bg?.image
-    ? { backgroundImage: `url(${bg.image})` }
-    : undefined;
-  const Component = as || "section";
+const SectionBase = React.forwardRef(function SectionBase(
+  props: SectionBaseProps & WithBackgroundImageProps,
+  ref: React.Ref<HTMLTableSectionElement>
+) {
+  const { className, children } = props;
 
   return (
-    <Component
-      className={clsx(
-        baseSection({
-          size: bg?.size,
-          repeat: bg?.repeat,
-          position: bg?.position,
-        }),
-        className
-      )}
-      style={backgroundImageStyle}
-      {...props}
-    >
-      <div className={baseSectionInner}>{children}</div>
-    </Component>
+    <section ref={ref}>
+      <div className={clsx(className, baseSectionInner)}>{children}</div>
+    </section>
   );
-}
+});
 
+const Section = withBackgroundImage(SectionBase);
 export default Section;

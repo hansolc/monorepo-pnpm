@@ -1,38 +1,39 @@
 import React, { ElementType, ReactNode } from "react";
-import { baseHeroBanner } from "./index.css";
+import { baseHeroBanner, HeroBannerStyleVariants } from "./index.css";
 import clsx from "clsx";
 import Overlay from "./components/Overlay";
+import {
+  withBackgroundImage,
+  WithBackgroundImageProps,
+} from "../hoc/withBackgroundImage";
 
 interface HeroBannerProps {
-  as?: ElementType;
-  bg?: string;
   ariaLabel?: string;
   children: ReactNode;
-  height?: "full" | "auto";
+  height?: HeroBannerStyleVariants["height"];
   className?: string;
 }
 
 function HeroBannerRoot({
-  as: Component = "section",
-  bg,
   ariaLabel,
-  height = "full",
   children,
+  height,
   className,
-}: HeroBannerProps) {
+  ...rest
+}: HeroBannerProps & WithBackgroundImageProps) {
   return (
-    <Component
-      className={clsx(baseHeroBanner({ height }), className)}
-      style={{ backgroundImage: `url(${bg})` }}
+    <section
       role="region"
       aria-label={ariaLabel}
+      className={clsx(baseHeroBanner({ height }), className)}
+      {...rest}
     >
       {children}
-    </Component>
+    </section>
   );
 }
 
-const HeroBanner = Object.assign(HeroBannerRoot, {
+const HeroBanner = Object.assign(withBackgroundImage(HeroBannerRoot), {
   Overlay,
 });
 
