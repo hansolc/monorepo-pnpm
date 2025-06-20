@@ -8,7 +8,8 @@ import clsx from "clsx";
 import { baseSectionInner } from "./index.css";
 
 interface SectionBaseProps {
-  className?: string;
+  outerClassName?: string;
+  innerClassName?: string;
   children: ReactNode;
 }
 
@@ -16,11 +17,11 @@ const SectionBase = React.forwardRef(function SectionBase(
   props: SectionBaseProps & WithBackgroundImageProps,
   ref: React.Ref<HTMLTableSectionElement>
 ) {
-  const { className, children } = props;
+  const { children, outerClassName, innerClassName } = props;
 
   return (
-    <section ref={ref}>
-      <div className={clsx(className, baseSectionInner)}>{children}</div>
+    <section ref={ref} className={outerClassName}>
+      <div className={clsx(innerClassName, baseSectionInner)}>{children}</div>
     </section>
   );
 });

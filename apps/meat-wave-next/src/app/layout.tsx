@@ -4,6 +4,7 @@ import "@monorepo-pnpm/shared/shared.css";
 import { Noto_Sans_KR } from "next/font/google";
 import clsx from "clsx";
 import { lightThemeClasses } from "@/styles/theme/theme.css";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(lightThemeClasses, noto.className)}>
         {children}
+        <Footer />
       </body>
     </html>
   );
