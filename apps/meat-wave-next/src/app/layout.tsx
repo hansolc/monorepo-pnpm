@@ -5,6 +5,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import clsx from "clsx";
 import { lightThemeClasses } from "@/styles/theme/theme.css";
 import Footer from "@/components/Footer";
+import GlobalNavigationBar from "@/components/GlobalNavigationBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(lightThemeClasses, noto.className)}>
+        <GlobalNavigationBar />
         {children}
         <Footer />
       </body>

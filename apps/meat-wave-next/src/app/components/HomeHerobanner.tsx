@@ -6,7 +6,7 @@ function HomeHerobanner() {
     <Herobanner
       bg={{
         image:
-          "https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-design-a-responsive-landing-page-or-hero-banner-for-a-business-startup-vector-png-image_28436428.png",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       }}
       ariaLabel="Hero Banner"
       overlay
