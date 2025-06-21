@@ -5,6 +5,7 @@ import { md3TabsGroup } from "./components/Tabs.css";
 import TabItem from "./components/TabItem";
 import { sprinkles } from "@styles/sprinkles.css";
 import { IconType } from "react-icons";
+import { flattenChildren } from "./utils";
 
 interface Props {
   options: Array<{ label: string; icon?: IconType }>;
@@ -21,6 +22,8 @@ function Tabs({
   children,
   className,
 }: Props) {
+  const flatChildren = flattenChildren(children);
+
   return (
     <TabGroup
       selectedIndex={selectedIndex}
@@ -46,7 +49,7 @@ function Tabs({
         ))}
       </TabList>
       <TabPanels>
-        {React.Children.map(children, (child, index) => (
+        {flatChildren.map((child, index) => (
           <TabPanel key={`tabpanel-${index}`}>{child}</TabPanel>
         ))}
       </TabPanels>
