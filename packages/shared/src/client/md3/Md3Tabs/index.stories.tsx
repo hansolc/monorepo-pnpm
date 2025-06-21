@@ -1,5 +1,5 @@
 import { MdAccessAlarm } from "react-icons/md";
-import Tabs from "./components/Tabs";
+import Tabs from ".";
 import { useState } from "react";
 
 const meta = {

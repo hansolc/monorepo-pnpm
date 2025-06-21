@@ -56,7 +56,3 @@ export const lightColors = {
 export const lightThemeClasses = createTheme(themeContract, {
   colors: lightColors,
 });
-
-export const vars = {
-  colors: themeContract.colors,
-};

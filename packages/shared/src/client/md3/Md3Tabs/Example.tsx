@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Tabs from "./components/Tabs";
+import Tabs from ".";
 import { MdAccessAlarm } from "react-icons/md";
 
 function Example() {

@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
-import { md3TabsGroup } from "./Tabs.css";
-import TabItem from "./TabItem";
+import { md3TabsGroup } from "./components/Tabs.css";
+import TabItem from "./components/TabItem";
 import { sprinkles } from "@styles/sprinkles.css";
 import { IconType } from "react-icons";
 
@@ -11,15 +11,22 @@ interface Props {
   selectedIndex?: number;
   onChange?: (option: number | undefined) => void;
   children?: React.ReactNode;
+  className?: string;
 }
 
-function Tabs({ options, selectedIndex, onChange, children }: Props) {
+function Tabs({
+  options,
+  selectedIndex,
+  onChange,
+  children,
+  className,
+}: Props) {
   return (
     <TabGroup
       selectedIndex={selectedIndex}
       onChange={onChange}
       //   defaultIndex={undefined}
-      className={clsx(md3TabsGroup)}
+      className={clsx(md3TabsGroup, className)}
     >
       <TabList className={sprinkles({ display: "flex" })}>
         {options.map(({ label, icon }) => (

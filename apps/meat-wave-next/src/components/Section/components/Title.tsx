@@ -12,13 +12,9 @@ interface Props {
 
 function Title({ subtitle, children, ...props }: Props) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pb-2">
       {subtitle && (
-        <Typography
-          variants="body"
-          size="lg"
-          className={`text-[${subtitle.color ?? ""}]`}
-        >
+        <Typography variants="body" size="lg" className={subtitle.color}>
           {subtitle.text}
         </Typography>
       )}

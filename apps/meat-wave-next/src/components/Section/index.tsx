@@ -1,14 +1,18 @@
-import React, { PropsWithChildren } from "react";
+import React, { ComponentProps, PropsWithChildren } from "react";
 import { ResponsiveSection } from "@monorepo-pnpm/shared/server";
 import Title from "./components/Title";
 import clsx from "clsx";
 
 function SectionRoot({
   children,
-  className,
-}: PropsWithChildren<{ className?: string }>) {
+  outerClassName,
+  ...props
+}: PropsWithChildren & ComponentProps<typeof ResponsiveSection>) {
   return (
-    <ResponsiveSection className={clsx(className)}>
+    <ResponsiveSection
+      outerClassName={clsx("py-[150px]", outerClassName)}
+      {...props}
+    >
       {children}
     </ResponsiveSection>
   );
