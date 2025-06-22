@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Appbar } from "@monorepo-pnpm/shared/client";
+import Link from "next/link";
 
 function HomeHeader() {
   return (
@@ -17,11 +18,19 @@ function HomeHeader() {
 }
 
 function Login() {
-  return <div className="cursor-pointer">로그인</div>;
+  return (
+    <Link href={"/login"} className="cursor-pointer">
+      로그인
+    </Link>
+  );
 }
 
 function Register() {
-  return <div className="cursor-pointer">회원가입</div>;
+  return (
+    <Link href={"/signup"} className="cursor-pointer">
+      회원가입
+    </Link>
+  );
 }
 
 export default HomeHeader;

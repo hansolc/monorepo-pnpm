@@ -3,11 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { connect } from "@lib/db/dbConfig";
-
-type UserProps = {
-  username: string;
-  password: string;
-};
+import { UserProps } from "@/types/user";
 
 connect();
 export async function POST(request: NextRequest) {
@@ -20,14 +16,17 @@ export async function POST(request: NextRequest) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "User does not exist" },
+        { error: "존재하지 않는 아이디 입니다." },
         { status: 400 }
       );
     }
 
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      return NextResponse.json({ error: "Invlid password" }, { status: 400 });
+      return NextResponse.json(
+        { error: "비밀번호가 틀렸습니다." },
+        { status: 400 }
+      );
     }
 
     const tokenData = {

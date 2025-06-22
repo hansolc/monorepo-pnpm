@@ -1,7 +1,7 @@
-import HomeButton from "./comonents/HomeButton";
-import HomeHeader from "./comonents/HomeHeader";
-import HomeHeroBanner from "./comonents/HomeHeroBanner";
-import ReservationCard from "./comonents/ReservationCard";
+import HomeButton from "./components/HomeButton";
+import HomeHeader from "./components/HomeHeader";
+import HomeHeroBanner from "./components/HomeHeroBanner";
+import ReservationCard from "./components/ReservationCard";
 
 export default function Home() {
   return (

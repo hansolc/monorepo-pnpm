@@ -2,7 +2,6 @@
 
 import Section from "@/components/Section";
 import { Card, Md3TextField } from "@monorepo-pnpm/shared/client";
-import { Typography } from "@monorepo-pnpm/shared/server";
 import React from "react";
 
 function RservationCard() {
@@ -12,9 +11,7 @@ function RservationCard() {
         variants="elevated"
         className="absolute w-[calc(100%-10px)] top-[-100px] z-10 hover:bg-surfaceContainerLow!"
       >
-        <Typography variants="title" size="lg" emphasize>
-          첫 번째 예약
-        </Typography>
+        <Section.Title>첫 번재 예약</Section.Title>
         <Md3TextField label="구글 지도 음식점 링크*" type="text" outlined />
         <Md3TextField
           label="인원*"

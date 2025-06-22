@@ -55,7 +55,6 @@ export const md3AppbarSubtitle = style({
 const iconSize = style({
   width: 24,
   height: 24,
-  padding: 12,
   cursor: "pointer",
 });
 

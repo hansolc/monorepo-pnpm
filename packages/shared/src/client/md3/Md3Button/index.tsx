@@ -11,7 +11,7 @@ interface Md3ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children?: React.ReactNode;
   size?: keyof typeof buttonTypoSize;
   shape?: Md3ButtonStyleProps["shape"];
-  icon?: IconType;
+  icon?: React.ComponentType<{ className?: string }>;
   className?: string;
 }
 

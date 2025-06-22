@@ -22,6 +22,7 @@ function Icon({
       className={sprinkles({
         display: "flex",
         gap: 8,
+        padding: 12,
       })}
     >
       {icons.map((icon, i) => {
@@ -31,6 +32,7 @@ function Icon({
             className: clsx(icon.props.className, iconStyle),
           });
         }
+        console.log("else");
         return null;
       })}
     </div>

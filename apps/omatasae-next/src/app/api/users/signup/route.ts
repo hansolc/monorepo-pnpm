@@ -2,11 +2,7 @@ import { connect } from "@lib/db/dbConfig";
 import User from "@lib/db/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-
-type UserProps = {
-  username: string;
-  password: string;
-};
+import { UserProps } from "@/types/user";
 
 connect();
 
