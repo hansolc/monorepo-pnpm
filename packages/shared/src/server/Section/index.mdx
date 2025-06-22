@@ -1,0 +1,45 @@
+import { Meta, Title, Story, Canvas, Controls, Primary } from '@storybook/blocks'; 
+import * as Section from './index.stories';
+
+<Meta of={Section} />
+
+# Section
+
+### Server Component
+
+<br/>
+<br/>
+
+## Overview
+
+<div style={{ display: "flex", gap: "32px", justifyContent: "space-between" }}>
+  <div style={{ flex: 1 }}>
+    <h3>고려한 것</h3>
+    <ul>
+      <li>Background image(url)</li>
+      <li>Ref(확장성을 위해)</li>
+      <li>반응형 대응(1280px 이상 margin-auto 처리, 1280px 이하 padding: "0 1rem")</li>
+    </ul>
+  </div>
+  <div style={{ flex: 1 }}>
+    <h3>고려하지 않은 것</h3>
+    <ul>
+      <li>Table Size 반응형</li>
+      <li>as Props(동적 시멘틱 태그)</li>
+    </ul>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+## Usuage
+```tsx
+<Section outerClassName="bg-surfaceContainer py-10">
+    <Typography variants="display" size="lg">Text Here!</Typography>
+</Section>
+```
+
+## Props
+<Primary />
+<Controls />

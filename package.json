@@ -8,6 +8,7 @@
   "scripts": {
     "build:shared": "pnpm --filter @monorepo-pnpm/shared run build",
     "dev:meat-wave-next": "pnpm --filter meat-wave-next dev",
+    "dev:omatasae-next": "pnpm --filter omatasae-next dev",
     "dev:react": "pnpm --filter react-app dev",
     "dev:shared-stories": "pnpm --filter @monorepo-pnpm/shared storybook"
   }
