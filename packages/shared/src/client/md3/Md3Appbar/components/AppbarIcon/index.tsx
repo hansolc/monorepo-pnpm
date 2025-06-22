@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ReactElement, ReactNode, isValidElement, cloneElement } from "react";
 import { md3AppbarLeadingIcon, md3AppbarTrailingIcon } from "../../index.css";
+import { sprinkles } from "@styles/sprinkles.css";
 
 function Icon({
   icons,
@@ -17,7 +18,12 @@ function Icon({
     type === "leading" ? md3AppbarLeadingIcon : md3AppbarTrailingIcon;
 
   return (
-    <div className={className}>
+    <div
+      className={sprinkles({
+        display: "flex",
+        gap: 8,
+      })}
+    >
       {icons.map((icon, i) => {
         if (isValidElement(icon)) {
           return cloneElement(icon as ReactElement, {
