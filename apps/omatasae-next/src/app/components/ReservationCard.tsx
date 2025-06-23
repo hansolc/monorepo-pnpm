@@ -1,28 +1,19 @@
 "use client";
 
+import ReservationForm from "@/components/ReservationForm/indx";
 import Section from "@/components/Section";
-import { Card, Md3TextField } from "@monorepo-pnpm/shared/client";
+import { Card } from "@monorepo-pnpm/shared/client";
 import React from "react";
 
-function RservationCard() {
+function RservationCard({ idx = 1 }: { idx: number }) {
   return (
-    <Section className="relative flex flex-col items-center h-full">
+    <Section className="relative" padding>
       <Card
         variants="elevated"
-        className="absolute w-[calc(100%-10px)] top-[-100px] z-10 hover:bg-surfaceContainerLow!"
+        className="absolute w-[calc(100%-10px)] left-[5px] top-[-100px] z-10 bg-surfaceContainerLow!"
       >
-        <Section.Title>첫 번재 예약</Section.Title>
-        <Md3TextField label="구글 지도 음식점 링크*" type="text" outlined />
-        <Md3TextField
-          label="인원*"
-          type="text"
-          outlined
-          inputConfig={{ suffix: "명" }}
-        />
-        <div className="flex">
-          <Md3TextField label="날짜*" type="text" outlined />
-          <Md3TextField label="시간*" type="text" outlined />
-        </div>
+        <Section.Title>{idx} 번째 예약</Section.Title>
+        <ReservationForm />
       </Card>
       <div className="h-[250px]" aria-hidden></div>
     </Section>

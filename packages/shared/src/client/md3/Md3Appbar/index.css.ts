@@ -25,6 +25,7 @@ export const md3Appbar = recipe({
           flexDirection: "column",
           height: 112,
           justifyContent: "space-between",
+          paddingTop: "1rem",
         },
       ],
       lg: [
@@ -33,6 +34,7 @@ export const md3Appbar = recipe({
           // Originally 152px
           height: 132,
           justifyContent: "space-between",
+          paddingTop: "1rem",
         },
       ],
     },

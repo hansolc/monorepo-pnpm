@@ -63,6 +63,7 @@ function RegistrationForm({ type }: Props) {
         type="submit"
         variants="filled"
         size="md"
+        shape="square"
         icon={
           loginMutate.isPending
             ? PiSpinner

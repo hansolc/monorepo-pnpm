@@ -3,4 +3,9 @@ type UserProps = {
   password: string;
 };
 
-export type { UserProps };
+type ResponseUserType = {
+  id: string;
+  username: string;
+};
+
+export type { UserProps, ResponseUserType };

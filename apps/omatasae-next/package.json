@@ -2,11 +2,13 @@
   "name": "omatasae-next",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.9.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "pnpm --filter @monorepo-pnpm/shared run build && pnpm build"
   },
   "dependencies": {
     "@monorepo-pnpm/shared": "workspace:*",
@@ -20,6 +22,7 @@
     "postcss": "^8.5.3",
     "react": "^18",
     "react-dom": "^18",
+    "recoil": "^0.7.7",
     "tailwindcss": "^4.1.6"
   },
   "devDependencies": {

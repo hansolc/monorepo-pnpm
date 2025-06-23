@@ -1,14 +1,20 @@
 "use client";
 
-import { UserProps } from "@/types/user";
+import { userState } from "@/lib/recoil/atoms/user";
+import { ResponseUserType, UserProps } from "@/types/user";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from "recoil";
 
 export default function useLogin() {
   const router = useRouter();
+  const setUser = useSetRecoilState(userState);
 
   return useMutation({
-    mutationFn: async ({ username, password }: UserProps) => {
+    mutationFn: async ({
+      username,
+      password,
+    }: UserProps): Promise<ResponseUserType> => {
       try {
         const res = await fetch(`/api/users/login`, {
           method: "POST",
@@ -22,7 +28,7 @@ export default function useLogin() {
           throw new Error(result.error || "로그인 실패");
         }
 
-        return "로그인 성공";
+        return result.response;
       } catch (error: unknown) {
         if (error instanceof Error) {
           throw new Error(error.message);
@@ -32,7 +38,7 @@ export default function useLogin() {
       }
     },
     onSuccess: (res) => {
-      alert(res);
+      setUser(res);
       router.push("/");
     },
   });
