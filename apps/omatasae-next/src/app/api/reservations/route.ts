@@ -11,11 +11,26 @@ export async function POST(request: NextRequest) {
       ...body,
       state: "WAITING",
     });
-    return NextResponse.json(newReservation, { status: 201 });
+    return NextResponse.json({ response: newReservation }, { status: 201 });
   } catch (error) {
     console.error("Reservation creation failed:", error);
     return NextResponse.json(
       { error: "Failed to create reservation" },
+      { status: 500 }
+    );
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function GET(request: NextRequest) {
+  try {
+    const reservations = await Reservation.find().sort({ createdAt: -1 });
+
+    return NextResponse.json({ response: reservations }, { status: 200 });
+  } catch (error) {
+    console.error("GET reservations error:", error);
+    return NextResponse.json(
+      { error: "예약 정보를 불러오지 못했습니다." },
       { status: 500 }
     );
   }

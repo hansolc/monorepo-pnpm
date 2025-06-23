@@ -19,8 +19,14 @@ interface ReservationInfoRequestType {
 
 type ReservationStatus = "WAITING" | "AVAILABLE" | "CONFIRMED" | "REJECTED";
 
+interface ReservationInfoResponseType extends ReservationInfoRequestType {
+  _id: string;
+  state: ReservationStatus;
+}
+
 export type {
   ReservationInfoType,
   ReservationInfoRequestType,
   ReservationStatus,
+  ReservationInfoResponseType,
 };

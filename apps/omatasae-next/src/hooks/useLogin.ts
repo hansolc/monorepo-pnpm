@@ -5,10 +5,12 @@ import { ResponseUserType, UserProps } from "@/types/user";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
+import useCreateReservation from "./useCreateReservation";
 
 export default function useLogin() {
   const router = useRouter();
   const setUser = useSetRecoilState(userState);
+  const { tryReservationAfterLogin } = useCreateReservation();
 
   return useMutation({
     mutationFn: async ({
@@ -39,6 +41,7 @@ export default function useLogin() {
     },
     onSuccess: (res) => {
       setUser(res);
+      tryReservationAfterLogin();
       router.push("/");
     },
   });

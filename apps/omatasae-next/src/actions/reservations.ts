@@ -1,5 +1,6 @@
 import {
   ReservationInfoRequestType,
+  ReservationInfoResponseType,
   ReservationInfoType,
 } from "@/types/reservation";
 
@@ -26,6 +27,25 @@ export async function createReservation(info: ReservationInfoType) {
 
     if (!res.ok) {
       throw new Error(result.error || "예약 실패");
+    }
+
+    return result.response;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("알 수 없는 오류입니다.");
+    }
+  }
+}
+
+export async function getReservation(): Promise<ReservationInfoResponseType[]> {
+  try {
+    const res = await fetch(`/api/reservations`);
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.error || "예약 조회 실패");
     }
 
     return result.response;

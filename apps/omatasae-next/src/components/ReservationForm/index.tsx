@@ -9,11 +9,14 @@ import { MdOutlinePeopleOutline } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
 import { MdOutlineDateRange } from "react-icons/md";
 import { MdOutlineAccessTime } from "react-icons/md";
+import useCreateReservation from "@/hooks/useCreateReservation";
+import { PiSpinner } from "react-icons/pi";
 
 function ReservationForm() {
   const { handleSubmit, register, errors } =
     useFormValidation<ReservationInfoType>();
   const [dateTimeCount, setDateTimeCount] = useState(1);
+  const { createReservation, isPending } = useCreateReservation();
 
   const renderDateTimeField = (
     date: keyof ReservationInfoType,
@@ -44,7 +47,7 @@ function ReservationForm() {
         {...register(time, {
           required: time === "primaryTime",
           pattern: {
-            value: /^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+            value: /^([0]?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
             message: "HH:mm 형식으로 작성해주세요.",
           },
         })}
@@ -59,7 +62,7 @@ function ReservationForm() {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => console.log(data))}
+      onSubmit={handleSubmit((data) => createReservation(data))}
       className="flex flex-col gap-3"
     >
       <Md3TextField
@@ -103,8 +106,13 @@ function ReservationForm() {
         </Md3Button>
       )}
 
-      <Md3Button type="submit" variants="filled" size="md">
-        예약하기
+      <Md3Button
+        type="submit"
+        variants="filled"
+        size="md"
+        icon={isPending ? PiSpinner : undefined}
+      >
+        {isPending ? "요청중..." : "예약하기"}
       </Md3Button>
     </form>
   );

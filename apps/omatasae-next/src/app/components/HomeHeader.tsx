@@ -22,7 +22,7 @@ function HomeHeader() {
         />,
         <HeaderLink
           key={"omatasae-reservation"}
-          href="reservation/verify"
+          href="reservations"
           text="예약확인"
         />,
         <HeaderLink key={"omatasae-logout"} href="logout" text="로그아웃" />,
@@ -35,15 +35,14 @@ function HeaderLink({
   href,
   text,
 }: {
-  href: "login" | "signup" | "reservation/verify" | "logout";
+  href: "login" | "signup" | "reservations" | "logout";
   text: string;
 }) {
   const { logout } = useLogout();
   const user = useRecoilValue(userState);
 
   if (user && (href === "login" || href === "signup")) return null;
-  if (!user && (href === "reservation/verify" || href === "logout"))
-    return null;
+  if (!user && (href === "reservations" || href === "logout")) return null;
 
   return (
     <>
