@@ -3,13 +3,21 @@
 import useFormValidation from "@/hooks/useFormValidation";
 import { Md3Button, Md3TextField } from "@monorepo-pnpm/shared/client";
 import React, { useState } from "react";
+import { MdOutlineMap } from "react-icons/md";
+import { MdOutlinePeopleOutline } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
+import { MdOutlineDateRange } from "react-icons/md";
+import { MdOutlineAccessTime } from "react-icons/md";
 
 interface ReservationInfoType {
   link: string;
   peopleCount: string;
-  primaryDateTime: string;
-  secondaryDateTime?: string;
-  tertiaryDateTime?: string;
+  primaryDate: string;
+  primaryTime: string;
+  secondaryDate?: string;
+  secondaryTime?: string;
+  tertiaryDate?: string;
+  tertiaryTime?: string;
 }
 
 function ReservationForm() {
@@ -18,22 +26,43 @@ function ReservationForm() {
   const [dateTimeCount, setDateTimeCount] = useState(1);
 
   const renderDateTimeField = (
-    label: string,
-    name: keyof ReservationInfoType
+    date: keyof ReservationInfoType,
+    time: keyof ReservationInfoType
   ) => (
     <div className="flex gap-2 mb-2">
       <Md3TextField
-        label={`${label} 날짜`}
+        label={`날짜(YYMMDD)`}
         type="text"
         outlined
-        {...register(name, { required: name === "primaryDateTime" })}
-        error={errors[name]}
+        {...register(date, {
+          required: date === "primaryDate",
+          pattern: {
+            value: /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/,
+            message: "YYMMDD 형식으로 작성해주세요.",
+          },
+        })}
+        error={errors[date]}
+        inputConfig={{
+          leadingIcon: <MdOutlineDateRange size="24" />,
+          supportingText: "ex) 250624",
+        }}
       />
       <Md3TextField
-        label={`${label} 시간`}
+        label={`시간(HH:mm)`}
         type="text"
         outlined
-        {...register(name, { required: name === "primaryDateTime" })}
+        {...register(time, {
+          required: time === "primaryTime",
+          pattern: {
+            value: /^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+            message: "HH:mm 형식으로 작성해주세요.",
+          },
+        })}
+        error={errors[time]}
+        inputConfig={{
+          leadingIcon: <MdOutlineAccessTime size="24" />,
+          supportingText: "ex) 21:30",
+        }}
       />
     </div>
   );
@@ -48,38 +77,43 @@ function ReservationForm() {
         type="text"
         outlined
         {...register("link", { required: "음식점 링크*" })}
+        inputConfig={{
+          supportingText: "구글 지도 음식점 링크를 입력해주세요.",
+          leadingIcon: <MdOutlineMap size="24" />,
+        }}
         error={errors.link}
       />
       <Md3TextField
         label="인원*"
         type="text"
         outlined
-        inputConfig={{ suffix: "명" }}
+        inputConfig={{
+          suffix: "명",
+          supportingText: "총 예약 인원 수를 입력해주세요.",
+          leadingIcon: <MdOutlinePeopleOutline size="24" />,
+        }}
         {...register("peopleCount", { required: "예약 인원 수*" })}
         error={errors.peopleCount}
       />
 
-      {renderDateTimeField("첫 번째", "primaryDateTime")}
+      {renderDateTimeField("primaryDate", "primaryTime")}
       {dateTimeCount >= 2 &&
-        renderDateTimeField("두 번째", "secondaryDateTime")}
+        renderDateTimeField("secondaryDate", "secondaryTime")}
       {dateTimeCount === 3 &&
-        renderDateTimeField("세 번째", "tertiaryDateTime")}
+        renderDateTimeField("tertiaryDate", "tertiaryTime")}
 
       {dateTimeCount < 3 && (
         <Md3Button
           type="button"
           variants="text"
           onClick={() => setDateTimeCount((prev) => prev + 1)}
+          icon={MdAdd}
         >
-          + 다른 가능한 시간 추가하기
+          다른 가능한 시간 추가하기
         </Md3Button>
       )}
 
-      <Md3Button
-        type="submit"
-        variants="filled"
-        className="mt-4 bg-primary text-white p-2 rounded"
-      >
+      <Md3Button type="submit" variants="filled" size="md">
         예약하기
       </Md3Button>
     </form>
