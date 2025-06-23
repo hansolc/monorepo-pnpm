@@ -5,6 +5,8 @@ import { Noto_Sans_KR } from "next/font/google";
 import clsx from "clsx";
 import { lightThemeClasses } from "@/styles/theme/theme.css";
 import ReactQueryProvider from "@/lib/tanstack-query/client";
+import RecoilRootWrapper from "@/lib/recoil/RecoilRootWrapper";
+import { decodeUserJwt } from "@/utils/auth";
 
 export const metadata: Metadata = {
   title: "Omatasae",
@@ -21,18 +23,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = decodeUserJwt();
   return (
     <html lang="en">
       <ReactQueryProvider>
-        <body
-          className={clsx(
-            lightThemeClasses,
-            noto.className,
-            "max-w-[380px] h-full min-w-[360px] m-auto bg-background"
-          )}
-        >
-          {children}
-        </body>
+        <RecoilRootWrapper user={user}>
+          <body
+            className={clsx(
+              lightThemeClasses,
+              noto.className,
+              "max-w-[550px] h-full min-w-[360px] mx-auto! bg-background"
+            )}
+          >
+            {children}
+          </body>
+        </RecoilRootWrapper>
       </ReactQueryProvider>
     </html>
   );
