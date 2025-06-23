@@ -1,6 +1,7 @@
 "use client";
 
 import useFormValidation from "@/hooks/useFormValidation";
+import { ReservationInfoType } from "@/types/reservation";
 import { Md3Button, Md3TextField } from "@monorepo-pnpm/shared/client";
 import React, { useState } from "react";
 import { MdOutlineMap } from "react-icons/md";
@@ -8,17 +9,6 @@ import { MdOutlinePeopleOutline } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
 import { MdOutlineDateRange } from "react-icons/md";
 import { MdOutlineAccessTime } from "react-icons/md";
-
-interface ReservationInfoType {
-  link: string;
-  peopleCount: string;
-  primaryDate: string;
-  primaryTime: string;
-  secondaryDate?: string;
-  secondaryTime?: string;
-  tertiaryDate?: string;
-  tertiaryTime?: string;
-}
 
 function ReservationForm() {
   const { handleSubmit, register, errors } =
