@@ -13,6 +13,7 @@ export interface Md3AppbarProps {
   leadingIcon?: ReactNode[];
   trailingIcon?: ReactNode[];
   textAlign?: "start" | "center";
+  className?: string;
 }
 
 function Md3Appbar({
@@ -22,10 +23,11 @@ function Md3Appbar({
   trailingIcon = [],
   size,
   textAlign = "start",
+  className,
 }: Md3AppbarProps) {
   if (size === "sm") {
     return (
-      <header className={clsx(md3Appbar({ size }))}>
+      <header className={clsx(md3Appbar({ size }), className)}>
         <Icon icons={leadingIcon} type="leading" />
         <div
           className={clsx(
@@ -49,7 +51,7 @@ function Md3Appbar({
     );
   } else {
     return (
-      <header className={clsx(md3Appbar({ size }))}>
+      <header className={clsx(md3Appbar({ size }), className)}>
         <div
           className={sprinkles({
             display: "flex",
@@ -64,7 +66,6 @@ function Md3Appbar({
             sprinkles({
               display: "flex",
               flexDirection: "column",
-              px: 16,
               paddingBottom: 12,
             }),
             md3AppbarTypoAlign[textAlign]
