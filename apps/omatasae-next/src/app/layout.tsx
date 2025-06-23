@@ -32,7 +32,7 @@ export default function RootLayout({
             className={clsx(
               lightThemeClasses,
               noto.className,
-              "max-w-[550px] h-full min-w-[360px] mx-auto! bg-background"
+              "max-w-[500px] h-full min-w-[360px] mx-auto! bg-background"
             )}
           >
             {children}

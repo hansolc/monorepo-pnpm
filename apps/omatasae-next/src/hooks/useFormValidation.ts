@@ -8,7 +8,7 @@ type RuleSet = {
   };
 };
 
-const useFormValidation = <T extends Record<keyof T, string>>() => {
+function useFormValidation<T extends Partial<Record<keyof T, string>>>() {
   const fields = useRef<
     Partial<Record<keyof T, { validator: (value: string) => string | null }>>
   >({});
@@ -64,6 +64,6 @@ const useFormValidation = <T extends Record<keyof T, string>>() => {
   };
 
   return { register, handleSubmit, errors };
-};
+}
 
 export default useFormValidation;
