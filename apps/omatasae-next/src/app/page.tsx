@@ -8,7 +8,6 @@ export default function Home() {
       <HomeHeader />
       <HomeHeroBanner />
       <ReservationCard idx={1} />
-      {/* <HomeButton /> */}
     </main>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import ReservationForm from "@/components/ReservationForm/indx";
+import ReservationForm from "@/components/ReservationForm";
 import Section from "@/components/Section";
 import { Card } from "@monorepo-pnpm/shared/client";
 import React from "react";
