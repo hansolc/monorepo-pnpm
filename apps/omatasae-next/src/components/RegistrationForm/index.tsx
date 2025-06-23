@@ -19,6 +19,7 @@ function RegistrationForm({ type }: Props) {
   const { register, handleSubmit, errors } = useFormValidation<UserProps>();
   const loginMutate = useLogin();
   const registerMutate = useRegistration();
+
   const onSubmit = async (data: UserProps) => {
     if (type === "login") loginMutate.mutate(data);
     else registerMutate.mutate(data);
