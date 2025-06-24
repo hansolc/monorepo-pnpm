@@ -8,8 +8,9 @@ import React from "react";
 function ReservationList() {
   const { data, error, isLoading, isError } = useQueryReservation();
 
-  if (!data || isLoading) return <div>예약 정보를 가져오고 있습니다...</div>;
-  if (isError) return <div>{error.message}</div>;
+  if (!data || isLoading)
+    return <Section padding>예약 정보를 가져오고 있습니다...</Section>;
+  if (isError) return <Section padding>{error.message}</Section>;
 
   return (
     <Section padding className="mt-5 flex flex-col gap-5">

@@ -24,7 +24,7 @@ function ReservationForm() {
   ) => (
     <div className="flex gap-2 mb-2">
       <Md3TextField
-        label={`날짜(YYMMDD)`}
+        label={`YYMMDD`}
         type="text"
         outlined
         {...register(date, {
@@ -41,7 +41,7 @@ function ReservationForm() {
         }}
       />
       <Md3TextField
-        label={`시간(HH:mm)`}
+        label={`HH:mm`}
         type="text"
         outlined
         {...register(time, {

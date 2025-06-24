@@ -1,6 +1,6 @@
 "use client";
 
-import { Appbar } from "@monorepo-pnpm/shared/client";
+import Appbar from "@/components/Appbar";
 import React from "react";
 import { MdArrowBackIos } from "react-icons/md";
 

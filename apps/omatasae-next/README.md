@@ -3,6 +3,8 @@
 이 프로젝트는 기존 [일본 음식점 예약 플랫폼](https://github.com/hansolc/omatasae-japan-restaurant-reservation-service)의 서버가 종료됨에 따라, **Next.js의 App Router와 API Routes**를 활용해 **Serverless 환경**으로 재구축한 버전입니다.  
 디자인 시스템은 모노레포 형태의 shared 컴포넌트를 적용하여 개발 효율성과 일관성을 높였습니다.
 
+배포 링크: https://monorepo-pnpm-omatasae-next.vercel.app/
+
 ## 🛠️ 사용기술
 
 - **Frontend**: Next.js (v14 App Router), Tailwind CSS
