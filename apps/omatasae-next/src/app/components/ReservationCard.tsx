@@ -2,7 +2,7 @@
 
 import ReservationForm from "@/components/ReservationForm";
 import Section from "@/components/Section";
-import { Card } from "@monorepo-pnpm/shared/client";
+import { Card } from "@monorepo-pnpm/shared/server";
 import React from "react";
 
 function RservationCard({ idx = 1 }: { idx: number }) {

@@ -1,5 +1,5 @@
 import React, { ComponentProps } from "react";
-import { Appbar as Component } from "@monorepo-pnpm/shared/client";
+import { Appbar as Component } from "@monorepo-pnpm/shared/server";
 import clsx from "clsx";
 
 function Appbar({ className, ...props }: ComponentProps<typeof Component>) {

@@ -2,8 +2,9 @@
 
 import Section from "@/components/Section";
 import useQueryReservation from "@/hooks/useQueryReservation";
-import { Card, Md3TextField } from "@monorepo-pnpm/shared/client";
+import { Md3TextField } from "@monorepo-pnpm/shared/client";
 import React from "react";
+import { Card } from "@monorepo-pnpm/shared/server";
 
 function ReservationList() {
   const { data, error, isLoading, isError } = useQueryReservation();
