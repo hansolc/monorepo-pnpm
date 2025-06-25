@@ -50,10 +50,12 @@ export async function getReservation({
   userId,
 }: {
   userId?: string;
-}): Promise<ReservationInfoResponseType[]> {
+} = {}): Promise<ReservationInfoResponseType[]> {
   try {
     const query = userId ? `?userId=${encodeURIComponent(userId)}` : "";
-    const res = await fetch(`/api/reservations${query}`);
+    const res = await fetch(
+      `${process.env.NEXT_BASE_URL}/api/reservations${query}`
+    );
     const result = await res.json();
 
     if (!res.ok) {

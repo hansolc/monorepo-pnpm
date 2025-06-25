@@ -1,6 +1,8 @@
 import React from "react";
-import AdminSidebarClient from "./AdminSidebar.client";
 import { Typography } from "@monorepo-pnpm/shared/server";
+import Link from "next/link";
+import { SIDEBAR_LINKS } from "../../constants";
+import { sidebarValueAs } from "../../utils";
 
 function AdminSidebar() {
   return (
@@ -16,7 +18,13 @@ function AdminSidebar() {
       <Typography variants="body" size="lg" className="pt-2" as="p">
         분류
       </Typography>
-      <AdminSidebarClient />
+      <ul className="list-disc marker:text-secondary ml-6">
+        {SIDEBAR_LINKS.map((link) => (
+          <li key={`omatasae-admin-${link}`}>
+            <Link href={`/admin?tabs=${link}`}>{sidebarValueAs(link)}</Link>
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 }
