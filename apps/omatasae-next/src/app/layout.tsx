@@ -29,11 +29,7 @@ export default function RootLayout({
       <ReactQueryProvider>
         <RecoilRootWrapper user={user}>
           <body
-            className={clsx(
-              lightThemeClasses,
-              noto.className,
-              "max-w-[500px] h-full min-w-[360px] mx-auto! bg-background"
-            )}
+            className={clsx(lightThemeClasses, noto.className, "bg-background")}
           >
             {children}
           </body>

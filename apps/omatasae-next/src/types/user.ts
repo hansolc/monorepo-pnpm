@@ -8,4 +8,6 @@ type ResponseUserType = {
   username: string;
 };
 
-export type { UserProps, ResponseUserType };
+type UserRole = "admin" | "user";
+
+export type { UserProps, ResponseUserType, UserRole };

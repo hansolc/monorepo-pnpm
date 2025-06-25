@@ -3,7 +3,7 @@
 import useFormValidation from "@/hooks/useFormValidation";
 import useLogin from "@/hooks/useLogin";
 import useRegistration from "@/hooks/useRegistration";
-import { UserProps } from "@/types/user";
+import { UserProps, UserRole } from "@/types/user";
 import { Md3Button, Md3TextField } from "@monorepo-pnpm/shared/client";
 import { Typography } from "@monorepo-pnpm/shared/server";
 import React from "react";
@@ -13,11 +13,12 @@ import { PiSpinner } from "react-icons/pi";
 
 interface Props {
   type: "login" | "regis";
+  role?: UserRole;
 }
 
-function RegistrationForm({ type }: Props) {
+function RegistrationForm({ type, role = "user" }: Props) {
   const { register, handleSubmit, errors } = useFormValidation<UserProps>();
-  const loginMutate = useLogin();
+  const loginMutate = useLogin({ role });
   const registerMutate = useRegistration();
 
   const onSubmit = async (data: UserProps) => {

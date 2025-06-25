@@ -1,13 +1,13 @@
 "use client";
 
 import { userState } from "@/lib/recoil/atoms/user";
-import { ResponseUserType, UserProps } from "@/types/user";
+import { ResponseUserType, UserProps, UserRole } from "@/types/user";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 import useCreateReservation from "./useCreateReservation";
 
-export default function useLogin() {
+export default function useLogin({ role }: { role?: UserRole }) {
   const router = useRouter();
   const setUser = useSetRecoilState(userState);
   const { tryReservationAfterLogin } = useCreateReservation();
@@ -42,7 +42,11 @@ export default function useLogin() {
     onSuccess: (res) => {
       setUser(res);
       tryReservationAfterLogin();
-      router.push("/");
+      if (role === "user") {
+        router.push("/");
+      } else if (role === "admin") {
+        router.push("/admin");
+      }
     },
   });
 }
