@@ -15,8 +15,8 @@ export default async function AdminHomepage({
 
   switch (tab) {
     case "reservation":
-      const reservations = await getReservation();
-      return <ReservationContent data={reservations} />;
+      const reservations = await getReservation({ limit: 30, skip: 0 });
+      return <ReservationContent initialData={reservations.reverse()} />;
     default:
       return null;
   }

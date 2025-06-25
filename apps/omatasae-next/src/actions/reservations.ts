@@ -48,11 +48,22 @@ export async function createReservation(
 
 export async function getReservation({
   userId,
+  limit,
+  skip,
 }: {
   userId?: string;
+  limit?: number;
+  skip?: number;
 } = {}): Promise<ReservationInfoResponseType[]> {
   try {
-    const query = userId ? `?userId=${encodeURIComponent(userId)}` : "";
+    const params = new URLSearchParams();
+
+    if (userId) params.set("userId", userId);
+    if (typeof limit === "number") params.set("limit", String(limit));
+    if (typeof skip === "number") params.set("skip", String(skip));
+
+    const query = params.toString() ? `?${params.toString()}` : "";
+
     const res = await fetch(
       `${process.env.NEXT_BASE_URL}/api/reservations${query}`
     );
