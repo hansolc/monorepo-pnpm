@@ -1,4 +1,4 @@
-import HomeHeader from "./components/HomeHeader";
+import HomeHeader from "./components/header";
 import HomeHeroBanner from "./components/HomeHeroBanner";
 import ReservationCard from "./components/ReservationCard"; // 필요 시 사용
 

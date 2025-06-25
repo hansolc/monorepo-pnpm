@@ -1,20 +1,13 @@
-"use client";
-
 import Appbar from "@/components/Appbar";
+import ArrowBackButton from "@/components/Icons/ArrowBack";
 import React from "react";
-import { MdArrowBackIos } from "react-icons/md";
 
 function RegisHeader() {
   return (
     <Appbar
       headline="회원가입"
       size="md"
-      leadingIcon={[
-        <MdArrowBackIos
-          key={`Appbar-arrow-back`}
-          onClick={() => window.history.back()}
-        />,
-      ]}
+      leadingIcon={[<ArrowBackButton key={`Appbar-arrow-back`} />]}
     />
   );
 }
