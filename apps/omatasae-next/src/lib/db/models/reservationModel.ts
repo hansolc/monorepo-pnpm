@@ -23,6 +23,10 @@ const reservationSchema = new Schema({
   tertiaryDate: {
     type: String,
   },
+  userId: {
+    type: String,
+    required: [true, "Please provide user id"],
+  },
 });
 
 const Reservation =

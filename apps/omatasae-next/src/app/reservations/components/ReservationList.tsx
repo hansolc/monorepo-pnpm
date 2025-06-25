@@ -5,24 +5,31 @@ import useQueryReservation from "@/hooks/useQueryReservation";
 import { Md3TextField } from "@monorepo-pnpm/shared/client";
 import React from "react";
 import { Card } from "@monorepo-pnpm/shared/server";
+import { useRecoilValue } from "recoil";
+import { userState } from "@/lib/recoil/atoms/user";
 
 function ReservationList() {
-  const { data, error, isLoading, isError } = useQueryReservation();
+  const user = useRecoilValue(userState);
+  const { data, error, isLoading, isError } = useQueryReservation({
+    userId: user?.id,
+  });
 
   if (!data || isLoading)
     return <Section padding>예약 정보를 가져오고 있습니다...</Section>;
   if (isError) return <Section padding>{error.message}</Section>;
-
   return (
     <Section padding className="mt-5 flex flex-col gap-5">
       {data.map((info, idx) => {
         return (
           <Card
-            key={info._id}
+            key={`${info.userId}_${idx}`}
             variants="filled"
             className="flex gap-2 flex-col"
           >
-            <Section.Title>{`${idx + 1}번째 예약 정보`}</Section.Title>
+            <Section.Title className="flex justify-between">
+              <p>{`${idx + 1}번째 예약 정보`}</p>
+              <p>{info.state}</p>
+            </Section.Title>
             <Md3TextField
               label="구글 지도 음식점 링크"
               type="text"

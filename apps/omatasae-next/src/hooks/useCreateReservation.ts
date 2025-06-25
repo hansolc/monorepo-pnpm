@@ -12,7 +12,7 @@ function useCreateReservation() {
   const router = useRouter();
 
   const mutation = useMutation({
-    mutationFn: create,
+    mutationFn: (info: ReservationInfoType) => create(info, user?.id),
     onSuccess: () => {
       localStorage.removeItem("pendingReservation");
       alert("예약 성공!");
@@ -24,7 +24,6 @@ function useCreateReservation() {
   });
 
   const createReservation = (info: ReservationInfoType) => {
-    console.log("create!");
     if (!user) {
       if (window.confirm("예약 생성을 위해 로그인이 필요합니다.")) {
         localStorage.setItem("pendingReservation", JSON.stringify(info));

@@ -7,6 +7,7 @@ connect();
 export async function POST(request: NextRequest) {
   try {
     const body: ReservationInfoRequestType = await request.json();
+    console.log(body);
     const newReservation = await Reservation.create({
       ...body,
       state: "WAITING",
@@ -24,7 +25,15 @@ export async function POST(request: NextRequest) {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(request: NextRequest) {
   try {
-    const reservations = await Reservation.find().sort({ createdAt: -1 });
+    const { searchParams } = new URL(request.url);
+    const userId = searchParams.get("userId");
+    let reservations = null;
+
+    if (!userId) {
+      reservations = await Reservation.find().sort({ createdAt: -1 });
+    } else {
+      reservations = await Reservation.find({ userId });
+    }
 
     return NextResponse.json({ response: reservations }, { status: 200 });
   } catch (error) {

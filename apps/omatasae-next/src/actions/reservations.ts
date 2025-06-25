@@ -4,8 +4,14 @@ import {
   ReservationInfoType,
 } from "@/types/reservation";
 
-export async function createReservation(info: ReservationInfoType) {
+export async function createReservation(
+  info: ReservationInfoType,
+  userId?: string
+) {
   try {
+    if (!userId) {
+      throw new Error("There is no user id");
+    }
     const requestInfo: ReservationInfoRequestType = {
       link: info.link,
       peopleCount: Number(info.peopleCount),
@@ -16,6 +22,7 @@ export async function createReservation(info: ReservationInfoType) {
       ...(info.tertiaryDate && info.tertiaryTime
         ? { tertiaryDate: `${info.tertiaryDate}-${info.tertiaryTime}` }
         : {}),
+      userId: userId,
     };
     const res = await fetch(`/api/reservations`, {
       method: "POST",
@@ -39,9 +46,14 @@ export async function createReservation(info: ReservationInfoType) {
   }
 }
 
-export async function getReservation(): Promise<ReservationInfoResponseType[]> {
+export async function getReservation({
+  userId,
+}: {
+  userId?: string;
+}): Promise<ReservationInfoResponseType[]> {
   try {
-    const res = await fetch(`/api/reservations`);
+    const query = userId ? `?userId=${encodeURIComponent(userId)}` : "";
+    const res = await fetch(`/api/reservations${query}`);
     const result = await res.json();
 
     if (!res.ok) {
