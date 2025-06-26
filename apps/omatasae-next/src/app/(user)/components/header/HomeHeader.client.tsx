@@ -21,7 +21,11 @@ export default function HeaderActions() {
           variants="body"
           size="lg"
           key={"omatasae-logout"}
-          onClick={logout}
+          onClick={() => {
+            if (window.confirm("정말 로그아웃 하시겠습니까?")) {
+              logout();
+            }
+          }}
           className="cursor-pointer"
         >
           로그아웃
