@@ -1,0 +1,55 @@
+import { Meta, Title, Story, Canvas, Controls, Primary } from '@storybook/blocks'; 
+import * as Md3Appbar from './index.stories';
+
+<Meta of={Md3Appbar} />
+
+# Appbar
+
+### Server Component
+
+<br/>
+<br/>
+
+## Overview
+
+
+<div style={{ display: "flex", gap: "32px", justifyContent: "space-between" }}>
+  <div style={{ flex: 1 }}>
+    <h3>고려한 것</h3>
+    <ul>
+      <li>Small, Medium Flexible, Large Flexible Types</li>
+      <li>Leading/Trailing Icon 포함</li>
+      <li>Text Alignment(start, cneter)</li>
+      <li>Headline, Subtitle</li>
+      <li><code>round</code>, <code>square</code> 지원</li>
+      <li>각 hover, focus, disabled, active 마다 스타일 대응</li>
+    </ul>
+  </div>
+  <div style={{ flex: 1 }}>
+    <h3>고려하지 않은 것</h3>
+    <ul>
+      <li>Search Type</li>
+      <li>각 Icon, Headline, Subtitle 스타일링 Props</li>
+      <li>Scroll 처리(스크롤시 따라 내려오면서 box-shadow, bg-color 변화 처리)</li>
+    </ul>
+  </div>
+</div>
+
+## Usuage
+
+```tsx
+<Md3Appbar
+    headline=""
+    subtitle=""
+    leadingIcon={[<MdAccessAlarm onClick={() => {}} />]}
+    trailingIcon={[
+    <MdAccessAlarm onClick={() => {}} />,
+    <MdAccessAlarm onClick={() => {}} />,
+    ]}
+    size="sm" | "md" | "lg"
+/>
+```
+
+## Props
+<Primary />
+<Controls />
