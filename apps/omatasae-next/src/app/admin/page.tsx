@@ -1,7 +1,7 @@
 import { getReservation } from "@/actions/reservations";
 import { redirect } from "next/navigation";
 import React from "react";
-import ReservationContent from "./components/ReservationContent/ReservationContent";
+import ReservationContent from "./components/ReservationContent";
 
 export default async function AdminHomepage({
   searchParams,
@@ -16,7 +16,7 @@ export default async function AdminHomepage({
   switch (tab) {
     case "reservation":
       const reservations = await getReservation({ limit: 30, skip: 0 });
-      return <ReservationContent initialData={reservations.reverse()} />;
+      return <ReservationContent initialData={reservations} />;
     default:
       return null;
   }

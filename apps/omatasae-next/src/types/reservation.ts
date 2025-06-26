@@ -15,13 +15,18 @@ interface ReservationInfoRequestType {
   primaryDate: string;
   secondaryDate?: string;
   tertiaryDate?: string;
-  userId: string;
 }
 
 type ReservationStatus = "WAITING" | "AVAILABLE" | "CONFIRMED" | "REJECTED";
 
 interface ReservationInfoResponseType extends ReservationInfoRequestType {
+  _id: string;
   state: ReservationStatus;
+  selectedDate?: string;
+  userId: {
+    _id: string;
+    username: string;
+  };
 }
 
 export type {

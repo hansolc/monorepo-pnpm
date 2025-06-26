@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const reservationSchema = new Schema({
   link: {
@@ -23,13 +23,17 @@ const reservationSchema = new Schema({
   tertiaryDate: {
     type: String,
   },
-  userId: {
+  selectedDate: {
     type: String,
-    required: [true, "Please provide user id"],
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
 });
 
 const Reservation =
-  models.reservations || model("reservations", reservationSchema);
+  models.Reservation || model("Reservation", reservationSchema);
 
 export default Reservation;

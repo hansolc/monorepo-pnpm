@@ -24,7 +24,9 @@ function useInfiniteScroll<T>({
       },
       initialPageParam: skip,
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.length < limit ? undefined : allPages.length * limit;
+        // 다음 페이지가 없으면 undefined 반환 (fetchNextPage는 호출 X)
+        if (lastPage.length < limit) return undefined;
+        return allPages.length * limit;
       },
       initialData: {
         pages: [initialData],
