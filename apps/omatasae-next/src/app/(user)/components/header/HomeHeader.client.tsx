@@ -4,7 +4,7 @@ import { userState } from "@/lib/recoil/atoms/user";
 import { useRecoilValue } from "recoil";
 import Link from "next/link";
 import { Typography } from "@monorepo-pnpm/shared/server";
-import useLogout from "@/hooks/useLogout";
+import useLogout from "@/hooks/auth/useLogout";
 
 export default function HeaderActions() {
   const user = useRecoilValue(userState);

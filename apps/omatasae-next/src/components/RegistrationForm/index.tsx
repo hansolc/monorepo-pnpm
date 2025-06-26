@@ -1,8 +1,8 @@
 "use client";
 
 import useFormValidation from "@/hooks/useFormValidation";
-import useLogin from "@/hooks/useLogin";
-import useRegistration from "@/hooks/useRegistration";
+import useLogin from "@/hooks/auth/useLogin";
+import useRegistration from "@/hooks/auth/useRegistration";
 import { UserProps, UserRole } from "@/types/user";
 import { Md3Button, Md3TextField } from "@monorepo-pnpm/shared/client";
 import { Typography } from "@monorepo-pnpm/shared/server";

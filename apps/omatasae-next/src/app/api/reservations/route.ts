@@ -54,7 +54,9 @@ export async function GET(request: NextRequest) {
     const limit = searchParams.get("limit");
     const skip = searchParams.get("skip");
 
-    const query: { userId?: string } = {};
+    const query: { userId?: string; state?: { $ne: string } } = {
+      state: { $ne: "DELETED" },
+    };
 
     if (userId) query.userId = userId;
 

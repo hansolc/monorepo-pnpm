@@ -8,7 +8,7 @@ export function usePatchReservationState() {
   return useMutation({
     mutationFn: patchReservationState,
     onSuccess: (updatedReservation) => {
-      console.log(updatedReservation);
+      console.log("updated reservation info: ", updatedReservation);
       // 예시: reservations 쿼리를 다시 가져오도록
       queryClient.invalidateQueries({ queryKey: ["reservations"] });
     },

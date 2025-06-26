@@ -17,7 +17,7 @@ interface ReservationInfoRequestType {
   tertiaryDate?: string;
 }
 
-type ReservationStatus = "WAITING" | "AVAILABLE" | "CONFIRMED" | "REJECTED";
+type ReservationStatus = "WAITING" | "DELETED" | "CONFIRMED" | "REJECTED";
 
 interface ReservationInfoResponseType extends ReservationInfoRequestType {
   _id: string;

@@ -9,7 +9,7 @@ import { MdOutlinePeopleOutline } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
 import { MdOutlineDateRange } from "react-icons/md";
 import { MdOutlineAccessTime } from "react-icons/md";
-import useCreateReservation from "@/hooks/useCreateReservation";
+import useCreateReservation from "@/hooks/reservations/useCreateReservation";
 import { PiSpinner } from "react-icons/pi";
 
 function ReservationForm() {

@@ -11,5 +11,6 @@ export default function useQueryReservation({ userId }: { userId?: string }) {
     queryKey: ["reservations"],
     queryFn: () => getReservation({ userId }),
     enabled: !!user,
+    staleTime: 1000 * 60 * 5,
   });
 }

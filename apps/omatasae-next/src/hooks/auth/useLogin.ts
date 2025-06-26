@@ -5,7 +5,7 @@ import { ResponseUserType, UserProps, UserRole } from "@/types/user";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
-import useCreateReservation from "./useCreateReservation";
+import useCreateReservation from "../reservations/useCreateReservation";
 
 export default function useLogin({ role }: { role?: UserRole }) {
   const router = useRouter();

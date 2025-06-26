@@ -3,18 +3,20 @@
 import { createReservation as create } from "@/actions/reservations";
 import { userState } from "@/lib/recoil/atoms/user";
 import { ReservationInfoType } from "@/types/reservation";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 
 function useCreateReservation() {
   const user = useRecoilValue(userState);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (info: ReservationInfoType) => create(info),
     onSuccess: () => {
       localStorage.removeItem("pendingReservation");
+      queryClient.invalidateQueries({ queryKey: ["reservations"] });
       alert("예약 성공!");
       router.push("/reservations");
     },
