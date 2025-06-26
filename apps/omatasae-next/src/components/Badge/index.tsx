@@ -25,7 +25,7 @@ export function ReservationStateBadge({
     <Badge
       className={clsx(
         { "bg-primary": state === "WAITING" },
-        { "bg-secondary": state === "AVAILABLE" },
+        { "bg-secondary": state === "DELETED" },
         { "bg-error": state === "REJECTED" },
         { "bg-tertiary": state === "CONFIRMED" },
         className

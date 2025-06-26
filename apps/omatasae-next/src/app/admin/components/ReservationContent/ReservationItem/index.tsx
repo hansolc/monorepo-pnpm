@@ -20,7 +20,7 @@ function ReservationItem({
   const { mutate, isPending } = usePatchReservationState();
   return (
     <React.Fragment>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 max-xl:flex-col">
         <UserIdAndState userId={item.userId} state={item.state} />
         <FieldsetWrapper link={item.link} disabled={item.state !== "WAITING"}>
           <DateOptions
@@ -33,37 +33,45 @@ function ReservationItem({
             tertiaryDate={item.tertiaryDate}
           />
         </FieldsetWrapper>
-        <Md3Button
-          variants="elevated"
-          size="sm"
-          shape="square"
-          icon={isPending ? PiSpinner : undefined}
-          onClick={() =>
-            mutate({
-              _id: item._id,
-              selectedDate: selectedDate,
-              state: "CONFIRMED",
-            })
-          }
-          disabled={!selectedDate || item.state !== "WAITING"}
-        >
-          확정
-        </Md3Button>
-        <Md3Button
-          variants="tonal"
-          size="sm"
-          shape="square"
-          icon={isPending ? PiSpinner : undefined}
-          onClick={() =>
-            mutate({
-              _id: item._id,
-              state: "REJECTED",
-            })
-          }
-          disabled={item.state !== "WAITING"}
-        >
-          불가
-        </Md3Button>
+        <div className="flex gap-4">
+          <Md3Button
+            variants="tonal"
+            size="sm"
+            shape="square"
+            icon={isPending ? PiSpinner : undefined}
+            className="w-[100px]!"
+            onClick={() => {
+              if (!selectedDate) {
+                alert("예약 시간을 선택해주세요.");
+                return;
+              }
+              mutate({
+                _id: item._id,
+                selectedDate: selectedDate,
+                state: "CONFIRMED",
+              });
+            }}
+            disabled={item.state !== "WAITING"}
+          >
+            확정
+          </Md3Button>
+          <Md3Button
+            variants="outlined"
+            size="sm"
+            shape="square"
+            icon={isPending ? PiSpinner : undefined}
+            className="w-[100px]!"
+            onClick={() =>
+              mutate({
+                _id: item._id,
+                state: "REJECTED",
+              })
+            }
+            disabled={item.state !== "WAITING"}
+          >
+            불가
+          </Md3Button>
+        </div>
       </div>
       <hr className="border-t border-primary" />
     </React.Fragment>

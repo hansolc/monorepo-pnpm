@@ -11,7 +11,10 @@ export default function FieldsetWrapper({
   return (
     <div className="grow shrink">
       <div className="break-all overflow-y-auto h-6 underline">{link}</div>
-      <fieldset className="pt-2 flex gap-4 items-center" disabled={disabled}>
+      <fieldset
+        className="pt-2 flex gap-4 items-center max-xl:flex-col"
+        disabled={disabled}
+      >
         {children}
       </fieldset>
     </div>
