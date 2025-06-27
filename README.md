@@ -1,19 +1,9 @@
-## Monorepo by pnpm
+# Monorepo by pnpm
 
-### 모노레포란?
+## 배경
 
-> 다수의 프로젝트를 한 개의 레포지토리 내에서 관리하는 소프트웨어 개발 전략 - wikipedia
-
-기존 멀티레포 환경에서는 유사한 기능의 컴포넌트나 UI를 프로젝트 간에 복사·붙여넣는 방식으로 공유하게 되어, 유지보수성과 생산성에 한계를 느꼈습니다. 또한 tsconfig.json, ESLint, Prettier 등의 설정을 매번 프로젝트마다 반복해서 구성해야 하는 비효율도 존재했습니다.
-
-이러한 문제를 해결하기 위해 모노레포 구조를 도입하였고, 패키지 매니저로는 빠른 설치 속도와 workspace 최적화에 강점을 지닌 pnpm을 선택했습니다.
-
-현재 이 프로젝트는 다음과 같이 구성되어 있습니다:
-
-- apps: 실제 배포 대상 애플리케이션
-- packages: shared(재사용 UI 컴포넌트), utils(공통 유틸리티 함수)
-
-특히 shared 패키지에서는 Material Design 3 가이드에 기반해 컴포넌트를 설계하고 있으며, 재사용성과 확장성을 고려하여 최대한 **headless** UI 방식으로 구성하고 있습니다. 또한 **Compound Pattern**을 활용해 유연하고 일관된 컴포넌트 구조를 구현하고 있습니다.
+프로젝트를 시작할 때마다 유사한 형태의 컴포넌트를 반복적으로 개발하는 비효율을 줄이고, 디자인 가이드에 기반한 일관된 컴포넌트를 재사용하기 위해 모노레포를 도입하였습니다.
+디자인 가이드는 [Material Design 3](https://m3.material.io/components)을 참고하였습니다.
 
 ## 🛠️ 사용기술
 
@@ -23,34 +13,21 @@
 
 ## 🏗️ 아키텍쳐
 
-```
-root/
-├── apps/
-│ ├── react-apps
-| ├── ...
-├── packages/
-│ ├── shared
-|   |── components
-|   |── frameworks
-│ ├── utils
-├── pnpm-workspace.yaml
-├── tsconfig.base.json
-```
+![모노레포 구조](./public/structure.PNG)
 
-**apps** - 소비자용 프로젝트
+- **apps/** – 배포용 프로젝트
+- **pnpm-workspace.yaml** – `pnpm` 워크스페이스 설정 파일 (`apps/`, `packages/` 경로 포함)
+- **tsconfig.base.json** – 각 프로젝트에서 공통으로 사용하는 TypeScript 설정
+- **packages/shared/** – 재사용 가능한 컴포넌트, Material Design 3 기반 UI 컴포넌트 제공
 
-**packages/shared** - 재사용 컴포넌트
+> **공유 컴포넌트 구조 및 빌드 방식**
 
-- **components** - 사용자 상호작용 컴포넌트
-- **frameworks** - 데이터, UI 컴포넌트
+- `vite`를 사용해 빌드하며, `build.lib.entry` 옵션을 통해 `client`, `server`로 분리된 엔트리 파일로 빌드합니다.
+- Next.js의 Client/Server 컴포넌트 구조를 고려하여 컴포넌트를 나눴습니다.
+- `rollupOptions`를 통해 `react`, `react-dom`, `storybook` 관련 파일은 외부 의존성으로 처리되어 번들링에서 제외됩니다.
+- Storybook은 개발 및 문서화를 위한 용도로 `shared` 패키지에서 개별적으로 빌드/실행됩니다.
 
-**packages/utils** - 재사용 로직
-
-**pnpm-workspace** - pnpm workspace 등록 파일 (apps, packages 등록)
-
-**tsconfig.base.json** - 각 프로젝트별 기본 ts 컴파일 설정
-
-## ✨ 주요기능
+## 🛠️ Why PNPM
 
 ### 1. pnpm의 빠른 속도, 효율적인 방식의 패키지 관리
 
@@ -60,43 +37,16 @@ pnpm은 `package.json`에 명시된 패키지를 읽은 후 `node_moduels`에 sy
 
 pnpm-workspace는 간단하게 모노레포 설정을 할 수 있습니다. `pnpm-workspcae.yaml` 파일에 모노레포를 적용할 폴더를 명시하고 `package.json`에 간단한 설정을 해 주면 끝입니다. 만들어진 패키지들은 자동으로 링크되기에 별도로 설치나 연결해줄 필요가 없습니다.
 
-## 📦 설치 및 사용방법
-
-### 1. git clone
-
-```
-git clone https://github.com/hansolc/monorepo-pnpm.git
-```
-
-### 2. 배포 프로젝트 설정
-
-apps 폴더 내에 프로젝트를 추가합니다(CRA or Vite 사용 가능). 재사용 컴포넌트를 사용하려면 `package.json` 파일에 `@monorepo-pnpm/shared: workspace:*`을 추가합니다.
-
-### 3. 재사용 컴포넌트 추가
-
-`packages/shared` 의 `component` 파일에 각 프로젝트마다 재사용할 컴포넌트를 추가합니다. 추가후, index.ts 파일에 export해주세요.
-
-### 4. Storybook 실행
-
-`packages/shared`의 컴포넌트 이해를 위해 storybook은 `dev:shared-stories`로 실행해주세요.
-
 ---
 
-# ♻️ 주요기능
+## ✨ 기술 구현 상세
 
-## 공유 패키지 수정 시 Vite에서 실시간 반영(HMR) 설정
+### 1. Vite 설정을 통한 개발 생산성 향상
 
-### 배포(apps/) 프로젝트내 vite.config.ts 설정
-
-모노레포 환경에서는 `packages/` 디렉토리의 컴포넌트나 유틸 함수를 수정할 때,  
-`apps/` 프로젝트에서 매번 별도 빌드 없이 즉시 반영되어야 개발 효율이 높아집니다.
-
-이를 위해 Vite 개발 서버에서는 다음 두 가지 설정이 필요합니다:
-
-1. `vanilla-extract`를 사용하는 공유 컴포넌트에 대한 스타일 처리
-2. 직접 소스 파일을 참조하도록 하는 `resolve.alias` 설정
-
-### Vite 설정 (apps/react-app/vite.config.ts)
+- `vanillaExtractPlugin` 추가: shared 컴포넌트는 `vanilla-extract/css`를 사용해 스타일링.
+- `resolve.alias`를 활용하여 컴포넌트 import 경로를 간결하게 지정.
+- `tsconfig.base.json`을 공통으로 두어 타입 설정 일관성 유지.
+- `references` 설정을 통해 각 프로젝트 간 의존성 명시 및 빌드 순서 보장.
 
 ```
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
@@ -114,28 +64,6 @@ export default defineConfig({
   },
 });
 
-```
-
-- `vanillaExtractPlaugin` 추가
-- `resolve.alias`에 실제 컴포는 export 파일 등록
-
-### 1. 루트 tsconfig.json 설정
-
-- 모노레포 내 각 프로젝트를 TypeScript가 인식하고 올바른 빌드 순서를 보장하도록 설정합니다.
-- packages에 프로젝트가 추가될 경우 이곳에 명시하세요
-
-```
-{
-  "files": [],
-  "references": [{ "path": "apps/react-app" }, { "path": "packages/shared" }]
-}
-```
-
-### 2. 앱 프로젝트(tsconfig.json)
-
-앱은 shared를 참조하므로 아래와 같이 references를 명시해 타입 의존성과 빌드 순서를 정의합니다.
-
-```
 // tsconfig.json
 {
   "extends": "../../tsconfig.base.json",
@@ -147,9 +75,134 @@ export default defineConfig({
 }
 ```
 
-- `noEmit: true`는 앱에서는 JS나 타입 파일을 출력하지 않고 타입 검사만 수행하기 위한 설정입니다.
+### 2. Server/Client 빌드 분리 및 불필요한 번들 제외
 
-### 3. packages내의 프로젝트 필수설정(composite:true)
+> Next.js의 Server/Client Component 구조 대응
 
-공유 패키지인 shared는 다른 프로젝트에서 참조되기 때문에 `composite: true`가 필요하며,
-이는 이미 공통 설정(tsconfig.base.json)에서 설정되어 있어 별도의 설정은 필요하지 않습니다.
+- shared 내 컴포넌트를 client, server로 구분하여 Vite에서 별도로 빌드
+- rollupOptions.external을 설정해 React, Storybook, 테스트 파일 등 불필요한 번들 제외
+- package.json의 exports 필드로 명시적 경로 지정
+
+```tsx
+// shared/vite.config.ts
+  build: {
+    lib: {
+      entry: {
+        client: "src/client/index.ts",
+        server: "src/server/index.ts",
+      },
+      formats: ["es"],
+    },
+  },
+  rollupOptions: {
+    ...
+    external: [
+      "react",
+      "react-dom",
+      path.resolve(__dirname, "src/test/**"),
+      /\.stories\.(ts|tsx)$/,
+      /\.mdx$/,
+    ],
+  },
+
+// shared/package.json
+  "exports": {
+    "./server": {
+      "import": "./dist/server.mjs",
+      "types": "./build/server/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.mjs",
+      "types": "./build/client/index.d.ts"
+    },
+    "./shared.css": {
+      "import": "./dist/shared.css"
+    }
+  },
+```
+
+### 3. Storybook을 통한 컴포넌트 문서화 및 UI 테스트
+
+- `*.stories.tsx`를 작성해 각 컴포넌트 테스트
+- `.mdx` 파일을 통해 컴포넌트 문서화
+
+### 4. vanilla-extract 기반 스타일 시스템
+
+> Zero-runtime, 타입 안전 스타일링 시스템 구축
+
+- `vanilla-extract/css`: 런타임 없는 CSS-in-TypeScript
+- `recipes`: variant 기반 스타일 구성, 자동완성 지원
+- `sprinkles`: 속성별 제약으로 안정성 확보
+- `createTheme`, `createThemeContract`로 테마 동적 구성
+- `Material Design 3`의 Design Token 기반 구조 설계
+
+```tsx
+//Material Design 3 Appbar 스타일 예시
+export const md3Appbar = recipe({
+  base: [
+    sprinkles({
+      backgroundColor: "surface",
+      boxShadow: "level0",
+      px: 4,
+      borderRadius: "none",
+      display: "flex",
+    }),
+    {
+      boxSizing: "border-box",
+    },
+  ],
+  variants: {
+    size: {
+      sm: [{ alignItems: "center", height: 64, gap: 4 }],
+      md: [
+        {
+          flexDirection: "column",
+          height: 112,
+          justifyContent: "space-between",
+          paddingTop: "1rem",
+        },
+      ],
+      lg: [
+        {
+          flexDirection: "column",
+          // Originally 152px
+          height: 132,
+          justifyContent: "space-between",
+          paddingTop: "1rem",
+        },
+      ],
+    },
+  },
+});
+```
+
+```tsx
+// shared/src/styles/theme.css.ts
+export const themeContract = createThemeContract({ colors });
+
+// 프로젝트별 테마 적용(themeContract: shared 프로젝트에서 import)
+export const lightThemeClasses = createTheme(themeContract, {
+  colors: lightColors,
+});
+```
+
+### 5. Compound Pattern으로 재사용성과 유연성 확보
+
+> Headless 컴포넌트 + Compound Pattern
+
+- 내부 구현은 감추고 유연한 조합만 노출
+- 복잡한 입력 필드를 TextField 하위 컴포넌트로 분리
+
+```tsx
+// Md3TextField 사용시
+<Input
+  label="이메일"
+  clear={<button>Clear</button>}
+/>
+
+// 내부 구조 예
+<TextField>
+  <TextField.FloatingLabel>{label}</TextField.FloatingLabel>
+  <TextField.Clear as={clear} />
+<TextField/>
+```
