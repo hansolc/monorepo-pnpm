@@ -71,7 +71,6 @@ export default function RootLayout({
 
 - [ReservationForm 컴포넌트](https://github.com/hansolc/monorepo-pnpm/blob/main/apps/omatasae-next/src/components/ReservationForm/index.tsx) 예약 입력 폼은 shared 패키지의 MD3 `TextField`를 사용
 - 최대 3개의 날짜/시간을 등록할 수 있도록 구현
-- 최대 3개의 날짜/시간을 입력할 수 있도록 설계
 - 성능 최적화를 위해 Uncontrolled 방식으로 구현:
   - `useFormValidation` 훅을 통해 각 필드의 `register`, `errors`, `handleSubmit` 관리
   - 필수 여부 및 정규식 패턴 검증
