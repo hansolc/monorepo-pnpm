@@ -174,6 +174,7 @@ onSuccess: (res) => {
 - 페이지별 `metadata` 등록으로 SEO 개선
 - 로그인/회원가입/관리자 페이지 등은 `robots` 설정으로 검색 제외
 - 서버/클라이언트 컴포넌트 분리로 Hydration 비용 최소화
+  - [Next.js 클라이언트, 서버 컴포넌트 분리](https://velog.io/@soll/Next.js-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EC%84%9C%EB%B2%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B6%84%EB%A6%AC)
 
 ```tsx
 // (user)/page.tsx
