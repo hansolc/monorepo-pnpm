@@ -57,7 +57,7 @@ export function renderWithComponent<TSlot extends object>({
     // cloneElement 로 자식 노드에게 porps값 전달
     if (as === Fragment) {
       if (isValidElement(rendered)) {
-        return cloneElement(rendered, {
+        return cloneElement(rendered as ReactElement, {
           ...props,
           ref,
         });

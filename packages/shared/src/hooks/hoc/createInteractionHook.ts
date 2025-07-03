@@ -4,11 +4,15 @@ type DisabledProps = { disabled?: boolean };
 
 type Handler = (...args: any[]) => boolean;
 
-type InteractionHook<TEventKey extends string> = (props?: DisabledProps) => {
+export type ReturnStateType<TEventKey extends string> = {
   state: boolean;
   eventProps: Partial<Record<TEventKey, (...args: any[]) => void>>;
   dataProps: Record<string, string>;
 };
+
+type InteractionHook<TEventKey extends string> = (
+  props?: DisabledProps
+) => ReturnStateType<TEventKey>;
 
 export function createInteractionHook<TEventKey extends string>(
   key: string,

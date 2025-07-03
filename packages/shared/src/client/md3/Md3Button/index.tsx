@@ -1,10 +1,10 @@
-import { Button } from "@headlessui/react";
 import clsx from "clsx";
 import { md3Button, md3ButtonIconSize, Md3ButtonStyleProps } from "./index.css";
 import { IconType } from "@react-icons/all-files/lib";
 import { buttonTypoSize } from "./types";
 import { ComponentPropsWithoutRef } from "react";
 import Typography from "src/server/Typography";
+import { Button } from "src/client/base/Button";
 
 interface Md3ButtonProps extends ComponentPropsWithoutRef<"button"> {
   variants: Md3ButtonStyleProps["variants"];

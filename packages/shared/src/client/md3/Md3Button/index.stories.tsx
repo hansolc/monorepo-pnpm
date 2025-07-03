@@ -58,7 +58,14 @@ export const BaseButton = {
       <div>
         {arr.map((d) => {
           return (
-            <Button variants={d} shape="square" icon={MdAccessTime}>
+            <Button
+              variants={d}
+              shape="square"
+              icon={MdAccessTime}
+              onClick={() => {
+                console.log("click");
+              }}
+            >
               hello world
             </Button>
           );
