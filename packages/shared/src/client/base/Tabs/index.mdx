@@ -1,0 +1,115 @@
+import { Meta, Title, Story, Canvas } from '@storybook/blocks'; 
+import * as TabStories from './index.stories';
+
+<Meta of={TabStories} />
+
+# Base Tab
+
+### Client Component
+
+<br/>
+<br/>
+
+## Overview
+
+<div style={{ display: "flex", gap: "32px", justifyContent: "space-between" }}>
+  <div style={{ flex: 1 }}>
+    <h3>고려한 것</h3>
+    <ul>
+      <li><strong>Tabs 컴포넌트</strong>: render props 및 <code>data-*</code> 속성</li>
+      <li>
+        <strong>Render Props</strong>: 
+        <code>selected</code>, <code>hover</code>, 
+        <code>disabled</code>, <code>active</code>, <code>focus</code>
+      </li>
+      <li><strong>ARIA 속성</strong> 적용</li>
+      <li><strong>Controlled / Uncontrolled</strong> 모드 지원</li>
+      <li>
+        <strong>Keyboard 이벤트</strong>: 
+        <code>Tab</code>, <code>ArrowRight</code>, 
+        <code>ArrowLeft</code>, <code>Enter</code>, <code>Space</code>
+      </li>
+    </ul>
+  </div>
+  <div style={{ flex: 1 }}>
+    <h3>고려하지 않은 것</h3>
+    <ul>
+      <li>
+        <code>TabLabel</code> 기능  
+        <small>※ 추가 시 <code>TabListFn</code>에 <code>aria-labelledby</code> 설정 필요</small>
+      </li>
+      <li>
+        <code>TabListFn</code>의 세로 방향 (<code>vertical</code>) 지원  
+        <small>※ 현재는 기본적으로 <strong>horizontal</strong> 방향으로 작동</small>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+## Usuage
+```tsx
+<TabGroup>
+<TabList>
+    <Tab>Tab1</Tab>
+    <Tab>Tab2</Tab>
+    <Tab>Tab3</Tab>
+</TabList>
+<TabPanels>
+    <TabPanel>panel1</TabPanel>
+    <TabPanel>panel2</TabPanel>
+    <TabPanel>panel3</TabPanel>
+</TabPanels>
+</TabGroup>
+```
+
+## Detail
+<div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
+  <ul>
+    <li>
+      <strong><code>Tab 컴포넌트</code></strong>
+      <ul>
+        <li><strong>Render Props</strong>를 통해 다음 상태 값을 전달받을 수 있습니다:</li>
+        <li><code>active</code>, <code>disabled</code>, <code>focus</code>, <code>hover</code>, <code>selected</code></li>
+        <li>
+            상태에 따라 자동으로 부여되는 <code>data-*</code> 속성을 기반으로 
+            <strong>CSS 스타일링</strong>이 가능합니다.
+        </li>
+      </ul>      
+    </li>
+
+
+    <li>
+      <strong>키보드 접근성</strong> 지원:
+      <ul>
+        <li>Tab 키 입력 시 첫 번째 탭에 <code>focus</code>가 이동됩니다.</li>
+        <li><code>ArrowRight</code>, <code>ArrowLeft</code>로 탭 간 이동이 가능합니다.</li>
+        <li><code>Enter</code>, <code>Space</code> 키로 패널 렌더링을 트리거합니다.</li>
+      </ul>
+    </li>
+
+    <li>
+      <strong>Controlled / Uncontrolled</strong> 모드를 모두 지원합니다.
+      <ul>
+        <li>Controlled 모드에서는 <code>TabGroup</code>에 <code>selectedIndex</code>, <code>onChange</code>를 전달해야 합니다.</li>
+      </ul>
+    </li>
+
+    <li>
+      <strong>컴포넌트 구성</strong>:
+      <ul>
+        <li><code>TabGroup</code>: 컨텍스트 제공자 역할로, 내부 상태와 로직을 관리합니다.</li>
+        <li><code>TabList</code>: 여러 <code>Tab</code>을 감싸는 컨테이너입니다.</li>
+        <li><code>Tab</code>: 키보드/클릭 이벤트 처리, render props 및 <code>data-*</code> 속성 부여</li>
+        <li><code>TabPanels</code>: 하나 이상의 <code>TabPanel</code>을 감싸는 컨테이너</li>
+        <li><code>TabPanel</code>: 선택된 탭에 따라 콘텐츠를 렌더링하는 영역</li>
+      </ul>
+    </li>
+
+    <li>
+      각 컴포넌트는 시멘틱한 역할을 위한 <strong>ARIA 속성</strong>을 적절히 포함하고 있습니다.
+    </li>
+  </ul>
+</div>

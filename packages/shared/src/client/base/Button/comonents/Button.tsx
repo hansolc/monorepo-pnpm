@@ -2,11 +2,14 @@ import { ElementType, Ref, useMemo } from "react";
 import { PropsWithAs, RenderProps } from "src/types";
 import useButtonState from "../hooks/useButtonState";
 import { renderWithComponent } from "src/utils/render";
+import { useFocusVisible } from "@hooks/useDomState";
+import { Keys } from "src/utils/keyboard";
 
 type ButtonRenderProps = {
   hover: boolean;
   disabled: boolean;
   active: boolean;
+  focus: boolean;
 };
 
 export type ButtonProps<TTag extends ElementType = "button"> = PropsWithAs<
@@ -24,24 +27,35 @@ function ButtonFn<TTag extends ElementType = "button">(
 ) {
   const { as, disabled = false, children, ...rest } = props;
 
-  // TODO: focus-visible 처리
-  // 마우스 클릭시 focus 발생하며 UI적으로 맞지 않음
-  // 보통 css에서 focus-visible로 키보드 사용시에만 focus되도록 처리
   const { state, eventProps, dataProps } = useButtonState({ disabled });
   const { active, hover } = state;
+  // Button은 기본적으로 click시 focus => onClick 발생
+  // 마우스로 클릭시 focus가 되지 않도록 설정(focus-visible)
+  // keyboard Tab 버튼 클릭시에만 focus 되도록 설정
+  const {
+    state: focus,
+    eventProps: focusEvents,
+    dataProps: focusDatas,
+  } = useFocusVisible({
+    disabled,
+    triggerFocusEvent: (e) => e.key === Keys.Tab,
+  });
 
-  const slot = useMemo(() => {
+  const slot: ButtonRenderProps = useMemo(() => {
     return {
       active,
       disabled,
       hover,
+      focus,
     };
-  }, [active, disabled, hover]);
+  }, [active, disabled, hover, focus]);
 
   const buttonProps = {
     ref,
     ...eventProps,
+    ...focusEvents,
     ...dataProps,
+    ...focusDatas,
     ...rest,
   };
 
