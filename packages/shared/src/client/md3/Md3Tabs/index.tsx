@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
 import { md3TabsGroup } from "./components/Tabs.css";
 import TabItem from "./components/TabItem";
 import { sprinkles } from "@styles/sprinkles.css";
 import { IconType } from "react-icons";
 import { flattenChildren } from "./utils";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "src/client/base";
 
 interface Props {
   options: Array<{ label: string; icon?: IconType }>;
