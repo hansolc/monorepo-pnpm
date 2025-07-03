@@ -22,6 +22,13 @@ export default function useTabState({ disabled, selected }: UseTabProps) {
     state: active,
   } = useActive({ disabled });
 
+  const disabledData =
+    disabled !== undefined
+      ? { "data-disabled": disabled ? "" : undefined }
+      : {};
+
+  const selectedData = { "data-selected": selected ? "" : undefined };
+
   return {
     state: { hover, focus, active, selected },
     eventProps: {
@@ -33,6 +40,8 @@ export default function useTabState({ disabled, selected }: UseTabProps) {
       ...hoverData,
       ...focusData,
       ...activeData,
+      ...disabledData,
+      ...selectedData,
     },
   };
 }
