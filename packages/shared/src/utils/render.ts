@@ -63,11 +63,9 @@ export function renderWithComponent<TSlot extends object>({
         });
       }
 
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(
-          "[renderWithComponent] as={Fragment}일 때 children(slot)은 반드시 단일 ReactElement를 반환해야 합니다."
-        );
-      }
+      console.warn(
+        "[renderWithComponent] as={Fragment}일 때 children(slot)은 반드시 단일 ReactElement를 반환해야 합니다."
+      );
 
       return null;
     }
