@@ -7,9 +7,9 @@
 
 ## 🛠️ 사용기술
 
-- pnpm
-- vite
-- storybook
+- **패키지 관리**: pnpm
+- **Build**: vite
+- **UI TEST/DOCS**: storybook
 
 ## 🏗️ 아키텍쳐
 
